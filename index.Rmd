@@ -3,3 +3,4 @@ title: "Trabalhos de Regressão Linear com R"
 site: distill::distill_website
 listing: posts
 ---
+

@@ -1,0 +1,202 @@
+---
+title: "Curso-R: Regressão Linear <br> Exercícios RLSM"
+description: |
+  A short description of the post.
+author: "Elizabeth Mie Hashimoto"
+date: 01-25-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Pacotes
+```{r}
+library(tidyverse) # manipulacao de data.frame
+library(MASS) # dados Boston
+library(broom)
+```
+
+# Dados
+
+O banco de dados `Boston` apresenta registros de valores medianos das casas (`medv`) de 506 bairros de Boston. 
+O objetivo é identificar quais das 13 variáveis explicativas estão associadas com esses valores e usá-las para fazer predições de preços das casas.
+
+```{r}
+glimpse(Boston)
+```
+
+```{r, eval=FALSE}
+# Descrição das variáveis
+help(Boston)
+```
+
+
+# Exercício 1
+
+Faça um gráfico de dispersão entre `medv` e `rm`.
+
+```{r}
+Boston %>% 
+  ggplot() +
+  geom_point(aes(x = rm, y = medv)) +
+  labs(x = 'Número médio de quartos por habitação', y = 'Preço mediano das habitações do bairro (em 1000 dólares)')
+```
+
+
+# Exercício 2
+
+Ajuste um modelo de regressão linear simples utilizando `medv` como resposta e `rm` como explicativa e guarde em objeto chamado `mod_simples`. Consulte o `summary(mod_simples)` em seguida.
+
+```{r}
+mod_simples <- lm(medv ~ rm, data=Boston)
+summary(mod_simples)
+```
+
+
+# Exercício 3
+
+Sabendo que `medv` é o preço mediano das habitações do bairro e o `rm` é o número médio de quartos por habitação, 
+
+a) interprete o parâmetro `(Intercept)`.
+
+$\blacktriangleright$ **Resposta**: Nesse caso, `r round(coefficients(mod_simples)[1],digits=3)` $\times$ 1000 dólares é a média do preço mediano das habitações quando temos zero quartos por habitação.
+
+
+b) interprete o parâmetro `rm`.
+
+$\blacktriangleright$ **Resposta**: A cada um quarto por habitação que aumentamos por habitação, temos um acréscimo de `r round(coefficients(mod_simples)[2],digits=3)` $\times$ 1000 dólares na média do preço mediano das habitações.
+
+
+c) o número de quartos está associado com o valor da habitação? Por quê?
+
+$\blacktriangleright$ **Resposta**: Sim, pois ao nível de significância de 5\%, rejeitamos a hipótese nula ($H_0: \beta_1=0$), uma vez que o $p$-valor é menor do que 0,001. Dessa forma, temos evidências de que o preço mediano das habitações tem alguma relação com o número médio de quartos por habitação.
+
+# Exercício 4
+
+Consulte as saídas das funções 
+
+- `coef(mod_simples)`: mostra apenas as estimativas dos coeficientes de regressão.
+
+- `confint(mod_simples)`: mostra o intervalo de 95\% de confiança das estimativas dos coeficientes de regressão.
+
+- `predict(mod_simples)`: calcula os valores preditos do preço mediano das habitações, isto é, $\hat{\mbox{medv}}=-34,671+9,102 rm$.
+
+- `predict(mod_simples, interval = "confidence")`: calcula os valores preditos do preço mediano das habitações e o intervalo de 95\% de confiança de cada valor predito.
+
+- `augment(mod_simples)`: cria um *data frame* com valores de `medv`, `rm`, valores preditos, resíduo e distância de Cook.
+
+```{r}
+coef(mod_simples)
+confint(mod_simples)
+predict(mod_simples) %>% head(n=10L)
+predict(mod_simples, interval = "confidence") %>% head(n=10L)
+augment(mod_simples)
+```
+
+
+# Exercício 5
+
+Usando o data.frame gerado por `augment(mod_simples)` faça um gráfico de `medv` *versus* `rm` e em seguida desenhe a reta ajustada do `mod_simples`.
+
+```{r}
+boston_pred <- augment(mod_simples)
+
+boston_pred %>% 
+  ggplot() +
+  geom_point(aes(x = rm, y = medv)) +
+  geom_line(aes(x = rm, y = .fitted), color="red") +
+  labs(x = 'Número médio de quartos por habitação', y = 'Preço mediano das habitações do bairro (em 1000 dólares)')
+```
+
+
+# Exercício 6
+
+Faça um gráfico de resíduos. Coloque os **resíduos** no eixo *Y* e os **valores ajustados** no eixo *X*.
+
+```{r}
+boston_pred %>% 
+  ggplot() +
+  geom_point(aes(x = .fitted, y = .std.resid)) +
+  geom_hline(yintercept=0, linetype="dashed") +
+  labs(x = 'Valores ajustados', y = 'Resíduos')
+```
+
+
+# Exercício 7
+
+Observe os gráficos de `plot(mod_simples)`.
+
+```{r}
+plot(mod_simples)
+```
+
+Apenas pela inspeção visual, responda: existem *outliers*? Eles são pontos de alavanca?
+
+$\blacktriangleright$ **Resposta**: Por meio das figuras, observamos que os pontos $\sharp366$, $\sharp369$ e $\sharp373$ são possíveis *outliers*. O gráfico de **Residuals vs Leverage** indica que não são pontos de alavanca.
+
+
+# Exercício 8
+
+Ajuste um modelo `mod_multiplo` para `medv` explicado por `rm` e `crim`. Consulte o `summary(mod_multiplo)` em seguida.
+
+```{r}
+mod_multiplo <- lm(medv ~ rm + crim, data=Boston)
+summary(mod_multiplo)
+```
+
+
+# Exercício 9
+
+Qual modelo ficou melhor: `mod_simples` ou `mod_multiplo`? Qual critério você utilizou para decidir o melhor?
+
+$\blacktriangleright$ **Resposta**: O `mod_multiplo` parece ser melhor do que o `mod_simples`, porque, considerando o R2 ajustado, o R2 ajustado do `mod_multiplo` (0,5401) é maior do que o R2 ajustado do `mod_simples` (0,4825). Além disso, a variável `crim` é significativa ($p$-valor < 0,001) para explicar a variablidade presente na média do preço mediano das habitações, considerando um nível de significância de 5\%.
+
+Por outro lado, pelos resíduos, ambos os modelos tem problemas com em relação a normalidade dos resíduos e com uma possível relação não linear entre a variável resposta e as variáveis explicativas. O que indica que o modelo `mod_multiplo` pode ser melhorado.
+
+```{r}
+# Resíduo modelo múltiplo
+plot(mod_multiplo)
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
+with(Boston,plot(crim,medv))
+```
+
+
+# Exercício 10
+
+Ajuste um modelo `mod_completo` para `medv` explicado por todas as demais colunas. DICA: na fórmula `medv ~ .`, o ponto significa "todas as variáveis, tirando medv".
+
+a) Consulte o `summary(mod_completo)` em seguida.
+
+```{r}
+mod_completo <- lm(medv ~ ., data=Boston)
+summary(mod_completo)
+```
+
+
+b) Qual modelo ficou melhor: `mod_simples`, `mod_multiplo` ou `mod_completo`?
+
+$\blacktriangleright$ **Resposta**: Novamente considerando o R2 ajustado, o modelo mais adequado entre os três modelos é o `mod_completo`, pois tem o R2 ajustado é igual a 0,7338; que é maior do que o R2 ajustados dos demais modelos. Além disso, as variáveis explicativas, exceto `indus` e `age`, foram signifitivas ao nível de significância de 5\%. 
+
+Em relação aos resíduos, o modelo completo tem o mesmo problema dos outros dois modelos. Nesse caso, o modelo completo também pode ser melhorado.
+
+```{r}
+# Resíduo modelo completo
+plot(mod_completo)
+```
+
+
+c) O valor estimado para o termo `rm` variou entre os três modelos? Por qual razão você acha que isso aconteceu?
+
+$\blacktriangleright$ **Resposta**: Sim, a estimativa para o termo `rm` variou devido a inclusão de variáveis de explicativas no modelo.
+
+
+
