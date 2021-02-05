@@ -1,0 +1,766 @@
+---
+title: "Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974"
+description: |
+  O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974.
+author: 
+  - first_name: "Elizabeth"
+    last_name: "Mie Hashimoto"
+    url: https://www.linkedin.com/in/elizabeth-mie-hashimoto-a416a917/
+date: 02-05-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      comment=NA,
+                      message=FALSE,
+                      warning=FALSE)
+```
+
+
+```{r}
+library(tidyverse)
+library(GGally)
+library(kableExtra)
+library(gridExtra)
+library(gtsummary)
+library(xtable)
+```
+
+[VERSÃO PDF](tcc_emh_final.pdf)
+
+## Introdução {-}
+
+Na crise petrolífera de 1973, membros da Organização dos Países Árabes Exportadores de Petróleo (OPAEP) aplicaram sanções em protesto ao apoio dos Estados Unidos e outras nações à Israel durante a Guerra do Yom Kippur. 
+O conflito resultou no aumento do preço do petróleo de três dólares por barril para cerca de 12 doláres no mundo inteiro, sendo que os preços fixados para os Estados Unidos foram ainda maiores.
+
+Como uma alternativa à alta do preço do petróleo no mercado mundial, os Estados Unidos iniciaram um programa de eficiência energética, conhecido como *Corporate Average Fuel Economy* (CAFE), com o propósito de reduzir o consumo de combustível de carros, *pick-ups*, minivans e SUVs (Almeida Filho, 2018). 
+
+Acredita-se que a melhoria no consumo médio de combustível dos automóveis leva à redução das contas de importação de petróleo, ou seja, pode resultar em economias estimadas nas contas anuais de importação de petróleo no valor de 300 bilhões de dólares em 2025 e 600 bilhões em 2050 (Global fuel economy initiative, 2021).
+Por outro lado, a eficiência do combustível depende de muitas características do veículo, incluindo as especificações do motor, resistência aerodinâmica, peso, combustível e entre outros atributos.
+
+Nesse contexto, buscou-se validar a hipótese de que modificações na estrutura do automóvel aumenta o seu consumo médio. Portanto, o presente trabalho teve como objetivo identificar quais características do carro explica a sua eficiência medida em milhas por galão. As análises foram feitas utilizando o *software* `R` versão 4.0.3, considerando um nível de significância de 5%.
+
+
+## Análise Exploratória
+
+O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974. O mesmo está disponível na biblioteca `datasets` do *software* `R` para consulta. 
+
+Dessa forma, de acordo com a hipótese formulada, as variáveis observadas no conjunto de dados são definidas como:
+
+\vspace{0.15cm}
+\noindent$\checkmark$ **Variável resposta**
+
+- `mpg`: eficiência (milhas por galão de combustível).
+
+\noindent$\checkmark$ **Variável explicativa**
+
+- `cyl`: número de cilindros.
+
+- `disp`: cilindradas (polegada cúbica).
+
+- `hp`: potência bruta (HP).
+
+- `drat`: relação de eixo traseiro.
+
+- `wt`: peso (1000 libras).
+
+- `qsec`: tempo no quarto de milha (segundos).
+
+- `vs`: formato do motor (0 = V e 1 = linha).
+
+- `am`: tipo de transmissão (0 = automático e 1 = manual).
+
+- `gear`: número de marchas para frente.
+
+- `carb`: número de carburadores.
+
+Para reduzir as informações do conjunto de dados, estatísticas descritivas de cada uma das variáveis quantitativas foram obtidas e apresentadas na Tabela 1. Os resultados mostram que não há nenhuma dado faltante e portanto, não há necessidade de imputar valores. Além disso, em média, a eficiência dos carros é de 20,09 mpg e são carros com 2 carburadores, seis cilindros e peso de 3,22 $\times 1000$ libras.
+
+```{r}
+resumo <- mtcars %>%
+  select(-am,-vs) %>% 
+  pivot_longer(everything()) %>%
+  group_by(name) %>% 
+  summarise_at("value", 
+               list(Missing =~sum(is.na(.)),media=~mean(.),
+                    desvPad=~sd(.), minimo=~min(.),
+                    Q1=~quantile(.,0.25),med=~median(.),
+                    Q3=~quantile(.,0.75),maxi=~max(.))) %>% 
+  mutate_if(is.numeric, format, digits=3,nsmall = 2)
+
+colnames(resumo) <- c('Variável', 'Missing', 'Média',
+                      'Desvio padrão', 'Mínimo', 'Q1',
+                      'Mediana', 'Q3', 'Máximo')
+kbl(resumo, booktabs = T, caption = 'Estatísticas descritivas das variáveis de natureza quantitativa', longtable = T) %>% 
+  kable_styling(position = 'center',latex_options = c("striped", "hold_position"))
+```
+
+Na Figura 1 é apresentada um correlograma das variáveis explicativas. Por meio do gráfico, observou-se que as variáveis explicativas apresentavam uma alta correlação, ou seja, há indicativos de problema de multicolinearidade.
+
+```{r, echo=FALSE, eval=TRUE, fig.width=6.5, fig.height=5, fig.align="center", fig.cap="Matriz de correlação das variáveis explicativas quantitativas"}
+mtcars %>% 
+  select(-vs,-am, -mpg) %>% 
+  ggpairs() 
+```
+
+
+Na Figura 2 são apresentados os gráficos de dispersão, na qual observou-se que uma relação linear da variável resposta com as variáveis \texttt{cyl}, \texttt{drat}, \texttt{wt} e \texttt{qsec}. Nas demais variáveis, a relação tende a ser não linear.
+
+```{r, fig.width=6.5, fig.height=6, fig.align="center", fig.cap="Gráfico de dispersão"}
+# Gráfico de dispersão
+
+fig1 <- mtcars %>% 
+  ggplot(aes(x=cyl,y=mpg)) +
+  geom_point() +
+  labs(x = 'Número de cilindros', y = 'Eficiência (mpg)')
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig2 <- mtcars %>% 
+  ggplot(aes(x=disp,y=mpg)) +
+  geom_point() +
+  labs(x = 'Cilindradas (in^3)', y = 'Eficiência (mpg)')
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig3 <- mtcars %>% 
+  ggplot(aes(x=hp,y=mpg)) +
+  geom_point() +
+  labs(x = 'Potência (HP)', y = 'Eficiência (mpg)') 
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig4 <- mtcars %>% 
+  ggplot(aes(x=drat,y=mpg)) +
+  geom_point() +
+  labs(x = 'Relação de eixo traseiro', y = 'Eficiência (mpg)') 
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig5 <- mtcars %>% 
+  ggplot(aes(x=wt,y=mpg)) +
+  geom_point() +
+  labs(x = 'Peso (1000 lb)', y = 'Eficiência (mpg)')
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig6 <- mtcars %>% 
+  ggplot(aes(x=qsec,y=mpg)) +
+  geom_point() +
+  labs(x = 'Tempo (s)', y = 'Eficiência (mpg)') 
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig7 <- mtcars %>% 
+  ggplot(aes(x=gear,y=mpg)) +
+  geom_point() +
+  labs(x = 'Número de marchas', y = 'Eficiência (mpg)') 
+  #+ geom_smooth(method = lm, se = FALSE)
+
+fig8 <- mtcars %>% 
+  ggplot(aes(x=carb,y=mpg)) +
+  geom_point() +
+  labs(x = 'Número de carburadores', y = 'Eficiência (mpg)') 
+  #+ geom_smooth(method = lm, se = FALSE)
+
+#grid.arrange(fig2, fig3, fig4, fig5, fig6, ncol = 3, nrow = 2)
+
+grid.arrange(fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, ncol = 3, nrow = 3)
+```
+
+Nas Figuras 3-5 são apresentados os gráficos de dispersão em função de outras covariáveis.
+
+```{r, fig.width=6.5, fig.height=8, fig.align="center", fig.cap="Gráfico de dispersão com pontos estratificados pelo número de cilindros"}
+# Gráfico de dispersão com pontos estratificados
+
+ffig2 <- mtcars %>% 
+  ggplot(aes(x=disp,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Cilindradas (in^3)', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig3 <- mtcars %>% 
+  ggplot(aes(x=hp,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Potência (HP)', y = 'Eficiência (mpg)') +
+  theme(legend.position = 'none')
+
+ffig4 <- mtcars %>% 
+  ggplot(aes(x=drat,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Relação de eixo traseiro', y = 'Eficiência (mpg)') +
+  theme(legend.position = 'none')
+
+ffig5 <- mtcars %>% 
+  ggplot(aes(x=wt,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Peso (1000 lb)', y = 'Eficiência (mpg)') +
+  theme(legend.position = 'none')
+
+ffig6 <- mtcars %>% 
+  ggplot(aes(x=qsec,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  #geom_smooth(method = "lm", se = FALSE, colour = "black") +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Tempo (s)', y = 'Eficiência (mpg)') +
+  theme(legend.position = 'none')
+
+ffig7 <- mtcars %>% 
+  ggplot(aes(x=gear,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Número de marchas', y = 'Eficiência (mpg)') +
+  theme(legend.position = 'none')
+
+ffig8 <- mtcars %>% 
+  ggplot(aes(x=carb,y=mpg)) +
+  geom_point(aes(colour = factor(cyl))) +
+  geom_smooth(method = lm, aes(colour = factor(cyl)), se = FALSE) +
+  labs(x = 'Número de carburadores', y = 'Eficiência (mpg)') 
+
+grid.arrange(ffig2, ffig3, ffig4, ffig5, ffig6, ffig7, ffig8,
+             ncol = 2, nrow = 4)
+```
+
+```{r, fig.width=6.5, fig.height=8, fig.align="center", fig.cap="Gráfico de dispersão com pontos estratificados pelo formato do motor"}
+# Gráfico de dispersão com pontos estratificados
+
+ffig1 <- mtcars %>% 
+  ggplot(aes(x=cyl,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Número de cilindros', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig2 <- mtcars %>% 
+  ggplot(aes(x=disp,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Cilindradas (in^3)', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig3 <- mtcars %>% 
+  ggplot(aes(x=hp,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Potência (HP)', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig4 <- mtcars %>% 
+  ggplot(aes(x=drat,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Relação de eixo traseiro', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig5 <- mtcars %>% 
+  ggplot(aes(x=wt,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Peso (1000 lb)', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig6 <- mtcars %>% 
+  ggplot(aes(x=qsec,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  #geom_smooth(method = "lm", se = FALSE, colour = "black") +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Tempo (s)', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig7 <- mtcars %>% 
+  ggplot(aes(x=gear,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Número de marchas', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'none')
+
+ffig8 <- mtcars %>% 
+  ggplot(aes(x=carb,y=mpg)) +
+  geom_point(aes(colour = factor(vs))) +
+  geom_smooth(method = lm, aes(colour = factor(vs)), se = FALSE) +
+  labs(x = 'Número de carburadores', y = 'Eficiência (mpg)') + 
+  theme(legend.position = 'top')
+
+grid.arrange(ffig1, ffig2, ffig3, ffig4, ffig5, ffig6, ffig7, ffig8,
+             ncol = 2, nrow = 4)
+```
+
+```{r, fig.width=6.5, fig.height=8, fig.align="center", fig.cap="Gráfico de dispersão com pontos estratificados pelo tipo de transmissão"}
+# Gráfico de dispersão com pontos estratificados
+
+ffig1 <- mtcars %>% 
+  ggplot(aes(x=cyl,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Número de cilindros', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig2 <- mtcars %>% 
+  ggplot(aes(x=disp,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Cilindradas (in^3)', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig3 <- mtcars %>% 
+  ggplot(aes(x=hp,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Potência (HP)', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig4 <- mtcars %>% 
+  ggplot(aes(x=drat,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Relação de eixo traseiro', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig5 <- mtcars %>% 
+  ggplot(aes(x=wt,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Peso (1000 lb)', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig6 <- mtcars %>% 
+  ggplot(aes(x=qsec,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  #geom_smooth(method = "lm", se = FALSE, colour = "black") +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Tempo (s)', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig7 <- mtcars %>% 
+  ggplot(aes(x=gear,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Número de marchas', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'none')
+
+ffig8 <- mtcars %>% 
+  ggplot(aes(x=carb,y=mpg)) +
+  geom_point(aes(colour = factor(am))) +
+  geom_smooth(method = lm, aes(colour = factor(am)), se = FALSE) +
+  labs(x = 'Número de carburadores', y = 'Eficiência (mpg)') +  
+  theme(legend.position = 'top')
+
+grid.arrange(ffig1, ffig2, ffig3, ffig4, ffig5, ffig6, ffig7, ffig8,
+             ncol = 2, nrow = 4)
+```
+
+```{r, eval=FALSE, fig.width=6.5, fig.height=8, fig.align="center", fig.cap="Gráfico de dispersão com pontos estratificados pelo número de marc"}
+# Gráfico de dispersão com pontos estratificados
+
+ffig1 <- mtcars %>% 
+  ggplot(aes(x=cyl,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE) +
+  theme(legend.position = 'top')
+
+ffig2 <- mtcars %>% 
+  ggplot(aes(x=disp,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE) +
+  theme(legend.position = 'top')
+
+ffig3 <- mtcars %>% 
+  ggplot(aes(x=hp,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE) +
+  theme(legend.position = 'top')
+
+ffig4 <- mtcars %>% 
+  ggplot(aes(x=drat,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE) +
+  theme(legend.position = 'top')
+
+ffig5 <- mtcars %>% 
+  ggplot(aes(x=wt,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE) +
+  theme(legend.position = 'top')
+
+ffig6 <- mtcars %>% 
+  ggplot(aes(x=qsec,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = "lm", se = FALSE, colour = "black") +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE) +
+  theme(legend.position = 'top')
+
+ffig8 <- mtcars %>% 
+  ggplot(aes(x=carb,y=mpg)) +
+  geom_point(aes(colour = factor(gear))) +
+  geom_smooth(method = lm, aes(colour = factor(gear)), se = FALSE)
+
+grid.arrange(ffig1, ffig2, ffig3, ffig4, ffig5, ffig6, ffig8,
+             ncol = 4, nrow = 2)
+```
+
+Na Figura 6 são apresentados os boxplots, na qual observou-se que há uma possível diferença entre o formato do motor em relação a eficiência do carro, assim como há uma diferença entre o tipo de transmissão.
+
+```{r, fig.width=6.5, fig.height=3.5, fig.align="center", fig.cap="Boxplot"}
+# Boxplot
+
+fig9 <- mtcars %>% 
+  ggplot(aes(x=as.factor(cyl),y=mpg)) +
+  geom_boxplot() +
+  labs(x = 'Número de cilindros', y = 'Eficiência (mpg)') 
+
+fig10 <- mtcars %>% 
+  ggplot(aes(x=as.factor(vs),y=mpg)) +
+  geom_boxplot() +
+  labs(x = 'Formato do motor', y = 'Eficiência (mpg)') 
+
+fig11 <- mtcars %>% 
+  ggplot(aes(x=as.factor(am),y=mpg)) +
+  geom_boxplot() +
+  labs(x = 'Tipo de transmissão', y = 'Eficiência (mpg)') 
+
+fig12 <- mtcars %>% 
+  ggplot(aes(x=as.factor(gear),y=mpg)) +
+  geom_boxplot() +
+  labs(x = 'Número de marchas', y = 'Eficiência (mpg)') 
+
+fig13 <- mtcars %>% 
+  mutate(carb_novo=ifelse(carb<=2,0,1)) %>% 
+  ggplot(aes(x=as.factor(carb_novo),y=mpg)) +
+  geom_boxplot() +
+  labs(x = 'Número de carburadores', y = 'Eficiência (mpg)') 
+
+grid.arrange(fig10, fig11, ncol = 2, nrow = 1)
+```
+
+
+# Modelagem
+
+O modelo de regressão linear múltiplo, como definido em James et al. (2013) é dado por
+
+\begin{equation}\label{eq:1}\bf{Y}=\beta_0+\beta_1\bf{X}_1+\ldots+\beta_p\bf{X}_p+\mathbf{\varepsilon},\end{equation}
+em que $\bf{Y}$ representa a variável resposta, $\bf{X}_1,\ldots, \bf{X}_p$ é o vetor de variáveis explicativas, $\beta_0,\ldots, \beta_p$ são os parâmetros a serem estimados e $\bf{\varepsilon}$ é o vetor de termos aleatórios do modelo.
+
+Então, dado o conjunto de dados \texttt{mtcars}, o modelo de regressão (1), reescrito em função do conjunto de dados \texttt{mtcars} é dado por
+$$mpg_i = \beta_0 + \beta_1cyl_i + \beta_2disp_i + \beta_3hp_i + \beta_4drat_i + \beta_5wt_i + \ldots + \beta_9gear_i + \beta_{10}carb_i + \varepsilon_i, \quad i=1,\ldots, 32,$$
+sendo este, denominado de modelo completo.
+Os parâmetros $\beta_0,\ldots, \beta_{10}$ foram estimados pelo método de mínimos quadrados com auxílio computacional do *software* \texttt{R}. Além disso, o efeito das variáveis explicativadas sobre a variável resposta {mpg} foram testadas considerando as seguintes hipóteses estatísticas
+$$H_0: \beta_j=0 \quad vs \quad H_a: \beta_j\neq 0, j=0,1,\ldots, 10.$$
+
+Nessse cenário, obteve-se os seguintes resultados:
+
+\vspace{0.15cm}
+\noindent$\checkmark$ **Modelo completo**
+
+As estimativas, bem os erros padrões e os $p-valores$ dos parâmetros do modelo completo foram obtidas pelo código
+
+<!-- # Primeiro modelo (completo) para fazer o teste do VIF -->
+```{r, echo = TRUE, results='hide'}
+mod_completo <- lm(mpg ~ ., data=mtcars)
+summary(mod_completo)
+```
+\noindent e apresentadas na Tabela 2. Os resultados apresentados nessa tabela indicam que nenhuma da variáveis explicativas tem alguma relação com a eficiência do carro, pois o $p$-valor é maior do o nível de significância e consequentemente, levando a rejeição da hipótese nula.
+
+Por outro lado, na análise exploratório foi identificado o problema de multicolinearidade. Dessa forma, o fator de inflação da variância (VIF) foi calculo pelo seguinte código
+
+```{r, echo=T, eval=FALSE}
+car::vif(mod_completo)
+```
+\noindent e os valores apresentados na Tabela 3. Segundo James et al. (2013), variáveis explicativas cujo VIF for maior do que cinco podem ser removidas do modelo como uma das soluções para o problema. Nessa situação, de acordo com a Tabela 3, as variáveis explicativas \texttt{drat}, \texttt{vs}, \texttt{am} e \texttt{wt} foram mantidas no modelo. Justifica-se a permanência da variável \texttt{wt} em função do comportamento linear quando comparado com as demains variáveis quantativas contínuas (Figura 2).
+
+```{r}
+options(scipen=1, digits=3)
+mod_completo %>% 
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "Estimativas dos parâmetros do modelo completo", 
+        booktabs = T, align = "c",longtable = T) %>% 
+  kable_styling(position = 'center',
+                latex_options = c("striped", "hold_position"))
+```
+
+```{r}
+out_vif1 <- car::vif(mod_completo) 
+
+kbl(out_vif1, booktabs = T, caption = 'Fator de inflação da variância das variáveis explicativas', longtable = T, col.names = c('VIF')) %>% 
+  kable_styling(position = 'center',latex_options = c("striped", "hold_position"))
+```
+
+\vspace{0.15cm}
+\noindent$\checkmark$ **Modelo reduzido**
+
+- `mod_red0`: modelo reduzido 1
+
+$$mpg_i = \beta_0 + \beta_4drat_i + \beta_5wt_i + \beta_7vs_i + \beta_{8}am_i + \varepsilon_i, \quad i=1,\ldots, 32,$$
+
+\noindent cujas estimativas dos parâmetros são obtidas por meio do seguinte código
+
+<!-- Modelo reduzido com as variáveis com VIF <5 -->
+```{r, echo = TRUE, results='hide'}
+mod_red1 <- lm(mpg ~ drat + wt + vs + am, data=mtcars)
+summary(mod_red1)
+```
+\noindent e os resultados apresentados na Tabela 4. Como a hipótese nula não foi rejeitada para os coeficientes associados as variáveis \texttt{wt} ($p$-valor = 0,000) e \texttt{vs} ($p$-valor = 0,016), ou seja, o peso e o formato do motor tem um possível efeito sobre a eficiência do carro. Entretanto, especialistas em mecânica acreditam o tipo de transmissão tem alguma influência sobre o consumo médio de um automável. Por essa razão, a variável \texttt{am} ainda foi mantida no modelo. Além disso, na Figura 5 foi observado uma possível interação entre o tipo de transmissão e o peso do carro.
+
+```{r}
+options(scipen=1, digits=3)
+mod_red1 %>% 
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "Estimativas dos parâmetros do modelo reduzido 1", 
+        booktabs = T, align = "c",longtable = T) %>% 
+  kable_styling(position = 'center',
+                latex_options = c("striped", "hold_position"))
+```
+
+\vspace{0.25cm}
+- `mod_red2`: modelo reduzido 2
+
+$$mpg_i = \beta_0  + \beta_{7}vs_i + \beta_{5}wt_i + \beta_{8}am_i + \beta_{58}wt_i\times am_i + \varepsilon_i, \quad i=1,\ldots, 32,$$
+
+\noindent cujas estimativas dos parâmetros são obtidas por meio do seguinte código
+
+<!-- Modelo reduzido 2 -->
+```{r, echo = TRUE, results='hide'}
+mod_red2 <- lm(mpg ~ vs + wt*am, data=mtcars)
+summary(mod_red2)
+```
+\noindent e os resultados apresentados na Tabela 5. De acordo com essa tabela, a hipótese nula foi rejeitada em todos os casos, pois o $p$-valor foi menor do que o nível de significância. Dessa forma, o formato do motor e assim como a interação entre peso e tipo de transmissão tem algum efeito sobre a eficiência do carro.
+
+```{r}
+options(scipen=1, digits=3)
+mod_red2 %>% 
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "Estimativas dos parâmetros do modelo reduzido 2", 
+        booktabs = T, align = "c",longtable = T) %>% 
+  kable_styling(position = 'center',
+                latex_options = c("striped", "hold_position"))
+```
+
+\vspace{0.25cm}
+- `mod_red3`: modelo reduzido 3
+
+Levando em consideração a análise exploratória e a opinião de especialistas em mecânica, um modelo alternativo é dado por
+
+$$mpg_i = \beta_0  + \beta_{5}wt_i + \beta_{16}cyl6_i + \beta_{18}cyl8_i + \beta_{56}wt_i\times cyl6_i + \beta_{58}wt_i\times cyl8_i + \varepsilon_i, \quad i=1,\ldots, 32,$$
+
+\noindent cujas estimativas dos parâmetros são obtidas por meio do seguinte código
+
+<!-- Modelo reduzido 3 dedução gráfica -->
+```{r, echo = TRUE, results='hide'}
+mod_red3 <- lm(mpg ~ wt*factor(cyl), data=mtcars)
+summary(mod_red3)
+```
+\noindent e os resultados apresentados na Tabela 6. Como a variável \texttt{cyl} foi categorizada para simplificar a interpertação do efeito da interação, duas variáveis *dummies* foram criadas, assumindo a categoria \texttt{cyl4} como casela de referência. Logo, verificou-se uma possível relação do peso, assim como do efeito da interação entre peso e número de cilindro sobre a eficiência do carro, uma vez que a hipótese de nula foi rejeitada.
+
+\newpage
+
+```{r}
+options(scipen=1, digits=3)
+mod_red3 %>% 
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "Estimativas dos parâmetros do modelo reduzido 3", 
+        booktabs = T, align = "c",longtable = T) %>% 
+  kable_styling(position = 'center',
+                latex_options = c("striped", "hold_position"))
+```
+
+Na Tabela 7 são apresentados os valores de R2 e R2 ajustado para os três modelos reduzidos estimados. Os valores obtidos indicam que o modelo `mod_red2` é mais adequado entre os três modelos estimados, seguido do modelo `mod_red3` e `mod_red1`. Entretanto, os valores de R2 ajustados não são suficientes para determinar a adequação do modelo. À vistsa disso, uma análise de resíduo foi realizada.
+
+```{r}
+modelo <- c('mod_red1','mod_red2','mod_red3')
+r2 <- c(0.809,0.868,0.862)
+r2_adj <- c(0.781,0.849,0.835)
+r2_df <- data.frame(Modelo=modelo,R2=r2, R2_ajustado=r2_adj)
+
+kbl(r2_df, booktabs = T, caption = 'Valores de R2 e R2 ajustados dos modelos reduzidos', longtable = T, align = 'c') %>% 
+  kable_styling(position = 'center',latex_options = c("striped", "hold_position"))
+```
+
+# Diagnóstico do Modelo
+
+## Dados completo
+
+Para cada modelo reduzido estimado foi realizado uma análise de resíduo e os resultados são apresentados nas Figuras 7, 8 e 9, respectivamente.
+
+\vspace{0.25cm}
+\noindent$\checkmark$ **Modelo reduzido 1**
+
+De acordo com a Figura 7:
+
+- **Residuals vs Fitted**: uma leve semelhança com uma parábola com concavidade voltada para cima, ou seja, temos um possível padrão não linear entre as variáveis. 
+
+
+- **Normal Q-Q**: A maior parte dos pontos encontra-se em torno da linha tracejada, exceto pelos pontos \texttt{Chrysler Imperial}, \texttt{Toyota Corolla}, \texttt{Fiat 128} e outros dois pontos não identificados na parte inferior da figura. O que indica que esses três pontos
+são possíveis *outliers*. 
+
+- **Scale-Location**: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.
+
+- **Residuals vs Leverage**: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.
+
+\vspace{0.25cm}
+\noindent$\checkmark$ **Modelo reduzido 2**
+
+De acordo com a Figura 8:
+
+- **Residuals vs Fitted**: os resíduos não mostram nenhum padrão, uma vez que a linha vermelha se parece com uma linha reta.
+
+
+- **Normal Q-Q**: A maior parte dos pontos encontra-se afastada da linha tracejada e além disso, os carros \texttt{Merc 240D}, \texttt{Toyota Corolla} e \texttt{Fiat 128} foram apontados como possíveis *outliers*. 
+
+- **Scale-Location**: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.
+
+- **Residuals vs Leverage**: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.
+
+\vspace{0.25cm}
+\noindent$\checkmark$ **Modelo reduzido 3**
+
+De acordo com a Figura 9:
+
+- **Residuals vs Fitted**: os resíduos não mostram nenhum padrão, uma vez que a linha vermelha se parece com uma linha reta.
+
+
+- **Normal Q-Q**: Alguns pontos encontra-se afastada da linha tracejada e além disso, os carros \texttt{Toyota Corona}, \texttt{Toyota Corolla} e \texttt{Fiat 128} foram apontados como possíveis *outliers*. 
+
+- **Scale-Location**: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.
+
+- **Residuals vs Leverage**: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.
+
+```{r, echo=FALSE, fig.width=6.5, fig.height=5.5, fig.align="center", fig.cap="Gráfico de resíduos do modelo reduzido 1"}
+par(mfrow = c(2, 2))
+plot(mod_red1)
+```
+
+<!-- Outliers: Imperial, Corolla e Fiag 128-->
+
+```{r, echo=FALSE, eval=TRUE, fig.width=6.5, fig.height=6.5, fig.align="center", fig.cap="Gráfico de resíduos do modelo reduzido 2"}
+par(mfrow = c(2, 2))
+plot(mod_red2)
+```
+
+<!-- Outliers: Merc240D, Corolla e Fiag 128-->
+
+```{r, echo=FALSE, eval = TRUE, fig.width=6.5, fig.height=6.5, fig.align="center", fig.cap="Gráfico de resíduos do modelo reduzido 3"}
+par(mfrow = c(2, 2))
+plot(mod_red3)
+```
+
+<!-- Outliers: Merc240D, Corolla e Fiag 128-->
+
+## Dados reduzidos
+
+O modelo `mod_red1` apresentou o menor valor de R2 ajustado e na análise de resíduo apontou a possível falta de um termo quadrático no modelo. Por essas razões, o modelo foi descartado para nova avaliação. 
+
+Em relação aos modelos `mod_red2` e `mod_red3` foi realizado uma nova análise removendo os carros identificados como possíveis *outliers*.
+
+\vspace{0.25cm}
+\noindent$\checkmark$ **Modelo reduzido 2**
+
+Os resultados são apresentados na Tabela 8 e na Figura 10 indicam que o formato do motor e o efeito da interação permanecem sendo significativos para explicar a variabilidade presente na eficiência do carro. Além disso, os pontos estãos mais próximos da linha tracejada no gráfico **Normal Q-Q**. Entretanto, pelo gráfico **Scale-Location**, há evidências de heterogeneidade de variâncias e outros carros foram identificados como possíveis *outliers*. 
+
+<!-- Modelo reduzido 2 sem outliers -->
+```{r, echo = TRUE, results='hide'}
+mtcars_red <- mtcars %>% 
+  slice(-8L, -20L, -18L)
+mod_red21 <- lm(mpg ~ vs + wt*am, data=mtcars_red)
+summary(mod_red21)
+```
+
+
+```{r}
+options(scipen=1, digits=3)
+mod_red21 %>% 
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "Estimativas dos parâmetros do modelo reduzido 2 sem os possíveis outliers", 
+        booktabs = T, align = "c",longtable = T) %>% 
+  kable_styling(position = 'center',
+                latex_options = c("striped", "hold_position"))
+```
+
+```{r, echo=FALSE, fig.width=6.5, fig.height=5, fig.align="center", fig.cap="Gráfico de resíduos do modelo reduzido 2 sem outliers"}
+par(mfrow = c(2, 2))
+plot(mod_red21)
+```
+
+\vspace{0.25cm}
+\noindent$\checkmark$ **Modelo reduzido 3**
+
+Os resultados são apresentados na Tabela 9 e na Figura 11 indicam que não houve grandes mudanças nos gráficos de resíduos. Porém, houve uma mudança na significância da interação entre \texttt{wt} e \texttt{cyl8} e também, novos foram identificados como possíveis *outliers*.
+
+<!-- Modelo reduzido 3 sem outliers -->
+```{r, echo = TRUE, results='hide'}
+mtcars_red1 <- mtcars %>% 
+  slice(-18L, -20L, -21L)
+mod_red31 <- lm(mpg ~ wt*factor(cyl), data=mtcars_red1)
+summary(mod_red31)
+```
+
+
+```{r}
+options(scipen=1, digits=3)
+mod_red31 %>% 
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "Estimativas dos parâmetros do modelo reduzido 3 sem os possíveis outliers", 
+        booktabs = T, align = "c",longtable = T) %>% 
+  kable_styling(position = 'center',
+                latex_options = c("striped", "hold_position"))
+```
+
+```{r, echo=FALSE, fig.width=6.5, fig.height=5, fig.align="center", fig.cap="Gráfico de resíduos do modelo reduzido 3 sem outliers"}
+par(mfrow = c(2, 2))
+plot(mod_red31)
+```
+
+# Conclusão e Discussão
+
+Diante do exposto, o modelo mais adequado para explicar a variabiliade presente na eficiência dos carros modelos 1973-1974 é o modelo `mod_red3`. A opção por esse modelo foi em função dos gráficos dos resíduos se manterem com o mesmo padrão com ou sem os carros \texttt{Toyota Corona}, \texttt{Toyota Corolla} e \texttt{Fiat 128}, apontados como possíveis *outliers*. Esses carros não foram identificados como pontos de alavanca, entretanto, são pontos influentes, pois a significância de um dos parâmetros do modelo foi alterada. Dessa forma, seria interessante levantar mais informações sobre esses carros, antes de removê-los por definitivo do conjunto de dados.  
+
+Portanto, o modelo `mod_red3` estimado é dado por
+$$\hat{mpg}_i = 39,57  -5,65wt_i -11,16cyl6_i -15,70cyl8_i + 2,87 wt_i\times cyl6_i + 3,46wt_i\times cyl8_i, \quad i=1,\ldots, 32,$$
+A partir do modelo estimado, as seguintes interpretações podem ser feitas:
+
+ - `wt`: com $p$-valor=0,00o; temos evidências de que a cada 1000 libras que se aumenta no carro há uma redução de -5,65 mpg na eficiência média.
+ 
+ - `cyl6`: com $p$-valor = 0,244; temos indicativos de que não existe diferença significativa entre quatro cilindros (casela de referência) e seis cilindros em relação eficiência média. 
+ 
+ - `cyl8`: com $p$-valor = 0,003; temos sinais de que existe diferença significativa entre quatro cilindros (casela de referência) e oito cilindros em relação eficiência média.  
+ 
+ Portanto, marginalmente, há o efeito do peso e do número de cilindros
+ 
+ - `wt:cyl6`: com $p$-valor = 0,366; temos evidências de que não existe diferença significativa entre a inclinação de quatro cilindros (casela de referência) e de seis cilindros em relação a eficiência média.
+ 
+ - `wt:cyl8`: com $p$-valor = 0,043; temos evidências de que existe diferença significativa entre a inclinação de quatro cilindros (casela de referência) e de oito cilindros em relação a eficiência média.
+
+ Portanto, temos efeito da interação entre peso e número de cilindro do carro. Dessa forma, a hipótese de que modificações na estrutura do automóvel aumenta o seu consumo médio  foi validada. Nesse caso, as modificações no peso e no número de cilindros do carro podem explicar a variabilidade presente no consumo médio de gasolina.
+
+Por fim, informações como relação peso e torque poderiam ser utilizadas no lugar de peso e potência. Outra informações que poderia ser utilizada é o tipo de carro, uma vez que carros esportivos são bem diferentes de sedãs.
+
+
+# Agradecimentos {-}
+
+Ao professor Athos Damiani pelas aulas e dedicação ao curso. Aos mecânicos Marcelo Prataviera e Taka Kurihara e, também, aos alunos do curso de Engenharia Mecânica da UTFPR/Londrina, João Pedro Alves Cordeiro dos Santos e Pedro Henrique Barion pelo auxílio na compreensão das estruturas de um carro.  
+
+# Referências bibliográficas {-}
+
+ALMEIDA FILHO, G.M. **Programa INOVAR-AUTO: atendimento das metas de eficiência energética e suas externalidades**. 2018. Dissertação (Mestrado em Ciências) - Universidade de São Paulo, São Paulo.\vspace{0.15cm}
+
+\noindent CRISE petrolífera de 1973. **Wikipedia**. Disponível em: <https://pt.wikipedia.org/wiki/Crise_petrol%C3%ADfera_de_1973>. Acesso em: 28 de jan. de 2021. \vspace{0.15cm}
+
+\noindent FUEL efficiency. **Wikipedia**. Disponível em: <https://en.wikipedia.org/wiki/Fuel_efficiency>. Acesso em: 28 de jan. de 2021.\vspace{0.15cm}
+
+\noindent HENDERSON, H.V.; VELLEMAN. P.F. Building multiple regression models interactively. **Biometrics**, v.37, p.391-411, 1981. \vspace{0.15cm}
+
+\noindent HOCKING, R.R. The analysis and selection of variables in linear regression. **Biometrics**, v.32, p.1-49, 1976. \vspace{0.15cm}
+
+\noindent JAMES, G.; WITTEN, D.; HASTIE. T.; TIBSHIRANI, R. **An Introduction to Statistical Learning with Applications in R**. New York: Springer, 2013. \vspace{0.15cm}
+
+\noindent R Core Team (2020). **R: A language and environment for statistical computing**. R Foundation for Statistical Computing, Vienna, Austria. URL: [https://www.R-project.org/](https://www.R-project.org/) \vspace{0.15cm}
+
+\noindent TOP reasons for supporting cleaner, more efficient vehicles. **Global fuel economy initiative**. Disponível em: <https://www.globalfueleconomy.org/media/45140/top-reasons-leaflet.pdf>. Acesso em: 28 de jan. de 2021.

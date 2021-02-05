@@ -1,0 +1,3609 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974</title>
+  
+  <meta property="description" itemprop="description" content="O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974."/>
+  
+  
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-02-05"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-02-05"/>
+  <meta name="article:author" content="Elizabeth Mie Hashimoto"/>
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974."/>
+  <meta property="og:locale" content="en_US"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974"/>
+  <meta property="twitter:description" content="O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974."/>
+  
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974"]},{"type":"character","attributes":{},"value":["O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name","url"]}},"value":[{"type":"character","attributes":{},"value":["Elizabeth"]},{"type":"character","attributes":{},"value":["Mie Hashimoto"]},{"type":"character","attributes":{},"value":["https://www.linkedin.com/in/elizabeth-mie-hashimoto-a416a917/"]}]}]},{"type":"character","attributes":{},"value":["02-05-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/anchor-4.2.2/anchor.min.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/bowser-1.9.3/bowser.min.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/distill-2.2.21/template.v2.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-21-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-22-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-23-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-26-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-29-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-3-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-4-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-5-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-6-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-7-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-9-1.png","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/jquery-1.11.3/jquery.min.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/kePrint-0.0.1/kePrint.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/lightable-0.0.1/lightable.css","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/popper-2.6.0/popper.min.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy-bundle.umd.min.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy-light-border.css","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy.css","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy.umd.min.js","anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/webcomponents-2.0.0/webcomponents.js","tcc_emh_final.pdf"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+  
+  <style type="text/css">
+  
+  body {
+    background-color: white;
+  }
+  
+  .pandoc-table {
+    width: 100%;
+  }
+  
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+  
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+  
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+  
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+  
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+  
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+  
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+  
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+  
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+  
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+  
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+  
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+  
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .shaded-content {
+    background: white;
+  }
+  
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+  
+  d-appendix {
+    padding-top: 30px;
+  }
+  
+  d-article>p>img {
+    width: 100%;
+  }
+  
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+  
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+  
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+  
+  /* Tweak code blocks */
+  
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+  
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+  
+  d-article div.sourceCode {
+    background-color: white;
+  }
+  
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+  
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  d-article pre a {
+    border-bottom: none;
+  }
+  
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+  
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+  
+  @media(min-width: 768px) {
+  
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+  
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+  
+  d-article pre {
+    font-size: 14px;
+  }
+  
+  }
+  
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  /* CSS for d-contents */
+  
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+  
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+  
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+  
+  .d-contents li {
+    list-style-type: none
+  }
+  
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+  
+  .d-contents ul {
+    padding-left: 1em
+  }
+  
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+  
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+  
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+  
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+  
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+  
+  
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+  
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+  
+  
+  /* Figure */
+  
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+  
+  .figure img {
+    width: 100%;
+  }
+  
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+  
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+  
+  /* Citations */
+  
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+  
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+  
+  /* Citation hover box */
+  
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+  
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+  
+  
+  /* Tweak 1000px media break to show more text */
+  
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+  
+    .grid {
+      grid-column-gap: 16px;
+    }
+  
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+  
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+  
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+  
+  
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+  
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  /* Include appendix styles here so they can be overridden */
+  
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+  
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+  
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+  
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+  
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+  
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+  
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  d-appendix > * {
+    grid-column: text;
+  }
+  
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+  
+  /* Include footnote styles here so they can be overridden */
+  
+  d-footnote-list {
+    contain: layout style;
+  }
+  
+  d-footnote-list > * {
+    grid-column: text;
+  }
+  
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+  
+  
+  
+  /* Anchor.js */
+  
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+  
+  /* Social footer */
+  
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+  
+  .disqus-comments {
+    margin-right: 30px;
+  }
+  
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  
+  #disqus_thread {
+    margin-top: 30px;
+  }
+  
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+  
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+  
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+  
+  
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+  
+  
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+  
+  /* Styles for posts lists (not auto-injected) */
+  
+  
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+  
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+  
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+  
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+  
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+  
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+  
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+  
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+  
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+  
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+  
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+  
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+  
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+  
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .posts-list img {
+    opacity: 1;
+  }
+  
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+  
+  .posts-more {
+    clear: both;
+  }
+  
+  
+  .posts-sidebar {
+    font-size: 16px;
+  }
+  
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+  
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+  
+  .categories li>a {
+    border-bottom: none;
+  }
+  
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+  
+  .categories .active {
+    font-weight: 600;
+  }
+  
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  
+  
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+  
+  
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+  
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+  
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+  
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+  
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+  
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  
+  
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+  
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+  
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+  
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+  
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+  
+  
+  
+  </style>
+  
+  <script type="application/javascript">
+  
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+  
+  // show body when load is complete
+  function on_load_complete() {
+  
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+  
+  
+    // set body to visible
+    document.body.style.visibility = 'visible';
+  
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+  
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+  
+  function init_distill() {
+  
+    init_common();
+  
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+  
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+  
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+  
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+  
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+  
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+  
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+  
+      // capture layout
+      var layout = $(this).attr('data-layout');
+  
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+  
+  
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+  
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+  
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+  
+    // load distill framework
+    load_distill_framework();
+  
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+  
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+  
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+  
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+  
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+  
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+  
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+  
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+  
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+  
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+  
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+  
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+  
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+  
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+  
+      // clear polling timer
+      clearInterval(tid);
+  
+      // show body now that everything is ready
+      on_load_complete();
+    }
+  
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+  
+  }
+  
+  function init_downlevel() {
+  
+    init_common();
+  
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+  
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+  
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+  
+    // remove toc
+    $('.d-contents').remove();
+  
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+  
+  
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+  
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+  
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+  
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+  
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+  
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+  
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+  
+    $('body').addClass('downlevel');
+  
+    on_load_complete();
+  }
+  
+  
+  function init_common() {
+  
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+  
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+  
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+  
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+  
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+  
+      }
+    });
+  
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+  
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+  
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+  
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+  
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+  
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+  
+  </script>
+  
+  <!--/radix_placeholder_distill-->
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/popper-2.6.0/popper.min.js"></script>
+  <link href="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974","description":"O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974.","authors":[{"author":"Elizabeth Mie Hashimoto","authorURL":"https://www.linkedin.com/in/elizabeth-mie-hashimoto-a416a917/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-02-05T00:00:00.000-03:00","citationText":"Mie Hashimoto, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>O conjunto de dados, denominado de <code>mtcars</code>, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista <em>Motor Trend</em> para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974.</p></p>
+</div>
+
+<div class="d-byline">
+  
+  true
+  
+<br/>02-05-2021
+</div>
+
+<div class="d-article">
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggobi.github.io/ggally'>GGally</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>gridExtra</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ddsjoberg/gtsummary'>gtsummary</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://xtable.r-forge.r-project.org/'>xtable</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p><a href="tcc_emh_final.pdf">VERSÃO PDF</a></p>
+<h2 id="introdução" class="unnumbered">Introdução</h2>
+<p>Na crise petrolífera de 1973, membros da Organização dos Países Árabes Exportadores de Petróleo (OPAEP) aplicaram sanções em protesto ao apoio dos Estados Unidos e outras nações à Israel durante a Guerra do Yom Kippur. O conflito resultou no aumento do preço do petróleo de três dólares por barril para cerca de 12 doláres no mundo inteiro, sendo que os preços fixados para os Estados Unidos foram ainda maiores.</p>
+<p>Como uma alternativa à alta do preço do petróleo no mercado mundial, os Estados Unidos iniciaram um programa de eficiência energética, conhecido como <em>Corporate Average Fuel Economy</em> (CAFE), com o propósito de reduzir o consumo de combustível de carros, <em>pick-ups</em>, minivans e SUVs (Almeida Filho, 2018).</p>
+<p>Acredita-se que a melhoria no consumo médio de combustível dos automóveis leva à redução das contas de importação de petróleo, ou seja, pode resultar em economias estimadas nas contas anuais de importação de petróleo no valor de 300 bilhões de dólares em 2025 e 600 bilhões em 2050 (Global fuel economy initiative, 2021). Por outro lado, a eficiência do combustível depende de muitas características do veículo, incluindo as especificações do motor, resistência aerodinâmica, peso, combustível e entre outros atributos.</p>
+<p>Nesse contexto, buscou-se validar a hipótese de que modificações na estrutura do automóvel aumenta o seu consumo médio. Portanto, o presente trabalho teve como objetivo identificar quais características do carro explica a sua eficiência medida em milhas por galão. As análises foram feitas utilizando o <em>software</em> <code>R</code> versão 4.0.3, considerando um nível de significância de 5%.</p>
+<h2 id="análise-exploratória">Análise Exploratória</h2>
+<p>O conjunto de dados, denominado de <code>mtcars</code>, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista <em>Motor Trend</em> para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974. O mesmo está disponível na biblioteca <code>datasets</code> do <em>software</em> <code>R</code> para consulta.</p>
+<p>Dessa forma, de acordo com a hipótese formulada, as variáveis observadas no conjunto de dados são definidas como:</p>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Variável resposta</strong></p>
+<ul>
+<li><code>mpg</code>: eficiência (milhas por galão de combustível).</li>
+</ul>
+<p><span class="math inline">\(\checkmark\)</span> <strong>Variável explicativa</strong></p>
+<ul>
+<li><p><code>cyl</code>: número de cilindros.</p></li>
+<li><p><code>disp</code>: cilindradas (polegada cúbica).</p></li>
+<li><p><code>hp</code>: potência bruta (HP).</p></li>
+<li><p><code>drat</code>: relação de eixo traseiro.</p></li>
+<li><p><code>wt</code>: peso (1000 libras).</p></li>
+<li><p><code>qsec</code>: tempo no quarto de milha (segundos).</p></li>
+<li><p><code>vs</code>: formato do motor (0 = V e 1 = linha).</p></li>
+<li><p><code>am</code>: tipo de transmissão (0 = automático e 1 = manual).</p></li>
+<li><p><code>gear</code>: número de marchas para frente.</p></li>
+<li><p><code>carb</code>: número de carburadores.</p></li>
+</ul>
+<p>Para reduzir as informações do conjunto de dados, estatísticas descritivas de cada uma das variáveis quantitativas foram obtidas e apresentadas na Tabela 1. Os resultados mostram que não há nenhuma dado faltante e portanto, não há necessidade de imputar valores. Além disso, em média, a eficiência dos carros é de 20,09 mpg e são carros com 2 carburadores, seis cilindros e peso de 3,22 <span class="math inline">\(\times 1000\)</span> libras.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>resumo</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>am</span>,<span class='op'>-</span><span class='va'>vs</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>pivot_longer</span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>name</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>summarise_at</span><span class='op'>(</span><span class='st'>"value"</span>, 
+               <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Missing <span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span><span class='op'>)</span>,media<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>,
+                    desvPad<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>, minimo<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>,
+                    Q1<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>.</span>,<span class='fl'>0.25</span><span class='op'>)</span>,med<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>,
+                    Q3<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>.</span>,<span class='fl'>0.75</span><span class='op'>)</span>,maxi<span class='op'>=</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate_if</span><span class='op'>(</span><span class='va'>is.numeric</span>, <span class='va'>format</span>, digits<span class='op'>=</span><span class='fl'>3</span>,nsmall <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>resumo</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Variável'</span>, <span class='st'>'Missing'</span>, <span class='st'>'Média'</span>,
+                      <span class='st'>'Desvio padrão'</span>, <span class='st'>'Mínimo'</span>, <span class='st'>'Q1'</span>,
+                      <span class='st'>'Mediana'</span>, <span class='st'>'Q3'</span>, <span class='st'>'Máximo'</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>resumo</span>, booktabs <span class='op'>=</span> <span class='cn'>T</span>, caption <span class='op'>=</span> <span class='st'>'Estatísticas descritivas das variáveis de natureza quantitativa'</span>, longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-2">Table 1: </span>Estatísticas descritivas das variáveis de natureza quantitativa
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variável
+</th>
+<th style="text-align:left;">
+Missing
+</th>
+<th style="text-align:left;">
+Média
+</th>
+<th style="text-align:left;">
+Desvio padrão
+</th>
+<th style="text-align:left;">
+Mínimo
+</th>
+<th style="text-align:left;">
+Q1
+</th>
+<th style="text-align:left;">
+Mediana
+</th>
+<th style="text-align:left;">
+Q3
+</th>
+<th style="text-align:left;">
+Máximo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+carb
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2.81
+</td>
+<td style="text-align:left;">
+1.615
+</td>
+<td style="text-align:left;">
+1.00
+</td>
+<td style="text-align:left;">
+2.00
+</td>
+<td style="text-align:left;">
+2.00
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+8.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cyl
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+6.19
+</td>
+<td style="text-align:left;">
+1.786
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+6.00
+</td>
+<td style="text-align:left;">
+8.00
+</td>
+<td style="text-align:left;">
+8.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+disp
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+230.72
+</td>
+<td style="text-align:left;">
+123.939
+</td>
+<td style="text-align:left;">
+71.10
+</td>
+<td style="text-align:left;">
+120.83
+</td>
+<td style="text-align:left;">
+196.30
+</td>
+<td style="text-align:left;">
+326.00
+</td>
+<td style="text-align:left;">
+472.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+drat
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3.60
+</td>
+<td style="text-align:left;">
+0.535
+</td>
+<td style="text-align:left;">
+2.76
+</td>
+<td style="text-align:left;">
+3.08
+</td>
+<td style="text-align:left;">
+3.70
+</td>
+<td style="text-align:left;">
+3.92
+</td>
+<td style="text-align:left;">
+4.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gear
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3.69
+</td>
+<td style="text-align:left;">
+0.738
+</td>
+<td style="text-align:left;">
+3.00
+</td>
+<td style="text-align:left;">
+3.00
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+5.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hp
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+146.69
+</td>
+<td style="text-align:left;">
+68.563
+</td>
+<td style="text-align:left;">
+52.00
+</td>
+<td style="text-align:left;">
+96.50
+</td>
+<td style="text-align:left;">
+123.00
+</td>
+<td style="text-align:left;">
+180.00
+</td>
+<td style="text-align:left;">
+335.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mpg
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+20.09
+</td>
+<td style="text-align:left;">
+6.027
+</td>
+<td style="text-align:left;">
+10.40
+</td>
+<td style="text-align:left;">
+15.43
+</td>
+<td style="text-align:left;">
+19.20
+</td>
+<td style="text-align:left;">
+22.80
+</td>
+<td style="text-align:left;">
+33.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qsec
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+17.85
+</td>
+<td style="text-align:left;">
+1.787
+</td>
+<td style="text-align:left;">
+14.50
+</td>
+<td style="text-align:left;">
+16.89
+</td>
+<td style="text-align:left;">
+17.71
+</td>
+<td style="text-align:left;">
+18.90
+</td>
+<td style="text-align:left;">
+22.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3.22
+</td>
+<td style="text-align:left;">
+0.978
+</td>
+<td style="text-align:left;">
+1.51
+</td>
+<td style="text-align:left;">
+2.58
+</td>
+<td style="text-align:left;">
+3.33
+</td>
+<td style="text-align:left;">
+3.61
+</td>
+<td style="text-align:left;">
+5.42
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Na Figura 1 é apresentada um correlograma das variáveis explicativas. Por meio do gráfico, observou-se que as variáveis explicativas apresentavam uma alta correlação, ou seja, há indicativos de problema de multicolinearidade.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>vs</span>,<span class='op'>-</span><span class='va'>am</span>, <span class='op'>-</span><span class='va'>mpg</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggobi.github.io/ggally/reference/ggpairs.html'>ggpairs</a></span><span class='op'>(</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-3-1.png" alt="Matriz de correlação das variáveis explicativas quantitativas" width="624" />
+<p class="caption">
+Figure 1: Matriz de correlação das variáveis explicativas quantitativas
+</p>
+</div>
+</div>
+<p>Na Figura 2 são apresentados os gráficos de dispersão, na qual observou-se que uma relação linear da variável resposta com as variáveis , ,  e . Nas demais variáveis, a relação tende a ser não linear.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão</span>
+
+<span class='va'>fig1</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>cyl</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de cilindros'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span>
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig2</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>disp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Cilindradas (in^3)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span>
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig3</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>hp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Potência (HP)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig4</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>drat</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Relação de eixo traseiro'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig5</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>wt</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Peso (1000 lb)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span>
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig6</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>qsec</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Tempo (s)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig7</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>gear</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de marchas'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='va'>fig8</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>carb</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de carburadores'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+  <span class='co'>#+ geom_smooth(method = lm, se = FALSE)</span>
+
+<span class='co'>#grid.arrange(fig2, fig3, fig4, fig5, fig6, ncol = 3, nrow = 2)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='va'>fig1</span>, <span class='va'>fig2</span>, <span class='va'>fig3</span>, <span class='va'>fig4</span>, <span class='va'>fig5</span>, <span class='va'>fig6</span>, <span class='va'>fig7</span>, <span class='va'>fig8</span>, ncol <span class='op'>=</span> <span class='fl'>3</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-4-1.png" alt="Gráfico de dispersão" width="624" />
+<p class="caption">
+Figure 2: Gráfico de dispersão
+</p>
+</div>
+</div>
+<p>Nas Figuras 3-5 são apresentados os gráficos de dispersão em função de outras covariáveis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
+
+<span class='va'>ffig2</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>disp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Cilindradas (in^3)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig3</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>hp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Potência (HP)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig4</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>drat</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Relação de eixo traseiro'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig5</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>wt</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Peso (1000 lb)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig6</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>qsec</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'>#geom_smooth(method = "lm", se = FALSE, colour = "black") +</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Tempo (s)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig7</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>gear</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de marchas'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig8</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>carb</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de carburadores'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+
+<span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='va'>ffig2</span>, <span class='va'>ffig3</span>, <span class='va'>ffig4</span>, <span class='va'>ffig5</span>, <span class='va'>ffig6</span>, <span class='va'>ffig7</span>, <span class='va'>ffig8</span>,
+             ncol <span class='op'>=</span> <span class='fl'>2</span>, nrow <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-5-1.png" alt="Gráfico de dispersão com pontos estratificados pelo número de cilindros" width="624" />
+<p class="caption">
+Figure 3: Gráfico de dispersão com pontos estratificados pelo número de cilindros
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
+
+<span class='va'>ffig1</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>cyl</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de cilindros'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig2</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>disp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Cilindradas (in^3)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig3</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>hp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Potência (HP)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig4</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>drat</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Relação de eixo traseiro'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig5</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>wt</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Peso (1000 lb)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig6</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>qsec</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'>#geom_smooth(method = "lm", se = FALSE, colour = "black") +</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Tempo (s)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig7</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>gear</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de marchas'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig8</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>carb</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de carburadores'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='va'>ffig1</span>, <span class='va'>ffig2</span>, <span class='va'>ffig3</span>, <span class='va'>ffig4</span>, <span class='va'>ffig5</span>, <span class='va'>ffig6</span>, <span class='va'>ffig7</span>, <span class='va'>ffig8</span>,
+             ncol <span class='op'>=</span> <span class='fl'>2</span>, nrow <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-6-1.png" alt="Gráfico de dispersão com pontos estratificados pelo formato do motor" width="624" />
+<p class="caption">
+Figure 4: Gráfico de dispersão com pontos estratificados pelo formato do motor
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
+
+<span class='va'>ffig1</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>cyl</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de cilindros'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig2</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>disp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Cilindradas (in^3)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig3</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>hp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Potência (HP)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig4</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>drat</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Relação de eixo traseiro'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig5</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>wt</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Peso (1000 lb)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig6</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>qsec</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'>#geom_smooth(method = "lm", se = FALSE, colour = "black") +</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Tempo (s)'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig7</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>gear</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de marchas'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'none'</span><span class='op'>)</span>
+
+<span class='va'>ffig8</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>carb</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de carburadores'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> <span class='op'>+</span>  
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='va'>ffig1</span>, <span class='va'>ffig2</span>, <span class='va'>ffig3</span>, <span class='va'>ffig4</span>, <span class='va'>ffig5</span>, <span class='va'>ffig6</span>, <span class='va'>ffig7</span>, <span class='va'>ffig8</span>,
+             ncol <span class='op'>=</span> <span class='fl'>2</span>, nrow <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-7-1.png" alt="Gráfico de dispersão com pontos estratificados pelo tipo de transmissão" width="624" />
+<p class="caption">
+Figure 5: Gráfico de dispersão com pontos estratificados pelo tipo de transmissão
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
+
+<span class='va'>ffig1</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>cyl</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='va'>ffig2</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>disp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='va'>ffig3</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>hp</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='va'>ffig4</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>drat</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='va'>ffig5</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>wt</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='va'>ffig6</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>qsec</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, colour <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'top'</span><span class='op'>)</span>
+
+<span class='va'>ffig8</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>carb</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='va'>lm</span>, <span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='va'>ffig1</span>, <span class='va'>ffig2</span>, <span class='va'>ffig3</span>, <span class='va'>ffig4</span>, <span class='va'>ffig5</span>, <span class='va'>ffig6</span>, <span class='va'>ffig8</span>,
+             ncol <span class='op'>=</span> <span class='fl'>4</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>Na Figura 6 são apresentados os boxplots, na qual observou-se que há uma possível diferença entre o formato do motor em relação a eficiência do carro, assim como há uma diferença entre o tipo de transmissão.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Boxplot</span>
+
+<span class='va'>fig9</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de cilindros'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+
+<span class='va'>fig10</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Formato do motor'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+
+<span class='va'>fig11</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Tipo de transmissão'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+
+<span class='va'>fig12</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de marchas'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+
+<span class='va'>fig13</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>carb_novo<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>carb</span><span class='op'>&lt;=</span><span class='fl'>2</span>,<span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>carb_novo</span><span class='op'>)</span>,y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Número de carburadores'</span>, y <span class='op'>=</span> <span class='st'>'Eficiência (mpg)'</span><span class='op'>)</span> 
+
+<span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='va'>fig10</span>, <span class='va'>fig11</span>, ncol <span class='op'>=</span> <span class='fl'>2</span>, nrow <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-9-1.png" alt="Boxplot" width="624" />
+<p class="caption">
+Figure 6: Boxplot
+</p>
+</div>
+</div>
+<h1 id="modelagem">Modelagem</h1>
+<p>O modelo de regressão linear múltiplo, como definido em James et al. (2013) é dado por</p>
+<p><span class="math display">\[\begin{equation}\label{eq:1}\bf{Y}=\beta_0+\beta_1\bf{X}_1+\ldots+\beta_p\bf{X}_p+\mathbf{\varepsilon},\end{equation}\]</span> em que <span class="math inline">\(\bf{Y}\)</span> representa a variável resposta, <span class="math inline">\(\bf{X}_1,\ldots, \bf{X}_p\)</span> é o vetor de variáveis explicativas, <span class="math inline">\(\beta_0,\ldots, \beta_p\)</span> são os parâmetros a serem estimados e <span class="math inline">\(\bf{\varepsilon}\)</span> é o vetor de termos aleatórios do modelo.</p>
+<p>Então, dado o conjunto de dados , o modelo de regressão (1), reescrito em função do conjunto de dados  é dado por <span class="math display">\[mpg_i = \beta_0 + \beta_1cyl_i + \beta_2disp_i + \beta_3hp_i + \beta_4drat_i + \beta_5wt_i + \ldots + \beta_9gear_i + \beta_{10}carb_i + \varepsilon_i, \quad i=1,\ldots, 32,\]</span> sendo este, denominado de modelo completo. Os parâmetros <span class="math inline">\(\beta_0,\ldots, \beta_{10}\)</span> foram estimados pelo método de mínimos quadrados com auxílio computacional do <em>software</em> . Além disso, o efeito das variáveis explicativadas sobre a variável resposta {mpg} foram testadas considerando as seguintes hipóteses estatísticas <span class="math display">\[H_0: \beta_j=0 \quad vs \quad H_a: \beta_j\neq 0, j=0,1,\ldots, 10.\]</span></p>
+<p>Nessse cenário, obteve-se os seguintes resultados:</p>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo completo</strong></p>
+<p>As estimativas, bem os erros padrões e os <span class="math inline">\(p-valores\)</span> dos parâmetros do modelo completo foram obtidas pelo código</p>
+<!-- # Primeiro modelo (completo) para fazer o teste do VIF -->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_completo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_completo</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>e apresentadas na Tabela 2. Os resultados apresentados nessa tabela indicam que nenhuma da variáveis explicativas tem alguma relação com a eficiência do carro, pois o <span class="math inline">\(p\)</span>-valor é maior do o nível de significância e consequentemente, levando a rejeição da hipótese nula.</p>
+<p>Por outro lado, na análise exploratório foi identificado o problema de multicolinearidade. Dessa forma, o fator de inflação da variância (VIF) foi calculo pelo seguinte código</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>mod_completo</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>e os valores apresentados na Tabela 3. Segundo James et al. (2013), variáveis explicativas cujo VIF for maior do que cinco podem ser removidas do modelo como uma das soluções para o problema. Nessa situação, de acordo com a Tabela 3, as variáveis explicativas , ,  e  foram mantidas no modelo. Justifica-se a permanência da variável  em função do comportamento linear quando comparado com as demains variáveis quantativas contínuas (Figura 2).</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mod_completo</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/xtable/man/xtable.html'>xtable</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Estimativas dos parâmetros do modelo completo"</span>, 
+        booktabs <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>"c"</span>,longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,
+                latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-12">Table 2: </span>Estimativas dos parâmetros do modelo completo
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Estimate
+</th>
+<th style="text-align:center;">
+Std. Error
+</th>
+<th style="text-align:center;">
+t value
+</th>
+<th style="text-align:center;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+12.303
+</td>
+<td style="text-align:center;">
+18.718
+</td>
+<td style="text-align:center;">
+0.657
+</td>
+<td style="text-align:center;">
+0.518
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cyl
+</td>
+<td style="text-align:center;">
+-0.111
+</td>
+<td style="text-align:center;">
+1.045
+</td>
+<td style="text-align:center;">
+-0.107
+</td>
+<td style="text-align:center;">
+0.916
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+disp
+</td>
+<td style="text-align:center;">
+0.013
+</td>
+<td style="text-align:center;">
+0.018
+</td>
+<td style="text-align:center;">
+0.747
+</td>
+<td style="text-align:center;">
+0.463
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hp
+</td>
+<td style="text-align:center;">
+-0.021
+</td>
+<td style="text-align:center;">
+0.022
+</td>
+<td style="text-align:center;">
+-0.987
+</td>
+<td style="text-align:center;">
+0.335
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+drat
+</td>
+<td style="text-align:center;">
+0.787
+</td>
+<td style="text-align:center;">
+1.635
+</td>
+<td style="text-align:center;">
+0.481
+</td>
+<td style="text-align:center;">
+0.635
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:center;">
+-3.715
+</td>
+<td style="text-align:center;">
+1.894
+</td>
+<td style="text-align:center;">
+-1.961
+</td>
+<td style="text-align:center;">
+0.063
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qsec
+</td>
+<td style="text-align:center;">
+0.821
+</td>
+<td style="text-align:center;">
+0.731
+</td>
+<td style="text-align:center;">
+1.123
+</td>
+<td style="text-align:center;">
+0.274
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vs
+</td>
+<td style="text-align:center;">
+0.318
+</td>
+<td style="text-align:center;">
+2.105
+</td>
+<td style="text-align:center;">
+0.151
+</td>
+<td style="text-align:center;">
+0.881
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+am
+</td>
+<td style="text-align:center;">
+2.520
+</td>
+<td style="text-align:center;">
+2.057
+</td>
+<td style="text-align:center;">
+1.225
+</td>
+<td style="text-align:center;">
+0.234
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gear
+</td>
+<td style="text-align:center;">
+0.655
+</td>
+<td style="text-align:center;">
+1.493
+</td>
+<td style="text-align:center;">
+0.439
+</td>
+<td style="text-align:center;">
+0.665
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+carb
+</td>
+<td style="text-align:center;">
+-0.199
+</td>
+<td style="text-align:center;">
+0.829
+</td>
+<td style="text-align:center;">
+-0.241
+</td>
+<td style="text-align:center;">
+0.812
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>out_vif1</span> <span class='op'>&lt;-</span> <span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>mod_completo</span><span class='op'>)</span> 
+
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>out_vif1</span>, booktabs <span class='op'>=</span> <span class='cn'>T</span>, caption <span class='op'>=</span> <span class='st'>'Fator de inflação da variância das variáveis explicativas'</span>, longtable <span class='op'>=</span> <span class='cn'>T</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'VIF'</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-13">Table 3: </span>Fator de inflação da variância das variáveis explicativas
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+VIF
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+cyl
+</td>
+<td style="text-align:right;">
+15.37
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+disp
+</td>
+<td style="text-align:right;">
+21.62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hp
+</td>
+<td style="text-align:right;">
+9.83
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+drat
+</td>
+<td style="text-align:right;">
+3.38
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:right;">
+15.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qsec
+</td>
+<td style="text-align:right;">
+7.53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vs
+</td>
+<td style="text-align:right;">
+4.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+am
+</td>
+<td style="text-align:right;">
+4.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gear
+</td>
+<td style="text-align:right;">
+5.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+carb
+</td>
+<td style="text-align:right;">
+7.91
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido</strong></p>
+<ul>
+<li><code>mod_red0</code>: modelo reduzido 1</li>
+</ul>
+<p><span class="math display">\[mpg_i = \beta_0 + \beta_4drat_i + \beta_5wt_i + \beta_7vs_i + \beta_{8}am_i + \varepsilon_i, \quad i=1,\ldots, 32,\]</span></p>
+<p>cujas estimativas dos parâmetros são obtidas por meio do seguinte código</p>
+<!-- Modelo reduzido com as variáveis com VIF <5 -->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_red1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>drat</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>am</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red1</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>e os resultados apresentados na Tabela 4. Como a hipótese nula não foi rejeitada para os coeficientes associados as variáveis  (<span class="math inline">\(p\)</span>-valor = 0,000) e  (<span class="math inline">\(p\)</span>-valor = 0,016), ou seja, o peso e o formato do motor tem um possível efeito sobre a eficiência do carro. Entretanto, especialistas em mecânica acreditam o tipo de transmissão tem alguma influência sobre o consumo médio de um automável. Por essa razão, a variável  ainda foi mantida no modelo. Além disso, na Figura 5 foi observado uma possível interação entre o tipo de transmissão e o peso do carro.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mod_red1</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/xtable/man/xtable.html'>xtable</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Estimativas dos parâmetros do modelo reduzido 1"</span>, 
+        booktabs <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>"c"</span>,longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,
+                latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-15">Table 4: </span>Estimativas dos parâmetros do modelo reduzido 1
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Estimate
+</th>
+<th style="text-align:center;">
+Std. Error
+</th>
+<th style="text-align:center;">
+t value
+</th>
+<th style="text-align:center;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+27.573
+</td>
+<td style="text-align:center;">
+6.874
+</td>
+<td style="text-align:center;">
+4.011
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+drat
+</td>
+<td style="text-align:center;">
+0.682
+</td>
+<td style="text-align:center;">
+1.559
+</td>
+<td style="text-align:center;">
+0.438
+</td>
+<td style="text-align:center;">
+0.665
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:center;">
+-3.699
+</td>
+<td style="text-align:center;">
+0.932
+</td>
+<td style="text-align:center;">
+-3.967
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vs
+</td>
+<td style="text-align:center;">
+3.452
+</td>
+<td style="text-align:center;">
+1.348
+</td>
+<td style="text-align:center;">
+2.561
+</td>
+<td style="text-align:center;">
+0.016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+am
+</td>
+<td style="text-align:center;">
+1.115
+</td>
+<td style="text-align:center;">
+1.736
+</td>
+<td style="text-align:center;">
+0.642
+</td>
+<td style="text-align:center;">
+0.526
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li><code>mod_red2</code>: modelo reduzido 2</li>
+</ul>
+<p><span class="math display">\[mpg_i = \beta_0  + \beta_{7}vs_i + \beta_{5}wt_i + \beta_{8}am_i + \beta_{58}wt_i\times am_i + \varepsilon_i, \quad i=1,\ldots, 32,\]</span></p>
+<p>cujas estimativas dos parâmetros são obtidas por meio do seguinte código</p>
+<!-- Modelo reduzido 2 -->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_red2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>wt</span><span class='op'>*</span><span class='va'>am</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>e os resultados apresentados na Tabela 5. De acordo com essa tabela, a hipótese nula foi rejeitada em todos os casos, pois o <span class="math inline">\(p\)</span>-valor foi menor do que o nível de significância. Dessa forma, o formato do motor e assim como a interação entre peso e tipo de transmissão tem algum efeito sobre a eficiência do carro.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mod_red2</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/xtable/man/xtable.html'>xtable</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Estimativas dos parâmetros do modelo reduzido 2"</span>, 
+        booktabs <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>"c"</span>,longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,
+                latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-17">Table 5: </span>Estimativas dos parâmetros do modelo reduzido 2
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Estimate
+</th>
+<th style="text-align:center;">
+Std. Error
+</th>
+<th style="text-align:center;">
+t value
+</th>
+<th style="text-align:center;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+26.25
+</td>
+<td style="text-align:center;">
+3.346
+</td>
+<td style="text-align:center;">
+7.85
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vs
+</td>
+<td style="text-align:center;">
+2.93
+</td>
+<td style="text-align:center;">
+1.095
+</td>
+<td style="text-align:center;">
+2.68
+</td>
+<td style="text-align:center;">
+0.012
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:center;">
+-2.70
+</td>
+<td style="text-align:center;">
+0.818
+</td>
+<td style="text-align:center;">
+-3.30
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+am
+</td>
+<td style="text-align:center;">
+14.32
+</td>
+<td style="text-align:center;">
+3.866
+</td>
+<td style="text-align:center;">
+3.70
+</td>
+<td style="text-align:center;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt:am
+</td>
+<td style="text-align:center;">
+-4.66
+</td>
+<td style="text-align:center;">
+1.329
+</td>
+<td style="text-align:center;">
+-3.51
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li><code>mod_red3</code>: modelo reduzido 3</li>
+</ul>
+<p>Levando em consideração a análise exploratória e a opinião de especialistas em mecânica, um modelo alternativo é dado por</p>
+<p><span class="math display">\[mpg_i = \beta_0  + \beta_{5}wt_i + \beta_{16}cyl6_i + \beta_{18}cyl8_i + \beta_{56}wt_i\times cyl6_i + \beta_{58}wt_i\times cyl8_i + \varepsilon_i, \quad i=1,\ldots, 32,\]</span></p>
+<p>cujas estimativas dos parâmetros são obtidas por meio do seguinte código</p>
+<!-- Modelo reduzido 3 dedução gráfica -->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_red3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red3</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>e os resultados apresentados na Tabela 6. Como a variável  foi categorizada para simplificar a interpertação do efeito da interação, duas variáveis <em>dummies</em> foram criadas, assumindo a categoria  como casela de referência. Logo, verificou-se uma possível relação do peso, assim como do efeito da interação entre peso e número de cilindro sobre a eficiência do carro, uma vez que a hipótese de nula foi rejeitada.</p>
+<div style="page-break-after: always;"></div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mod_red3</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/xtable/man/xtable.html'>xtable</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Estimativas dos parâmetros do modelo reduzido 3"</span>, 
+        booktabs <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>"c"</span>,longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,
+                latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-19">Table 6: </span>Estimativas dos parâmetros do modelo reduzido 3
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Estimate
+</th>
+<th style="text-align:center;">
+Std. Error
+</th>
+<th style="text-align:center;">
+t value
+</th>
+<th style="text-align:center;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+39.57
+</td>
+<td style="text-align:center;">
+3.19
+</td>
+<td style="text-align:center;">
+12.39
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:center;">
+-5.65
+</td>
+<td style="text-align:center;">
+1.36
+</td>
+<td style="text-align:center;">
+-4.15
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor(cyl)6
+</td>
+<td style="text-align:center;">
+-11.16
+</td>
+<td style="text-align:center;">
+9.36
+</td>
+<td style="text-align:center;">
+-1.19
+</td>
+<td style="text-align:center;">
+0.244
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor(cyl)8
+</td>
+<td style="text-align:center;">
+-15.70
+</td>
+<td style="text-align:center;">
+4.84
+</td>
+<td style="text-align:center;">
+-3.25
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt:factor(cyl)6
+</td>
+<td style="text-align:center;">
+2.87
+</td>
+<td style="text-align:center;">
+3.12
+</td>
+<td style="text-align:center;">
+0.92
+</td>
+<td style="text-align:center;">
+0.366
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt:factor(cyl)8
+</td>
+<td style="text-align:center;">
+3.46
+</td>
+<td style="text-align:center;">
+1.63
+</td>
+<td style="text-align:center;">
+2.12
+</td>
+<td style="text-align:center;">
+0.043
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Na Tabela 7 são apresentados os valores de R2 e R2 ajustado para os três modelos reduzidos estimados. Os valores obtidos indicam que o modelo <code>mod_red2</code> é mais adequado entre os três modelos estimados, seguido do modelo <code>mod_red3</code> e <code>mod_red1</code>. Entretanto, os valores de R2 ajustados não são suficientes para determinar a adequação do modelo. À vistsa disso, uma análise de resíduo foi realizada.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>modelo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'mod_red1'</span>,<span class='st'>'mod_red2'</span>,<span class='st'>'mod_red3'</span><span class='op'>)</span>
+<span class='va'>r2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.809</span>,<span class='fl'>0.868</span>,<span class='fl'>0.862</span><span class='op'>)</span>
+<span class='va'>r2_adj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.781</span>,<span class='fl'>0.849</span>,<span class='fl'>0.835</span><span class='op'>)</span>
+<span class='va'>r2_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>Modelo<span class='op'>=</span><span class='va'>modelo</span>,R2<span class='op'>=</span><span class='va'>r2</span>, R2_ajustado<span class='op'>=</span><span class='va'>r2_adj</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='va'>r2_df</span>, booktabs <span class='op'>=</span> <span class='cn'>T</span>, caption <span class='op'>=</span> <span class='st'>'Valores de R2 e R2 ajustados dos modelos reduzidos'</span>, longtable <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>'c'</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-20">Table 7: </span>Valores de R2 e R2 ajustados dos modelos reduzidos
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Modelo
+</th>
+<th style="text-align:center;">
+R2
+</th>
+<th style="text-align:center;">
+R2_ajustado
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+mod_red1
+</td>
+<td style="text-align:center;">
+0.809
+</td>
+<td style="text-align:center;">
+0.781
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+mod_red2
+</td>
+<td style="text-align:center;">
+0.868
+</td>
+<td style="text-align:center;">
+0.849
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+mod_red3
+</td>
+<td style="text-align:center;">
+0.862
+</td>
+<td style="text-align:center;">
+0.835
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="diagnóstico-do-modelo">Diagnóstico do Modelo</h1>
+<h2 id="dados-completo">Dados completo</h2>
+<p>Para cada modelo reduzido estimado foi realizado uma análise de resíduo e os resultados são apresentados nas Figuras 7, 8 e 9, respectivamente.</p>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 1</strong></p>
+<p>De acordo com a Figura 7:</p>
+<ul>
+<li><p><strong>Residuals vs Fitted</strong>: uma leve semelhança com uma parábola com concavidade voltada para cima, ou seja, temos um possível padrão não linear entre as variáveis.</p></li>
+<li><p><strong>Normal Q-Q</strong>: A maior parte dos pontos encontra-se em torno da linha tracejada, exceto pelos pontos , ,  e outros dois pontos não identificados na parte inferior da figura. O que indica que esses três pontos são possíveis <em>outliers</em>.</p></li>
+<li><p><strong>Scale-Location</strong>: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.</p></li>
+<li><p><strong>Residuals vs Leverage</strong>: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.</p></li>
+</ul>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 2</strong></p>
+<p>De acordo com a Figura 8:</p>
+<ul>
+<li><p><strong>Residuals vs Fitted</strong>: os resíduos não mostram nenhum padrão, uma vez que a linha vermelha se parece com uma linha reta.</p></li>
+<li><p><strong>Normal Q-Q</strong>: A maior parte dos pontos encontra-se afastada da linha tracejada e além disso, os carros ,  e  foram apontados como possíveis <em>outliers</em>.</p></li>
+<li><p><strong>Scale-Location</strong>: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.</p></li>
+<li><p><strong>Residuals vs Leverage</strong>: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.</p></li>
+</ul>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 3</strong></p>
+<p>De acordo com a Figura 9:</p>
+<ul>
+<li><p><strong>Residuals vs Fitted</strong>: os resíduos não mostram nenhum padrão, uma vez que a linha vermelha se parece com uma linha reta.</p></li>
+<li><p><strong>Normal Q-Q</strong>: Alguns pontos encontra-se afastada da linha tracejada e além disso, os carros ,  e  foram apontados como possíveis <em>outliers</em>.</p></li>
+<li><p><strong>Scale-Location</strong>: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.</p></li>
+<li><p><strong>Residuals vs Leverage</strong>: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.</p></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red1</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-21-1.png" alt="Gráfico de resíduos do modelo reduzido 1" width="624" />
+<p class="caption">
+Figure 7: Gráfico de resíduos do modelo reduzido 1
+</p>
+</div>
+</div>
+<!-- Outliers: Imperial, Corolla e Fiag 128-->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-22-1.png" alt="Gráfico de resíduos do modelo reduzido 2" width="624" />
+<p class="caption">
+Figure 8: Gráfico de resíduos do modelo reduzido 2
+</p>
+</div>
+</div>
+<!-- Outliers: Merc240D, Corolla e Fiag 128-->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red3</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-23-1.png" alt="Gráfico de resíduos do modelo reduzido 3" width="624" />
+<p class="caption">
+Figure 9: Gráfico de resíduos do modelo reduzido 3
+</p>
+</div>
+</div>
+<!-- Outliers: Merc240D, Corolla e Fiag 128-->
+<h2 id="dados-reduzidos">Dados reduzidos</h2>
+<p>O modelo <code>mod_red1</code> apresentou o menor valor de R2 ajustado e na análise de resíduo apontou a possível falta de um termo quadrático no modelo. Por essas razões, o modelo foi descartado para nova avaliação.</p>
+<p>Em relação aos modelos <code>mod_red2</code> e <code>mod_red3</code> foi realizado uma nova análise removendo os carros identificados como possíveis <em>outliers</em>.</p>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 2</strong></p>
+<p>Os resultados são apresentados na Tabela 8 e na Figura 10 indicam que o formato do motor e o efeito da interação permanecem sendo significativos para explicar a variabilidade presente na eficiência do carro. Além disso, os pontos estãos mais próximos da linha tracejada no gráfico <strong>Normal Q-Q</strong>. Entretanto, pelo gráfico <strong>Scale-Location</strong>, há evidências de heterogeneidade de variâncias e outros carros foram identificados como possíveis <em>outliers</em>.</p>
+<!-- Modelo reduzido 2 sem outliers -->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mtcars_red</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>slice</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>8L</span>, <span class='op'>-</span><span class='fl'>20L</span>, <span class='op'>-</span><span class='fl'>18L</span><span class='op'>)</span>
+<span class='va'>mod_red21</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>wt</span><span class='op'>*</span><span class='va'>am</span>, data<span class='op'>=</span><span class='va'>mtcars_red</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red21</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mod_red21</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/xtable/man/xtable.html'>xtable</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Estimativas dos parâmetros do modelo reduzido 2 sem os possíveis outliers"</span>, 
+        booktabs <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>"c"</span>,longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,
+                latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-25">Table 8: </span>Estimativas dos parâmetros do modelo reduzido 2 sem os possíveis outliers
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Estimate
+</th>
+<th style="text-align:center;">
+Std. Error
+</th>
+<th style="text-align:center;">
+t value
+</th>
+<th style="text-align:center;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+26.94
+</td>
+<td style="text-align:center;">
+2.545
+</td>
+<td style="text-align:center;">
+10.59
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vs
+</td>
+<td style="text-align:center;">
+1.87
+</td>
+<td style="text-align:center;">
+0.859
+</td>
+<td style="text-align:center;">
+2.18
+</td>
+<td style="text-align:center;">
+0.040
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:center;">
+-2.85
+</td>
+<td style="text-align:center;">
+0.621
+</td>
+<td style="text-align:center;">
+-4.58
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+am
+</td>
+<td style="text-align:center;">
+12.34
+</td>
+<td style="text-align:center;">
+3.074
+</td>
+<td style="text-align:center;">
+4.01
+</td>
+<td style="text-align:center;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt:am
+</td>
+<td style="text-align:center;">
+-4.13
+</td>
+<td style="text-align:center;">
+1.041
+</td>
+<td style="text-align:center;">
+-3.97
+</td>
+<td style="text-align:center;">
+0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red21</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-26-1.png" alt="Gráfico de resíduos do modelo reduzido 2 sem outliers" width="624" />
+<p class="caption">
+Figure 10: Gráfico de resíduos do modelo reduzido 2 sem outliers
+</p>
+</div>
+</div>
+
+<p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 3</strong></p>
+<p>Os resultados são apresentados na Tabela 9 e na Figura 11 indicam que não houve grandes mudanças nos gráficos de resíduos. Porém, houve uma mudança na significância da interação entre  e  e também, novos foram identificados como possíveis <em>outliers</em>.</p>
+<!-- Modelo reduzido 3 sem outliers -->
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mtcars_red1</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>slice</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>18L</span>, <span class='op'>-</span><span class='fl'>20L</span>, <span class='op'>-</span><span class='fl'>21L</span><span class='op'>)</span>
+<span class='va'>mod_red31</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, data<span class='op'>=</span><span class='va'>mtcars_red1</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red31</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mod_red31</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/xtable/man/xtable.html'>xtable</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Estimativas dos parâmetros do modelo reduzido 3 sem os possíveis outliers"</span>, 
+        booktabs <span class='op'>=</span> <span class='cn'>T</span>, align <span class='op'>=</span> <span class='st'>"c"</span>,longtable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>'center'</span>,
+                latex_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hold_position"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-28">Table 9: </span>Estimativas dos parâmetros do modelo reduzido 3 sem os possíveis outliers
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Estimate
+</th>
+<th style="text-align:center;">
+Std. Error
+</th>
+<th style="text-align:center;">
+t value
+</th>
+<th style="text-align:center;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+36.06
+</td>
+<td style="text-align:center;">
+2.61
+</td>
+<td style="text-align:center;">
+13.816
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt
+</td>
+<td style="text-align:center;">
+-4.45
+</td>
+<td style="text-align:center;">
+1.08
+</td>
+<td style="text-align:center;">
+-4.109
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor(cyl)6
+</td>
+<td style="text-align:center;">
+-7.65
+</td>
+<td style="text-align:center;">
+7.21
+</td>
+<td style="text-align:center;">
+-1.061
+</td>
+<td style="text-align:center;">
+0.300
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor(cyl)8
+</td>
+<td style="text-align:center;">
+-12.19
+</td>
+<td style="text-align:center;">
+3.81
+</td>
+<td style="text-align:center;">
+-3.198
+</td>
+<td style="text-align:center;">
+0.004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt:factor(cyl)6
+</td>
+<td style="text-align:center;">
+1.67
+</td>
+<td style="text-align:center;">
+2.40
+</td>
+<td style="text-align:center;">
+0.696
+</td>
+<td style="text-align:center;">
+0.494
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wt:factor(cyl)8
+</td>
+<td style="text-align:center;">
+2.26
+</td>
+<td style="text-align:center;">
+1.28
+</td>
+<td style="text-align:center;">
+1.764
+</td>
+<td style="text-align:center;">
+0.091
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red31</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="anlise-do-consumo-mdio-de-combustvel-de-carros-modelos-19731974_files/figure-html5/unnamed-chunk-29-1.png" alt="Gráfico de resíduos do modelo reduzido 3 sem outliers" width="624" />
+<p class="caption">
+Figure 11: Gráfico de resíduos do modelo reduzido 3 sem outliers
+</p>
+</div>
+</div>
+<h1 id="conclusão-e-discussão">Conclusão e Discussão</h1>
+<p>Diante do exposto, o modelo mais adequado para explicar a variabiliade presente na eficiência dos carros modelos 1973-1974 é o modelo <code>mod_red3</code>. A opção por esse modelo foi em função dos gráficos dos resíduos se manterem com o mesmo padrão com ou sem os carros ,  e , apontados como possíveis <em>outliers</em>. Esses carros não foram identificados como pontos de alavanca, entretanto, são pontos influentes, pois a significância de um dos parâmetros do modelo foi alterada. Dessa forma, seria interessante levantar mais informações sobre esses carros, antes de removê-los por definitivo do conjunto de dados.</p>
+<p>Portanto, o modelo <code>mod_red3</code> estimado é dado por <span class="math display">\[\hat{mpg}_i = 39,57  -5,65wt_i -11,16cyl6_i -15,70cyl8_i + 2,87 wt_i\times cyl6_i + 3,46wt_i\times cyl8_i, \quad i=1,\ldots, 32,\]</span> A partir do modelo estimado, as seguintes interpretações podem ser feitas:</p>
+<ul>
+<li><p><code>wt</code>: com <span class="math inline">\(p\)</span>-valor=0,00o; temos evidências de que a cada 1000 libras que se aumenta no carro há uma redução de -5,65 mpg na eficiência média.</p></li>
+<li><p><code>cyl6</code>: com <span class="math inline">\(p\)</span>-valor = 0,244; temos indicativos de que não existe diferença significativa entre quatro cilindros (casela de referência) e seis cilindros em relação eficiência média.</p></li>
+<li><p><code>cyl8</code>: com <span class="math inline">\(p\)</span>-valor = 0,003; temos sinais de que existe diferença significativa entre quatro cilindros (casela de referência) e oito cilindros em relação eficiência média.</p></li>
+</ul>
+<p>Portanto, marginalmente, há o efeito do peso e do número de cilindros</p>
+<ul>
+<li><p><code>wt:cyl6</code>: com <span class="math inline">\(p\)</span>-valor = 0,366; temos evidências de que não existe diferença significativa entre a inclinação de quatro cilindros (casela de referência) e de seis cilindros em relação a eficiência média.</p></li>
+<li><p><code>wt:cyl8</code>: com <span class="math inline">\(p\)</span>-valor = 0,043; temos evidências de que existe diferença significativa entre a inclinação de quatro cilindros (casela de referência) e de oito cilindros em relação a eficiência média.</p></li>
+</ul>
+<p>Portanto, temos efeito da interação entre peso e número de cilindro do carro. Dessa forma, a hipótese de que modificações na estrutura do automóvel aumenta o seu consumo médio foi validada. Nesse caso, as modificações no peso e no número de cilindros do carro podem explicar a variabilidade presente no consumo médio de gasolina.</p>
+<p>Por fim, informações como relação peso e torque poderiam ser utilizadas no lugar de peso e potência. Outra informações que poderia ser utilizada é o tipo de carro, uma vez que carros esportivos são bem diferentes de sedãs.</p>
+<h1 id="agradecimentos" class="unnumbered">Agradecimentos</h1>
+<p>Ao professor Athos Damiani pelas aulas e dedicação ao curso. Aos mecânicos Marcelo Prataviera e Taka Kurihara e, também, aos alunos do curso de Engenharia Mecânica da UTFPR/Londrina, João Pedro Alves Cordeiro dos Santos e Pedro Henrique Barion pelo auxílio na compreensão das estruturas de um carro.</p>
+<h1 id="referências-bibliográficas" class="unnumbered">Referências bibliográficas</h1>
+<p>ALMEIDA FILHO, G.M. <strong>Programa INOVAR-AUTO: atendimento das metas de eficiência energética e suas externalidades</strong>. 2018. Dissertação (Mestrado em Ciências) - Universidade de São Paulo, São Paulo.</p>
+<p>CRISE petrolífera de 1973. <strong>Wikipedia</strong>. Disponível em: <a href="https://pt.wikipedia.org/wiki/Crise_petrol%C3%ADfera_de_1973" class="uri">https://pt.wikipedia.org/wiki/Crise_petrol%C3%ADfera_de_1973</a>. Acesso em: 28 de jan. de 2021. </p>
+<p>FUEL efficiency. <strong>Wikipedia</strong>. Disponível em: <a href="https://en.wikipedia.org/wiki/Fuel_efficiency" class="uri">https://en.wikipedia.org/wiki/Fuel_efficiency</a>. Acesso em: 28 de jan. de 2021.</p>
+<p>HENDERSON, H.V.; VELLEMAN. P.F. Building multiple regression models interactively. <strong>Biometrics</strong>, v.37, p.391-411, 1981. </p>
+<p>HOCKING, R.R. The analysis and selection of variables in linear regression. <strong>Biometrics</strong>, v.32, p.1-49, 1976. </p>
+<p>JAMES, G.; WITTEN, D.; HASTIE. T.; TIBSHIRANI, R. <strong>An Introduction to Statistical Learning with Applications in R</strong>. New York: Springer, 2013. </p>
+<p>R Core Team (2020). <strong>R: A language and environment for statistical computing</strong>. R Foundation for Statistical Computing, Vienna, Austria. URL: <a href="https://www.R-project.org/">https://www.R-project.org/</a> </p>
+<p>TOP reasons for supporting cleaner, more efficient vehicles. <strong>Global fuel economy initiative</strong>. Disponível em: <a href="https://www.globalfueleconomy.org/media/45140/top-reasons-leaflet.pdf" class="uri">https://www.globalfueleconomy.org/media/45140/top-reasons-leaflet.pdf</a>. Acesso em: 28 de jan. de 2021.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
