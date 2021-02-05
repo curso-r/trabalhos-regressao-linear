@@ -1,8 +1,11 @@
 ---
-title: "Curso-R: Regressão Linear <br> Exercícios RLSM"
+title: "Exercícios RLSM"
 description: |
-  A short description of the post.
-author: "Elizabeth Mie Hashimoto"
+  Resolução da lista de exercícios do Curso de Regressão Linear com R de janeiro de 2021.
+author: 
+  - first_name: "Elizabeth"
+    last_name: "Mie Hashimoto"
+    url: https://www.linkedin.com/in/elizabeth-mie-hashimoto-a416a917/
 date: 01-25-2021
 output:
   distill::distill_article:
