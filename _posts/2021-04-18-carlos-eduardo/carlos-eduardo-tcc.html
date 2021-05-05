@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>TCC</title>
+
+
+
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-03-27"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-03-27"/>
+  <meta name="article:author" content="Carlos Eduardo Cardoso"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="TCC"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="TCC"/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["TCC"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name"]}},"value":[{"type":"character","attributes":{},"value":["Carlos Eduardo"]},{"type":"character","attributes":{},"value":["Cardoso"]}]}]},{"type":"character","attributes":{},"value":["03-27-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["carlos-eduardo-tcc_files/anchor-4.2.2/anchor.min.js","carlos-eduardo-tcc_files/bowser-1.9.3/bowser.min.js","carlos-eduardo-tcc_files/crosstalk-1.1.0.1/css/crosstalk.css","carlos-eduardo-tcc_files/crosstalk-1.1.0.1/js/crosstalk.js","carlos-eduardo-tcc_files/crosstalk-1.1.0.1/js/crosstalk.js.map","carlos-eduardo-tcc_files/crosstalk-1.1.0.1/js/crosstalk.min.js","carlos-eduardo-tcc_files/crosstalk-1.1.0.1/js/crosstalk.min.js.map","carlos-eduardo-tcc_files/distill-2.2.21/template.v2.js","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-1-1.png","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-10-1.png","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-12-1.png","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-2-1.png","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-2-2.png","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-3-1.png","carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-4-1.png","carlos-eduardo-tcc_files/header-attrs-2.7/header-attrs.js","carlos-eduardo-tcc_files/htmlwidgets-1.5.1/htmlwidgets.js","carlos-eduardo-tcc_files/jquery-1.11.3/jquery-AUTHORS.txt","carlos-eduardo-tcc_files/jquery-1.11.3/jquery.js","carlos-eduardo-tcc_files/jquery-1.11.3/jquery.min.js","carlos-eduardo-tcc_files/jquery-1.11.3/jquery.min.map","carlos-eduardo-tcc_files/plotly-binding-4.9.2.1/plotly.js","carlos-eduardo-tcc_files/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css","carlos-eduardo-tcc_files/plotly-main-1.52.2/plotly-latest.min.js","carlos-eduardo-tcc_files/popper-2.6.0/popper.min.js","carlos-eduardo-tcc_files/tippy-6.2.7/tippy-bundle.umd.min.js","carlos-eduardo-tcc_files/tippy-6.2.7/tippy-light-border.css","carlos-eduardo-tcc_files/tippy-6.2.7/tippy.css","carlos-eduardo-tcc_files/tippy-6.2.7/tippy.umd.min.js","carlos-eduardo-tcc_files/typedarray-0.1/typedarray.min.js","carlos-eduardo-tcc_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="carlos-eduardo-tcc_files/header-attrs-2.7/header-attrs.js"></script>
+  <script src="carlos-eduardo-tcc_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+  <script src="carlos-eduardo-tcc_files/plotly-binding-4.9.2.1/plotly.js"></script>
+  <script src="carlos-eduardo-tcc_files/typedarray-0.1/typedarray.min.js"></script>
+  <script src="carlos-eduardo-tcc_files/jquery-1.11.3/jquery.min.js"></script>
+  <link href="carlos-eduardo-tcc_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+  <script src="carlos-eduardo-tcc_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+  <link href="carlos-eduardo-tcc_files/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+  <script src="carlos-eduardo-tcc_files/plotly-main-1.52.2/plotly-latest.min.js"></script>
+  <script src="carlos-eduardo-tcc_files/popper-2.6.0/popper.min.js"></script>
+  <link href="carlos-eduardo-tcc_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="carlos-eduardo-tcc_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="carlos-eduardo-tcc_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="carlos-eduardo-tcc_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="carlos-eduardo-tcc_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="carlos-eduardo-tcc_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="carlos-eduardo-tcc_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"TCC","authors":[{"author":"Carlos Eduardo Cardoso","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-03-27T00:00:00.000-03:00","citationText":"Cardoso, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>TCC</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+
+</div>
+
+<div class="d-byline">
+  
+  true
+  
+<br/>03-27-2021
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#introdução">1. Introdução</a></li>
+<li><a href="#gráficos-e-tabelas-descritivos">2. Gráficos e tabelas descritivos:</a></li>
+<li><a href="#modelagem">3. MODELAGEM</a></li>
+<li><a href="#diagnóstico-do-modelo">4. Diagnóstico do modelo:</a></li>
+<li><a href="#conclusão-e-discussão">5. Conclusão e discussão</a></li>
+</ul>
+</nav>
+</div>
+<h1 id="introdução">1. Introdução</h1>
+<p>Os dados utilizados nesse estudo foram extraídos da revista Motor Trend US de 1974 e abrangem o consumo de combustível e 10 aspectos do design e desempenho de automóveis para 32 automóveis (modelos de 1973 a 1974). Nossa base contém 32 observações (linhas) de 11 variáveis numéricas (colunas). São elas:</p>
+<p><strong>1. mpg</strong>: consumo de combustível em milhas por galão;</p>
+<p><strong>2. cyl</strong>: número de cilindros;</p>
+<p><strong>3. disp</strong>: deslocamento;</p>
+<p><strong>4. hp</strong>: potência bruta;</p>
+<p><strong>5. drat</strong>: relação do eixo traseiro;</p>
+<p><strong>6. wt</strong>: Peso (1000 libras);</p>
+<p><strong>7. qsec</strong>: 1/4 de milha;</p>
+<p><strong>8. vs</strong>: Motor (0 = em forma de V, 1 = reto);</p>
+<p><strong>9. am</strong>: Transmissão (0 = automático, 1 = manual);</p>
+<p><strong>10. gear</strong>: Número de marchas (para frente);</p>
+<p><strong>11. carb</strong>: número de carburadores.</p>
+<p>Pretendemos com esse estudo identificar quais características do carro explicam sua eficiência (<em>mpg</em>) analisando o comportamento de cada variável e construindo então um modelo linear que possa quantificar quantas e quais são essas variáveis.</p>
+<h1 id="gráficos-e-tabelas-descritivos">2. Gráficos e tabelas descritivos:</h1>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://gking.harvard.edu/amelia'>Amelia</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/Amelia/man/missmap.html'>missmap</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-1-1.png" width="960" style="display: block; margin: auto;" />
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span>,<span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>8</span>,<span class='fl'>9</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>      mpg             cyl             disp             hp       
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+      drat             wt             qsec            gear      
+ Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :3.000  
+ 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:3.000  
+ Median :3.695   Median :3.325   Median :17.71   Median :4.000  
+ Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :3.688  
+ 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:4.000  
+ Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :5.000  
+      carb      
+ Min.   :1.000  
+ 1st Qu.:2.000  
+ Median :2.000  
+ Mean   :2.812  
+ 3rd Qu.:4.000  
+ Max.   :8.000  </code></pre>
+</div>
+<p>Não há dados faltantes em nossa base. Com relação as informações acima, destaca-se:</p>
+<p><strong>1.</strong> Temos carros entre 4 e 8 cilindros;</p>
+<p><strong>2.</strong> Temos carros com o número de marchas entre 3 e 5;</p>
+<p><strong>3.</strong> Temos também carros com carburadores variando entre 1 e 8;</p>
+<p><strong>4.</strong> Em relação a variável <strong>wt</strong> que, por hipóstese, consideramos significativa para explicar a eficiência do veículo, podemos notar que os pesos variam de 1.513 até 5.424, tendo a média e a mediana com valores próximos (3.217 e 3.352, respectivamente).</p>
+<p><strong>5.</strong> Em todas as variáveis podemos perceber uma relativa proximidade entre a média e a mediana, o que pode ser uma indício de baixa dispersão em nossos dados.</p>
+<p>Vamos analisar o comportamento de cada uma dessas variáveis, duas a duas:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/taiyun/corrplot'>corrplot</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggobi.github.io/ggally/'>GGally</a></span><span class='op'>)</span>
+
+<span class='va'>df_correlacao</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/corrplot/man/corrplot.mixed.html'>corrplot.mixed</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>df_correlacao</span><span class='op'>)</span>, order<span class='op'>=</span><span class='st'>"hclust"</span>, tl.col<span class='op'>=</span><span class='st'>"black"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-2-1.png" width="960" style="display: block; margin: auto;" />
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggobi.github.io/ggally/reference/ggpairs.html'>ggpairs</a></span><span class='op'>(</span><span class='va'>df_correlacao</span>, lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>continuous <span class='op'>=</span> <span class='st'>"smooth"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-2-2.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<p>Com os dados normalizados podemos percerber que a variável mpg se correlaciona com todas as outras (algumas de forma positiva e forte, como por exemplo <em>drat</em> e <em>vs</em> e outras negativamente, como <em>disp</em>, <em>cyl</em> e <em>wt</em>). Porém, algumas dessas variáveis também se correlacionam entre si de forma considerável, o que pode ser um problema na construção de um possível modelo linear múltiplo.</p>
+<p>A variável <em>vs</em> apresenta informações sobre o formato do motor, podendo o mesmo ser em formato “v” ou “reto”, enquanto <em>am</em> nos informa se temos um veículo automático ou mecânico. Vamos olhar separadamente para cada uma delas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df_am_vs</span> <span class='op'>=</span> <span class='va'>mtcars</span>
+<span class='va'>df_am_vs</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>df_am_vs</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
+<span class='va'>df_am_vs</span><span class='op'>$</span><span class='va'>vs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>df_am_vs</span><span class='op'>$</span><span class='va'>vs</span><span class='op'>)</span>
+
+
+<span class='fu'><a href='https://ggobi.github.io/ggally/reference/ggpairs.html'>ggpairs</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>df_am_vs</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>6</span>,<span class='fl'>9</span><span class='op'>)</span><span class='op'>]</span>,
+        title<span class='op'>=</span><span class='st'>"Carros"</span>, 
+        colour <span class='op'>=</span> <span class='st'>"am"</span>, <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>colour<span class='op'>=</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</details>
+<p><img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<p>Na análise de correlação, <em>wt</em> foi a variável que apresentou maior correlação negativa com <em>mpg</em>. Quando separamos os carros em dois grupos através de <em>am</em> (automáticos ou não) podemos perceber que que existe uma certa divisão em relação a cada um desses grupos, o que pode ser um indício de ganho com essa possível interação na construção do modelo.</p>
+<p>De forma análoga vamos analisar a variável <em>vs</em>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggobi.github.io/ggally/reference/ggpairs.html'>ggpairs</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>df_am_vs</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>6</span>,<span class='fl'>8</span><span class='op'>)</span><span class='op'>]</span>,
+        title<span class='op'>=</span><span class='st'>"Carros"</span>, 
+        colour <span class='op'>=</span> <span class='st'>"vs"</span>, <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>colour<span class='op'>=</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</details>
+<p><img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-4-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<p>A separação dos dados considerando-se os dois tipos de motores também pode ser um ganho na construção do nosso modelo.</p>
+<h1 id="modelagem">3. MODELAGEM</h1>
+<p>Nossa modelagem terá variável resposta <em>mpg</em>. Para tentar explicar tal variável através de um modelo linear, analisaremos quais as variáveis que apresentam melhor desempenho e seu impacto nessa explicação. Com os dados normalizados, nossa primeira tentativa consiste na construção de um modelo que leva em consideração todas as outras variáveis para essa explicação.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#normalizando</span>
+
+<span class='va'>df_cars_norm</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'>#modelando</span>
+
+<span class='va'>model_cars</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>.</span>, <span class='va'>df_cars_norm</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model_cars</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ ., data = df_cars_norm)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.57254 -0.26620 -0.01985  0.20230  0.76773 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) -1.613e-17  7.773e-02   0.000   1.0000  
+cyl         -3.302e-02  3.097e-01  -0.107   0.9161  
+disp         2.742e-01  3.672e-01   0.747   0.4635  
+hp          -2.444e-01  2.476e-01  -0.987   0.3350  
+drat         6.983e-02  1.451e-01   0.481   0.6353  
+wt          -6.032e-01  3.076e-01  -1.961   0.0633 .
+qsec         2.434e-01  2.167e-01   1.123   0.2739  
+vs           2.657e-02  1.760e-01   0.151   0.8814  
+am           2.087e-01  1.703e-01   1.225   0.2340  
+gear         8.023e-02  1.828e-01   0.439   0.6652  
+carb        -5.344e-02  2.221e-01  -0.241   0.8122  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4397 on 21 degrees of freedom
+Multiple R-squared:  0.869, Adjusted R-squared:  0.8066 
+F-statistic: 13.93 on 10 and 21 DF,  p-value: 3.793e-07</code></pre>
+</div>
+<p>O primeiro modelo tendo como preditoras todas as demais variáveis apresentou valores não significativos para cada uma delas. O comando summary nos permite concluir a partir do teste de hipótese (olhando para o p-valor) que, juntas, elas não tem poder de explicação. Provelmente isso se deve ao fato de existirem muitas variáveis correlacionadas entre si, quando olhamos para as variáveis preditoras.</p>
+<p>Voltando para a análise de correlação, observa-se que <em>mpg</em> tem forte correlação positiva com <em>vs</em>, <em>drat</em>, <em>am</em>, <em>gear</em> e que essas variáveis, entre si, não se correlaciona tão bem assim. Vamos para um novo teste de modelagem.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_cars2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>vs</span><span class='op'>+</span><span class='va'>am</span><span class='op'>+</span><span class='va'>gear</span><span class='op'>+</span><span class='va'>drat</span>, <span class='va'>df_cars_norm</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model_cars2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ vs + am + gear + drat, data = df_cars_norm)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0859 -0.4173  0.0132  0.3340  0.9418 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  9.126e-17  1.024e-01   0.000 1.000000    
+vs           5.181e-01  1.191e-01   4.350 0.000174 ***
+am           4.889e-01  1.863e-01   2.624 0.014131 *  
+gear        -1.721e-01  1.803e-01  -0.955 0.348251    
+drat         2.250e-01  1.750e-01   1.286 0.209375    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.5791 on 27 degrees of freedom
+Multiple R-squared:  0.7079,    Adjusted R-squared:  0.6647 
+F-statistic: 16.36 on 4 and 27 DF,  p-value: 6.423e-07</code></pre>
+</div>
+<p>Notamos uma representatividade apenas com <em>vs</em> e <em>am</em> no modelo. Apesar do R2 ajustado ter apresentado um valor menor que o do modelo anterior, aqui obtivemos coeficientes mais representativos para essas variáveis. Porém essas duas variáveis apresentam características binárias que, isoladamente, não seriam capazes de explicar o desempenho de um veículo.</p>
+<p>Em se tratando de desempenho veicular, estudos mostram que o peso (<em>wt</em>), a quantidade de cilindros (<em>cyl</em>) e a potência bruta (<em>hp</em>) podem ser influenciadores diretos de desempenho. Vamos verificar:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_cars3</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>cyl</span><span class='op'>+</span><span class='va'>hp</span>, <span class='va'>df_cars_norm</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model_cars3</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt + cyl + hp, data = df_cars_norm)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.65191 -0.25880 -0.08813  0.19662  0.97870 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.676e-17  7.367e-02   0.000 1.000000    
+wt          -5.141e-01  1.202e-01  -4.276 0.000199 ***
+cyl         -2.790e-01  1.632e-01  -1.709 0.098480 .  
+hp          -2.052e-01  1.351e-01  -1.519 0.140015    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4167 on 28 degrees of freedom
+Multiple R-squared:  0.8431,    Adjusted R-squared:  0.8263 
+F-statistic: 50.17 on 3 and 28 DF,  p-value: 2.184e-11</code></pre>
+</div>
+<p>Apenas <em>wt</em> apresentou significância. A correlação entre as outras certamente impacta na nossa construção.</p>
+<p>Quando olhamos separadamente para <em>am</em> percebemos uma divisão bem definida em relação as duas características dessa variável. Como <em>wt</em> é o fator com maior correlação com nossa variável resposta, vamos construir um modelo com essa interação e analisar as métricas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df_interacao</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>6</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>df_interacao</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>df_interacao</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>df_interacao</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>=</span><span class='st'>'am'</span>
+<span class='va'>df_interacao</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>df_interacao</span><span class='op'>$</span><span class='va'>am</span><span class='op'>==</span><span class='fl'>0</span>, <span class='st'>'automatico'</span>, <span class='st'>'manual'</span><span class='op'>)</span>
+
+<span class='va'>model_cars4</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>*</span><span class='va'>am</span>, <span class='va'>df_interacao</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model_cars4</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt * am, data = df_interacao)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.59738 -0.25628 -0.08836  0.14953  1.01061 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -0.1418     0.1221  -1.162  0.25509    
+wt           -0.6146     0.1275  -4.819 4.55e-05 ***
+ammanual     -0.3597     0.2354  -1.528  0.13779    
+wt:ammanual  -0.8602     0.2345  -3.667  0.00102 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4299 on 28 degrees of freedom
+Multiple R-squared:  0.833, Adjusted R-squared:  0.8151 
+F-statistic: 46.57 on 3 and 28 DF,  p-value: 5.209e-11</code></pre>
+</div>
+<p>Nessa situação podemos notar que o coeficiente <em>ammanual</em> não possui significância para o modelo e o R2 ajustado apresenta resultado siginificativo (0.8151).</p>
+<p>De forma análoga, vamos promover a interação de <em>wt</em> com a variável <em>vs</em>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df_interacao_2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>df_interacao</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>df_interacao_2</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>=</span><span class='st'>'vs'</span>
+<span class='va'>df_interacao_2</span><span class='op'>$</span><span class='va'>vs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>df_interacao_2</span><span class='op'>$</span><span class='va'>vs</span><span class='op'>==</span><span class='fl'>0</span>, <span class='st'>'v'</span>, <span class='st'>'reto'</span><span class='op'>)</span>
+
+<span class='va'>model_cars5</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>*</span><span class='va'>vs</span>, <span class='va'>df_interacao_2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model_cars5</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt * vs, data = df_interacao_2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6629 -0.2967 -0.0568  0.2146  0.8638 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.09651    0.15222   0.634   0.5312    
+wt          -1.04081    0.16232  -6.412 6.08e-07 ***
+vsv         -0.39911    0.19041  -2.096   0.0452 *  
+wt:vsv       0.47238    0.19736   2.393   0.0236 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4277 on 28 degrees of freedom
+Multiple R-squared:  0.8348,    Adjusted R-squared:  0.8171 
+F-statistic: 47.16 on 3 and 28 DF,  p-value: 4.497e-11</code></pre>
+</div>
+<p>Percebe-se que todos os coeficientes tem significância para o modelo e que o mesmo apresentou um bom valor do R2 ajustado (0,8171).</p>
+<h1 id="diagnóstico-do-modelo">4. Diagnóstico do modelo:</h1>
+<p>Com base nos testes realizados e nas métricas avaliadas, o model_cars5, que foi o último modelo construído e que leva em consideração a interação de <em>vs</em> com <em>wt</em> para uma possível explicação de <em>mpg</em>, foi o que apresentou melhor desempenho até agora. Continuaremos nossas análises com o diagnóstico residual desse modelo.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>model_cars5</span>, which <span class='op'>=</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>, pch<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;" />
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></span><span class='op'>(</span><span class='va'>model_cars5</span><span class='op'>$</span><span class='va'>residuals</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  model_cars5$residuals
+W = 0.95567, p-value = 0.2084</code></pre>
+</div>
+<p>Podemos perceber uma distribuição aleatória dos resíduos com alguns pontos no gráfico Normal Q-Q que podem indicar uma não normalidade dos resíduos, porém o teste de normalidade nos mostra que não devemos rejeitar a hipótese de que essa distribuição é normal. Vamos verificar uma possível presença de outliers para buscar um melhor ajuste.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://plotly-r.com'>plotly</a></span><span class='op'>)</span>
+<span class='va'>a</span> <span class='op'>=</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>df_interacao_2</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>vs</span>, y<span class='op'>=</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://docs.ropensci.org/plotly/reference/ggplotly.html'>ggplotly</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div id="htmlwidget-2aeb1cffa5fa24dcebd3" style="width:960px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2aeb1cffa5fa24dcebd3">{"x":{"data":[{"x":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"y":[0.150884824647657,0.150884824647657,-0.960788934955696,-0.612353875975541,-0.230734525663942,-0.811459623964201,-1.60788261591884,-1.60788261591884,-0.463024564984046,-0.761683186967036,-0.811459623964201,-1.12671039161291,-0.89442035229281,-0.0648130690067253,0.980492107933741,-0.147773797335334,-0.844643915295645,-0.711906749969871,0.217253407310543,-0.330287399658272,0.715017777282194,-0.147773797335334,0.449543446630647,2.29127161552575,0.449543446630647,2.04238943053993,-0.380063836655437,1.7105465172255,0.233845552976265,1.19619000158812,1.7105465172255,0.217253407310543],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"},"size":5.66929133858268},"line":{"color":"rgba(51,51,51,1)","width":1.88976377952756},"showlegend":false,"xaxis":"x","yaxis":"y","frame":null}],"layout":{"margin":{"t":28.1765601217656,"r":7.30593607305936,"b":42.130898021309,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,2.6],"tickmode":"array","ticktext":["reto","v"],"tickvals":[1,2],"categoryorder":"array","categoryarray":["reto","v"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"vs","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.80284032749107,2.48622932709798],"tickmode":"array","ticktext":["-1","0","1","2"],"tickvals":[-1,0,1,2],"categoryorder":"array","categoryarray":["-1","0","1","2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"mpg","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"81675bd3020c":{"x":{},"y":{},"type":"box"}},"cur_data":"81675bd3020c","visdat":{"81675bd3020c":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>Em relação a variável <em>mpg</em> podemos notar a presença de um outlier em motores do tipo <em>v</em>. Vamos substituir esse valor pela média e analisar o comportamento do nosso modelo.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df_interacao_2</span><span class='op'>$</span><span class='va'>mpg</span><span class='op'>[</span><span class='fl'>27</span><span class='op'>]</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>df_interacao_2</span><span class='op'>$</span><span class='va'>mpg</span><span class='op'>)</span>
+
+<span class='va'>novo_model_car</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>*</span><span class='va'>vs</span>, <span class='va'>df_interacao_2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>novo_model_car</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt * vs, data = df_interacao_2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6629 -0.2656 -0.1185  0.2787  0.8638 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.09651    0.14386   0.671  0.50781    
+wt          -1.04081    0.15341  -6.784 2.28e-07 ***
+vsv         -0.50509    0.17996  -2.807  0.00901 ** 
+wt:vsv       0.57931    0.18653   3.106  0.00432 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4042 on 28 degrees of freedom
+Multiple R-squared:  0.8476,    Adjusted R-squared:  0.8312 
+F-statistic: 51.89 on 3 and 28 DF,  p-value: 1.469e-11</code></pre>
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>novo_model_car</span>, which <span class='op'>=</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>, pch<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="carlos-eduardo-tcc_files/figure-html5/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" />
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></span><span class='op'>(</span><span class='va'>novo_model_car</span><span class='op'>$</span><span class='va'>residuals</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  novo_model_car$residuals
+W = 0.95634, p-value = 0.2176</code></pre>
+</div>
+<p>Após o tratamento desse ponto, notamos que houve uma melhora em relação ao R2 ajustado e em relação aos resíduos, podemos perceber um ajuste mais suave e uma melhor distribuição.</p>
+<p>Graficamente:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://plotly-r.com'>plotly</a></span><span class='op'>)</span>
+<span class='va'>plot_final</span> <span class='op'>=</span> <span class='va'>df_interacao_2</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>wt</span>, y <span class='op'>=</span> <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>colour <span class='op'>=</span> <span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, colour <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'>geom_abline</span><span class='op'>(</span>intercept <span class='op'>=</span>  <span class='fl'>0.09651</span>, slope <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1.04081</span>, colour <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span> <span class='co'># reto</span>
+  <span class='fu'>geom_abline</span><span class='op'>(</span>intercept <span class='op'>=</span>  <span class='fl'>0.09651</span><span class='op'>-</span><span class='fl'>0.50509</span> , slope <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1.04081</span><span class='op'>+</span><span class='fl'>0.57931</span> , colour <span class='op'>=</span> <span class='st'>"green"</span><span class='op'>)</span><span class='op'>+</span> <span class='co'># v</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://docs.ropensci.org/plotly/reference/ggplotly.html'>ggplotly</a></span><span class='op'>(</span><span class='va'>plot_final</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div id="htmlwidget-8886fd090083b2d9bcdd" style="width:960px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8886fd090083b2d9bcdd">{"x":{"data":[{"x":[-0.917004624399846,-0.00229953792688741,0.248094591889733,-0.0278499593367465,-0.0687306335925212,0.227654254761845,0.227654254761845,-1.03964664716717,-1.63752650815787,-1.41268279975111,-0.768812180222662,-1.31048111411168,-1.7417722275101,-0.446876870458437],"y":[0.449543446630647,0.217253407310543,-0.330287399658272,0.715017777282194,0.449543446630647,-0.147773797335334,-0.380063836655437,2.04238943053993,1.7105465172255,2.29127161552575,0.233845552976265,1.19619000158812,1.7105465172255,0.217253407310543],"text":["vs: reto<br />wt: -0.917004624<br />mpg:  4.495434e-01","vs: reto<br />wt: -0.002299538<br />mpg:  2.172534e-01","vs: reto<br />wt:  0.248094592<br />mpg: -3.302874e-01","vs: reto<br />wt: -0.027849959<br />mpg:  7.150178e-01","vs: reto<br />wt: -0.068730634<br />mpg:  4.495434e-01","vs: reto<br />wt:  0.227654255<br />mpg: -1.477738e-01","vs: reto<br />wt:  0.227654255<br />mpg: -3.800638e-01","vs: reto<br />wt: -1.039646647<br />mpg:  2.042389e+00","vs: reto<br />wt: -1.637526508<br />mpg:  1.710547e+00","vs: reto<br />wt: -1.412682800<br />mpg:  2.291272e+00","vs: reto<br />wt: -0.768812180<br />mpg:  2.338456e-01","vs: reto<br />wt: -1.310481114<br />mpg:  1.196190e+00","vs: reto<br />wt: -1.741772228<br />mpg:  1.710547e+00","vs: reto<br />wt: -0.446876870<br />mpg:  2.172534e-01"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"reto","legendgroup":"reto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-0.610399567481535,-0.349785269100972,0.227654254761845,0.360516446093113,0.871524874290296,0.524039143116211,0.57513998593593,2.07750476483565,2.25533569784827,2.17459636619311,0.309415603273395,0.222544170479873,0.636460997319592,0.641571081601564,-1.10096765855083,-0.0482902964646338,-0.45709703902238,0.360516446093113],"y":[0.150884824647657,0.150884824647657,-0.230734525663942,-0.960788934955696,-0.612353875975541,-0.463024564984046,-0.811459623964201,-1.60788261591884,-1.60788261591884,-0.89442035229281,-0.761683186967036,-0.811459623964201,-1.12671039161291,-0.147773797335334,7.11236625150491e-17,-0.711906749969871,-0.0648130690067253,-0.844643915295645],"text":["vs: v<br />wt: -0.610399567<br />mpg:  1.508848e-01","vs: v<br />wt: -0.349785269<br />mpg:  1.508848e-01","vs: v<br />wt:  0.227654255<br />mpg: -2.307345e-01","vs: v<br />wt:  0.360516446<br />mpg: -9.607889e-01","vs: v<br />wt:  0.871524874<br />mpg: -6.123539e-01","vs: v<br />wt:  0.524039143<br />mpg: -4.630246e-01","vs: v<br />wt:  0.575139986<br />mpg: -8.114596e-01","vs: v<br />wt:  2.077504765<br />mpg: -1.607883e+00","vs: v<br />wt:  2.255335698<br />mpg: -1.607883e+00","vs: v<br />wt:  2.174596366<br />mpg: -8.944204e-01","vs: v<br />wt:  0.309415603<br />mpg: -7.616832e-01","vs: v<br />wt:  0.222544170<br />mpg: -8.114596e-01","vs: v<br />wt:  0.636460997<br />mpg: -1.126710e+00","vs: v<br />wt:  0.641571082<br />mpg: -1.477738e-01","vs: v<br />wt: -1.100967659<br />mpg:  7.112366e-17","vs: v<br />wt: -0.048290296<br />mpg: -7.119067e-01","vs: v<br />wt: -0.457097039<br />mpg: -6.481307e-02","vs: v<br />wt:  0.360516446<br />mpg: -8.446439e-01"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"v","legendgroup":"v","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-1.7417722275101,-1.69117592465746,-1.64057962180482,-1.58998331895219,-1.53938701609955,-1.48879071324691,-1.43819441039427,-1.38759810754164,-1.337001804689,-1.28640550183636,-1.23580919898372,-1.18521289613109,-1.13461659327845,-1.08402029042581,-1.03342398757317,-0.982827684720536,-0.932231381867898,-0.881635079015261,-0.831038776162623,-0.780442473309985,-0.729846170457348,-0.67924986760471,-0.628653564752073,-0.578057261899435,-0.527460959046798,-0.47686465619416,-0.426268353341522,-0.375672050488885,-0.325075747636247,-0.27447944478361,-0.223883141930972,-0.173286839078334,-0.122690536225697,-0.0720942333730594,-0.0214979305204217,0.0290983723322158,0.0796946751848533,0.130290978037491,0.180887280890129,0.231483583742766,0.282079886595404,0.332676189448041,0.383272492300679,0.433868795153316,0.484465098005954,0.535061400858591,0.585657703711229,0.636254006563867,0.686850309416504,0.737446612269142,0.78804291512178,0.838639217974417,0.889235520827055,0.939831823679692,0.99042812653233,1.04102442938497,1.09162073223761,1.14221703509024,1.19281333794288,1.24340964079552,1.29400594364816,1.34460224650079,1.39519854935343,1.44579485220607,1.49639115505871,1.54698745791134,1.59758376076398,1.64818006361662,1.69877636646926,1.74937266932189,1.79996897217453,1.85056527502717,1.90116157787981,1.95175788073244,2.00235418358508,2.05295048643772,2.10354678929036,2.15414309214299,2.20473939499563,2.25533569784827],"y":[1.4199721789521,1.37783370004365,1.3356952211352,1.29355674222675,1.25141826331831,1.20927978440986,1.16714130550141,1.12500282659296,1.08286434768451,1.04072586877606,0.998587389867613,0.956448910959164,0.914310432050715,0.872171953142266,0.830033474233817,0.787894995325368,0.745756516416919,0.703618037508471,0.661479558600022,0.619341079691573,0.577202600783124,0.535064121874675,0.492925642966226,0.450787164057777,0.408648685149328,0.366510206240879,0.324371727332431,0.282233248423982,0.240094769515533,0.197956290607084,0.155817811698635,0.113679332790186,0.0715408538817373,0.0294023749732885,-0.0127361039351605,-0.0548745828436093,-0.0970130617520581,-0.139151540660507,-0.181290019568956,-0.223428498477405,-0.265566977385854,-0.307705456294303,-0.349843935202751,-0.3919824141112,-0.434120893019649,-0.476259371928098,-0.518397850836547,-0.560536329744996,-0.602674808653445,-0.644813287561894,-0.686951766470343,-0.729090245378791,-0.77122872428724,-0.813367203195689,-0.855505682104138,-0.897644161012587,-0.939782639921036,-0.981921118829485,-1.02405959773793,-1.06619807664638,-1.10833655555483,-1.15047503446328,-1.19261351337173,-1.23475199228018,-1.27689047118863,-1.31902895009708,-1.36116742900552,-1.40330590791397,-1.44544438682242,-1.48758286573087,-1.52972134463932,-1.57185982354777,-1.61399830245622,-1.65613678136467,-1.69827526027312,-1.74041373918156,-1.78255221809001,-1.82469069699846,-1.86682917590691,-1.90896765481536],"text":["wt: -1.74177223<br />mpg:  1.41997218","wt: -1.69117592<br />mpg:  1.37783370","wt: -1.64057962<br />mpg:  1.33569522","wt: -1.58998332<br />mpg:  1.29355674","wt: -1.53938702<br />mpg:  1.25141826","wt: -1.48879071<br />mpg:  1.20927978","wt: -1.43819441<br />mpg:  1.16714131","wt: -1.38759811<br />mpg:  1.12500283","wt: -1.33700180<br />mpg:  1.08286435","wt: -1.28640550<br />mpg:  1.04072587","wt: -1.23580920<br />mpg:  0.99858739","wt: -1.18521290<br />mpg:  0.95644891","wt: -1.13461659<br />mpg:  0.91431043","wt: -1.08402029<br />mpg:  0.87217195","wt: -1.03342399<br />mpg:  0.83003347","wt: -0.98282768<br />mpg:  0.78789500","wt: -0.93223138<br />mpg:  0.74575652","wt: -0.88163508<br />mpg:  0.70361804","wt: -0.83103878<br />mpg:  0.66147956","wt: -0.78044247<br />mpg:  0.61934108","wt: -0.72984617<br />mpg:  0.57720260","wt: -0.67924987<br />mpg:  0.53506412","wt: -0.62865356<br />mpg:  0.49292564","wt: -0.57805726<br />mpg:  0.45078716","wt: -0.52746096<br />mpg:  0.40864869","wt: -0.47686466<br />mpg:  0.36651021","wt: -0.42626835<br />mpg:  0.32437173","wt: -0.37567205<br />mpg:  0.28223325","wt: -0.32507575<br />mpg:  0.24009477","wt: -0.27447944<br />mpg:  0.19795629","wt: -0.22388314<br />mpg:  0.15581781","wt: -0.17328684<br />mpg:  0.11367933","wt: -0.12269054<br />mpg:  0.07154085","wt: -0.07209423<br />mpg:  0.02940237","wt: -0.02149793<br />mpg: -0.01273610","wt:  0.02909837<br />mpg: -0.05487458","wt:  0.07969468<br />mpg: -0.09701306","wt:  0.13029098<br />mpg: -0.13915154","wt:  0.18088728<br />mpg: -0.18129002","wt:  0.23148358<br />mpg: -0.22342850","wt:  0.28207989<br />mpg: -0.26556698","wt:  0.33267619<br />mpg: -0.30770546","wt:  0.38327249<br />mpg: -0.34984394","wt:  0.43386880<br />mpg: -0.39198241","wt:  0.48446510<br />mpg: -0.43412089","wt:  0.53506140<br />mpg: -0.47625937","wt:  0.58565770<br />mpg: -0.51839785","wt:  0.63625401<br />mpg: -0.56053633","wt:  0.68685031<br />mpg: -0.60267481","wt:  0.73744661<br />mpg: -0.64481329","wt:  0.78804292<br />mpg: -0.68695177","wt:  0.83863922<br />mpg: -0.72909025","wt:  0.88923552<br />mpg: -0.77122872","wt:  0.93983182<br />mpg: -0.81336720","wt:  0.99042813<br />mpg: -0.85550568","wt:  1.04102443<br />mpg: -0.89764416","wt:  1.09162073<br />mpg: -0.93978264","wt:  1.14221704<br />mpg: -0.98192112","wt:  1.19281334<br />mpg: -1.02405960","wt:  1.24340964<br />mpg: -1.06619808","wt:  1.29400594<br />mpg: -1.10833656","wt:  1.34460225<br />mpg: -1.15047503","wt:  1.39519855<br />mpg: -1.19261351","wt:  1.44579485<br />mpg: -1.23475199","wt:  1.49639116<br />mpg: -1.27689047","wt:  1.54698746<br />mpg: -1.31902895","wt:  1.59758376<br />mpg: -1.36116743","wt:  1.64818006<br />mpg: -1.40330591","wt:  1.69877637<br />mpg: -1.44544439","wt:  1.74937267<br />mpg: -1.48758287","wt:  1.79996897<br />mpg: -1.52972134","wt:  1.85056528<br />mpg: -1.57185982","wt:  1.90116158<br />mpg: -1.61399830","wt:  1.95175788<br />mpg: -1.65613678","wt:  2.00235418<br />mpg: -1.69827526","wt:  2.05295049<br />mpg: -1.74041374","wt:  2.10354679<br />mpg: -1.78255222","wt:  2.15414309<br />mpg: -1.82469070","wt:  2.20473939<br />mpg: -1.86682918","wt:  2.25533570<br />mpg: -1.90896765"],"type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-1.94162762377802,2.45519109411619],"y":[2.1173754471044,-2.45887744266707],"text":"intercept: 0.09651<br />slope: -1.04081","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-1.94162762377802,2.45519109411619],"y":[0.487481148373555,-1.54165068993462],"text":"intercept: -0.40858<br />slope: -0.4615","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,255,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":28.1765601217656,"r":7.30593607305936,"b":42.130898021309,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.94162762377802,2.45519109411619],"tickmode":"array","ticktext":["-1","0","1","2"],"tickvals":[-1,0,1,2],"categoryorder":"array","categoryarray":["-1","0","1","2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"wt","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.11897961833242,2.50128357904281],"tickmode":"array","ticktext":["-2","-1","0","1","2"],"tickvals":[-2,-1,0,1,2],"categoryorder":"array","categoryarray":["-2","-1","0","1","2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"mpg","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.972933070866142},"annotations":[{"text":"vs","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"81674b16c77":{"colour":{},"x":{},"y":{},"type":"scatter"},"816775fc9fb7":{"x":{},"y":{}},"81672a869457":{"intercept":{},"slope":{}},"816740a98ae7":{"intercept":{},"slope":{}}},"cur_data":"81674b16c77","visdat":{"81674b16c77":["function (y) ","x"],"816775fc9fb7":["function (y) ","x"],"81672a869457":["function (y) ","x"],"816740a98ae7":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<h1 id="conclusão-e-discussão">5. Conclusão e discussão</h1>
+<p>Todas as variáveis analisadas possuem correlação com a nossa variável resposta, ou seja, o desempenho veicular poderia ser explicado de inúmeras formas. Após alguns testes com essas variáveis foi possível perceber que o peso (<em>wt</em>) era a variável que melhor se comportava nessa explicação e que, quando combinada com outras variáveis acabava tendo um desempenho inferior. Porém o formato do motor (<em>vs</em>) quando combinado com o peso (<em>wt</em>) apresentava uma ganho nas métricas do nosso modelo.</p>
+<p>Assim o modelo final leva em consideração a interação entre as variáveis <em>wt</em> e <em>vs</em>, apresentando coeficentes significantes para ambas, e melhores métricas conforme verificado em nossos testes de hipóteses através do comando summary. Segue os detalhes do nosso modelo final:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>modelo_final</span> <span class='op'>=</span> <span class='va'>novo_model_car</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>modelo_final</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+lm(formula = mpg ~ wt * vs, data = df_interacao_2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6629 -0.2656 -0.1185  0.2787  0.8638 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.09651    0.14386   0.671  0.50781    
+wt          -1.04081    0.15341  -6.784 2.28e-07 ***
+vsv         -0.50509    0.17996  -2.807  0.00901 ** 
+wt:vsv       0.57931    0.18653   3.106  0.00432 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4042 on 28 degrees of freedom
+Multiple R-squared:  0.8476,    Adjusted R-squared:  0.8312 
+F-statistic: 51.89 on 3 and 28 DF,  p-value: 1.469e-11</code></pre>
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>modelo_final</span><span class='op'>$</span><span class='va'>coefficients</span>
+</code></pre>
+</div>
+</details>
+<pre><code>(Intercept)          wt         vsv      wt:vsv 
+ 0.09651164 -1.04080989 -0.50509226  0.57931189 </code></pre>
+</div>
+<p>Como mencionado, nosso modelo final construído com a interação entre <em>wt</em> e <em>vs</em> leva como casela de referência motores do tipo reto e está representado da seguinte forma:</p>
+<p><strong>mpg = 0.09651 - 1.0481 beta1 + (0.09651 - 0.50509) + (-1.0481 + 0.57931) beta2</strong>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

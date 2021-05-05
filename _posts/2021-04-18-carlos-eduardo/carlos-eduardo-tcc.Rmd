@@ -1,0 +1,261 @@
+---
+title: "TCC"
+author: 
+  - first_name: "Carlos Eduardo"
+    last_name: "Cardoso"
+date: 03-27-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  message = FALSE, 
+  warning = FALSE,
+  fig.align = "center"
+)
+
+head(mtcars)
+```
+
+# 1. Introdução
+
+Os dados utilizados nesse estudo foram extraídos da revista Motor Trend US de 1974 e abrangem o consumo de combustível e 10 aspectos do design e desempenho de automóveis para 32 automóveis (modelos de 1973 a 1974). Nossa base contém 32 observações (linhas) de 11 variáveis numéricas (colunas). São elas:
+
+ **1. mpg**: consumo de combustível em milhas por galão;
+ 
+ **2. cyl**: número de cilindros;
+ 
+ **3. disp**: deslocamento;
+ 
+ **4. hp**: potência bruta;
+ 
+ **5. drat**: relação do eixo traseiro;
+ 
+ **6. wt**: Peso (1000 libras);
+ 
+ **7. qsec**: 1/4 de milha;
+ 
+ **8. vs**: Motor (0 = em forma de V, 1 = reto);
+ 
+ **9. am**: Transmissão (0 = automático, 1 = manual);
+ 
+ **10. gear**: Número de marchas (para frente);
+ 
+ **11. carb**: número de carburadores.
+ 
+Pretendemos com esse estudo identificar quais características do carro explicam sua  eficiência (*mpg*) analisando o comportamento de cada variável e construindo então um modelo linear que possa quantificar quantas e quais são essas variáveis. 
+ 
+
+# 2. Gráficos e tabelas descritivos:
+ 
+```{r, warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+library(Amelia)
+missmap(mtcars)
+
+summary(mtcars[,-c(8,9)])
+```
+
+
+Não há dados faltantes em nossa base. Com relação as informações acima, destaca-se:
+
+**1.** Temos carros entre 4 e 8 cilindros;
+
+**2.** Temos carros com o número de marchas entre 3 e 5;
+
+**3.** Temos também carros com carburadores variando entre 1 e 8;
+
+**4.** Em relação a variável **wt** que, por hipóstese, consideramos significativa para explicar a eficiência do veículo, podemos notar que os pesos variam de 1.513 até 5.424, tendo a média e a mediana com valores próximos (3.217 e 3.352, respectivamente).
+
+**5.** Em todas as variáveis podemos perceber uma relativa proximidade entre a média e a mediana, o que pode ser uma indício de baixa dispersão em nossos dados.
+
+
+Vamos analisar o comportamento de cada uma dessas variáveis, duas a duas:
+
+```{r, warning=FALSE, message=FALSE, fig.height=10, fig.width=10}
+
+library(corrplot)
+library(GGally)
+
+df_correlacao = data.frame(scale(mtcars))
+corrplot.mixed(cor(df_correlacao), order="hclust", tl.col="black")
+
+
+ggpairs(df_correlacao, lower = list(continuous = "smooth"))
+```
+
+Com os dados normalizados podemos percerber que a variável mpg se correlaciona com todas as outras (algumas de forma positiva e forte, como por exemplo *drat* e *vs* e outras negativamente, como *disp*, *cyl* e *wt*). Porém, algumas dessas variáveis também se correlacionam entre si de forma considerável, o que pode ser um problema na construção de um possível modelo linear múltiplo.
+
+
+
+A variável *vs* apresenta informações sobre o formato do motor, podendo o mesmo ser em formato "v" ou "reto", enquanto *am* nos informa se temos um veículo automático ou mecânico. Vamos olhar separadamente para cada uma delas.
+
+```{r, message=F, warning=F, fig.height=6, fig.width=10}
+df_am_vs = mtcars
+df_am_vs$am = as.factor(df_am_vs$am)
+df_am_vs$vs = as.factor(df_am_vs$vs)
+
+
+ggpairs(data=df_am_vs[,c(1,6,9)],
+        title="Carros", 
+        colour = "am", ggplot2::aes(colour=am)) 
+```
+
+Na análise de correlação, *wt* foi a variável que apresentou maior correlação negativa com *mpg*. Quando separamos os carros em dois grupos através de *am* (automáticos ou não) podemos perceber que que existe uma certa divisão  em relação a cada um desses grupos, o que pode ser um indício de ganho com essa possível interação na construção do modelo.
+
+De forma análoga vamos analisar a variável *vs*:
+
+```{r,warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+ggpairs(data=df_am_vs[,c(1,6,8)],
+        title="Carros", 
+        colour = "vs", ggplot2::aes(colour=vs)) 
+```
+
+A separação dos dados considerando-se os dois tipos de motores também pode ser um ganho na construção do nosso modelo.
+
+
+
+# 3. MODELAGEM
+
+Nossa modelagem terá variável resposta *mpg*. Para tentar explicar tal variável através de um modelo linear, analisaremos quais as variáveis que apresentam melhor desempenho e seu impacto nessa explicação. Com os dados normalizados, nossa primeira tentativa consiste na construção de um modelo que leva em consideração todas as outras variáveis para essa explicação. 
+
+```{r, message=F, warning=F, fig.height=6, fig.width=10}
+
+#normalizando
+
+df_cars_norm = data.frame(scale(mtcars))
+
+#modelando
+
+model_cars = lm(mpg~., df_cars_norm)
+summary(model_cars)
+```
+
+O primeiro modelo tendo como preditoras todas as demais variáveis apresentou valores não significativos para cada uma delas. O comando summary nos permite concluir a partir do teste de hipótese (olhando para o p-valor) que, juntas, elas não tem poder de explicação. Provelmente isso se deve ao fato de existirem muitas variáveis correlacionadas entre si, quando olhamos para as variáveis preditoras. 
+
+Voltando para a análise de correlação, observa-se que *mpg* tem forte correlação positiva com *vs*, *drat*, *am*, *gear* e que essas variáveis, entre si, não se correlaciona tão bem assim. Vamos para um novo teste de modelagem.
+
+```{r, warning=FALSE, message=FALSE}
+model_cars2 = lm(mpg~vs+am+gear+drat, df_cars_norm)
+summary(model_cars2)
+```
+
+Notamos uma representatividade apenas com *vs* e *am* no modelo. Apesar do R2 ajustado ter apresentado um valor menor que o do modelo anterior, aqui obtivemos coeficientes mais representativos para essas variáveis. Porém essas duas variáveis apresentam características binárias que, isoladamente, não seriam capazes de explicar o desempenho de um veículo. 
+
+Em se tratando de desempenho veicular, estudos mostram que o peso (*wt*), a quantidade de cilindros (*cyl*) e a potência bruta (*hp*) podem ser influenciadores diretos de desempenho. Vamos verificar:
+
+
+```{r,warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+model_cars3 = lm(mpg~wt+cyl+hp, df_cars_norm)
+summary(model_cars3)
+```
+Apenas *wt* apresentou significância. A correlação entre as outras certamente impacta na nossa construção.
+
+Quando olhamos separadamente para *am* percebemos uma divisão bem definida em relação as duas características dessa variável. Como *wt* é o fator com maior correlação com nossa variável resposta, vamos construir um modelo com essa interação e analisar as métricas.
+
+```{r,message=F, warning=F, fig.height=6, fig.width=10}
+df_interacao = data.frame(scale(mtcars[,c(1,6)]))
+df_interacao = cbind(df_interacao, mtcars$am)
+names(df_interacao)[3]='am'
+df_interacao$am = ifelse(df_interacao$am==0, 'automatico', 'manual')
+
+model_cars4 = lm(mpg~wt*am, df_interacao)
+summary(model_cars4)
+```
+Nessa situação podemos notar que o coeficiente *ammanual* não possui significância para o modelo e o R2 ajustado apresenta resultado siginificativo (0.8151). 
+
+De forma análoga, vamos promover a interação de *wt* com a variável *vs*:
+
+
+```{r,message=F, warning=F, fig.height=6, fig.width=10}
+df_interacao_2 = cbind(df_interacao[,c(1,2)], mtcars$vs)
+names(df_interacao_2)[3]='vs'
+df_interacao_2$vs = ifelse(df_interacao_2$vs==0, 'v', 'reto')
+
+model_cars5 = lm(mpg~wt*vs, df_interacao_2)
+summary(model_cars5)
+```
+Percebe-se que todos os coeficientes tem significância para o modelo e que o mesmo apresentou um bom valor do R2 ajustado (0,8171).
+
+
+
+# 4. Diagnóstico do modelo:
+
+Com base nos testes realizados e nas métricas avaliadas, o model_cars5, que foi o último modelo construído e que leva em consideração a interação de *vs* com *wt* para uma possível explicação de *mpg*, foi o que apresentou melhor desempenho até agora. Continuaremos nossas análises com o diagnóstico residual desse modelo.
+
+
+
+```{r,message=F, warning=F, fig.height=6, fig.width=10}
+par(mfrow = c(2,2))
+plot(model_cars5, which = (1:4), pch=20)
+
+shapiro.test(model_cars5$residuals)
+```
+
+Podemos perceber uma distribuição aleatória dos resíduos com alguns pontos no gráfico Normal Q-Q que podem indicar uma não normalidade dos resíduos, porém o teste de normalidade nos mostra que não devemos rejeitar a hipótese de que essa distribuição é normal. Vamos verificar uma possível presença de outliers para buscar um melhor ajuste.
+
+
+```{r,warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+library(plotly)
+a = ggplot(df_interacao_2)+
+  geom_boxplot(aes(x = vs, y=mpg))
+
+ggplotly(a)
+
+
+
+```
+
+Em relação a variável *mpg* podemos notar a presença de um outlier em motores do tipo *v*. Vamos substituir esse valor pela média e analisar o comportamento do nosso modelo.
+
+```{r,warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+df_interacao_2$mpg[27]= mean(df_interacao_2$mpg)
+
+novo_model_car = lm(mpg~wt*vs, df_interacao_2)
+summary(novo_model_car)
+
+
+par(mfrow = c(2,2))
+plot(novo_model_car, which = (1:4), pch=20)
+
+shapiro.test(novo_model_car$residuals)
+```
+Após o tratamento desse ponto, notamos que houve uma melhora em relação ao R2 ajustado e em relação aos resíduos, podemos perceber um ajuste mais suave e uma melhor distribuição.
+
+Graficamente:
+
+```{r,warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+library(plotly)
+plot_final = df_interacao_2 %>%
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(colour = vs)) +
+  geom_smooth(method = "lm", se = FALSE, colour = "black")+
+  geom_abline(intercept =  0.09651, slope = -1.04081, colour = "red") + # reto
+  geom_abline(intercept =  0.09651-0.50509 , slope = -1.04081+0.57931 , colour = "green")+ # v
+  theme(legend.position = "bottom")
+
+ggplotly(plot_final)
+```
+
+# 5. Conclusão e discussão
+
+Todas as variáveis analisadas possuem correlação com a nossa variável resposta, ou seja, o desempenho veicular poderia ser explicado de inúmeras formas. Após alguns testes com essas variáveis foi possível perceber que o peso (*wt*) era a variável que melhor se comportava nessa explicação e que, quando combinada com outras variáveis acabava tendo um desempenho inferior. Porém o formato do motor (*vs*) quando combinado com o peso (*wt*) apresentava uma ganho nas métricas do nosso modelo.
+
+Assim o modelo final leva em consideração a interação entre as variáveis *wt* e *vs*, apresentando coeficentes significantes para ambas, e melhores métricas conforme verificado em nossos testes de hipóteses através do comando summary. Segue os detalhes do nosso modelo final:
+
+```{r,warning=FALSE, message=FALSE, fig.height=6, fig.width=10}
+modelo_final = novo_model_car
+summary(modelo_final)
+modelo_final$coefficients
+
+```
+Como mencionado, nosso modelo final construído com a interação entre *wt* e *vs* leva como casela de referência motores do tipo reto e está representado da seguinte forma: 
+
+**mpg = 0.09651 - 1.0481 beta1 + (0.09651 - 0.50509) + (-1.0481 + 0.57931) beta2**.
+
+
+  
