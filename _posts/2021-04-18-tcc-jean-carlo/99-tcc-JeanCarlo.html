@@ -85,7 +85,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>TCC em Regressão Linear - curso-R</title>
+  <title>Análise de Desempenhos na NBA com Regressão Linear</title>
 
   <meta property="description" itemprop="description" content="TCC em Regressão Linear - curso-R."/>
 
@@ -96,21 +96,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="article:author" content="Jean Carlo Nunes da Silva"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="TCC em Regressão Linear - curso-R"/>
+  <meta property="og:title" content="Análise de Desempenhos na NBA com Regressão Linear"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="TCC em Regressão Linear - curso-R."/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="TCC em Regressão Linear - curso-R"/>
+  <meta property="twitter:title" content="Análise de Desempenhos na NBA com Regressão Linear"/>
   <meta property="twitter:description" content="TCC em Regressão Linear - curso-R."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["TCC em Regressão Linear - curso-R"]},{"type":"character","attributes":{},"value":["TCC em Regressão Linear - curso-R.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name"]}},"value":[{"type":"character","attributes":{},"value":["Jean Carlo"]},{"type":"character","attributes":{},"value":["Nunes da Silva"]}]}]},{"type":"character","attributes":{},"value":["04-18-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Análise de Desempenhos na NBA com Regressão Linear"]},{"type":"character","attributes":{},"value":["TCC em Regressão Linear - curso-R.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name"]}},"value":[{"type":"character","attributes":{},"value":["Jean Carlo"]},{"type":"character","attributes":{},"value":["Nunes da Silva"]}]}]},{"type":"character","attributes":{},"value":["04-18-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1456,7 +1456,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"TCC em Regressão Linear - curso-R","description":"TCC em Regressão Linear - curso-R.","authors":[{"author":"Jean Carlo Nunes da Silva","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-04-18T00:00:00.000-03:00","citationText":"Nunes da Silva, 2021"}
+{"title":"Análise de Desempenhos na NBA com Regressão Linear","description":"TCC em Regressão Linear - curso-R.","authors":[{"author":"Jean Carlo Nunes da Silva","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-04-18T00:00:00.000-03:00","citationText":"Nunes da Silva, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1466,7 +1466,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>TCC em Regressão Linear - curso-R</h1>
+<h1>Análise de Desempenhos na NBA com Regressão Linear</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>TCC em Regressão Linear - curso-R.</p></p>
@@ -1480,13 +1480,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h1 id="análise-de-desempenhos-na-nba-com-regressão-linear">Análise de Desempenhos na NBA com Regressão Linear</h1>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#introdução">Introdução</a></li>
+<li><a href="#análise-exploratória">Análise Exploratória</a></li>
+<li><a href="#pensando-na-modelagem">Pensando na modelagem</a></li>
+<li><a href="#aprofundando-a-modelagem-com-interações">Aprofundando a modelagem com interações</a></li>
+<li><a href="#diagnóstico-do-modelo">Diagnóstico do modelo</a></li>
+<li><a href="#conclusão">Conclusão</a></li>
+</ul>
+</nav>
+</div>
 <h2 id="introdução">Introdução</h2>
 <p>A NBA é uma das ligas esportivas mais competitivas do Mundo. O basquete - esporte não tão popular em outros países - faz grande sucesso na região norte das Américas. Além de todo grande investimento e estrutura, a liga também tem uma <strong>forte influência dos números</strong>. Isso é facilmente notado pelos fãs, pois, em todo jogo, é possível observar a divulgação dos dados históricos e da partida em si. <strong>Para quem trabalha com dados, isso se torna ainda mais atrativo</strong>.</p>
 <p>Dado esse contexto, a principal motivação neste trabalho está, exatamente, em responder questões sobre <strong>a forma que as estatísticas do jogo podem (ou não) exercer efeitos sobre os resultados</strong>. Para isso, utilizarei <strong>regressão linear múltipla</strong> para <strong>análise das influências das variáveis sobre a variável resposta “teamaprov”</strong> - desempenho e aproveitamento das equipes ao longo das temporadas. Pretendo, também, aproveitar das <strong>técnicas de interações para aprofundar a análise entre algumas variáveis categóricas</strong> - como a separação entre o <strong>melhor atleta da temporada</strong> e jogadores regulares, o <strong>jovem da temporada</strong> e os atletas regulares e assim por diante.</p>
 <h2 id="análise-exploratória">Análise Exploratória</h2>
 <p>Para o trabalho, utilizarei a base de dados denominada <strong>“nbadb”</strong>. Esse conjunto de informações foi extraído, utilizando técnicas de WebScraping, do portal <a href="https://www.basketball-reference.com/">“basketball-reference”</a>, que organiza um grande acervo de dados sobre o basquete estadunidense. Trata-se de <strong>informações das temporadas completas da NBA</strong> - princial liga de basquete dos Estados Unidos. Ou seja, contém informações da temporada regular e de playoffs. Para este trabalho, utilizei dados das <strong>últimas 30 temporadas</strong> (de 1990 até 2020), desconsiderando possíveis desvios contextuais de cada competição (por exemplo, temporadas que tiveram menos jogos, menos participantes e etc.). A base conta com 903 observações e 29 variáveis. Cada linha da base representa os dados de uma equipe em determinada temporada. As variáveis representam estatísticas de jogo das equipes (arremessos, bloqueios, roubadas de bola, faltas e etc.).</p>
-<h3 id="as-variáveis-da-base">As variáveis da base</h3>
+<h4 id="as-variáveis-da-base">As variáveis da base</h4>
 <ul>
 <li><strong>team</strong>: equipe;</li>
 <li><strong>champion</strong>: equipe foi campeã ou não;</li>

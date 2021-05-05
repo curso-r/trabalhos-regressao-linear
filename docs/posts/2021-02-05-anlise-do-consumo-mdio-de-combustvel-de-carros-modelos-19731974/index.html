@@ -20,19 +20,18 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -52,7 +51,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -112,7 +111,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974"]},{"type":"character","attributes":{},"value":["O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name","url"]}},"value":[{"type":"character","attributes":{},"value":["Elizabeth"]},{"type":"character","attributes":{},"value":["Mie Hashimoto"]},{"type":"character","attributes":{},"value":["https://www.linkedin.com/in/elizabeth-mie-hashimoto-a416a917/"]}]}]},{"type":"character","attributes":{},"value":["02-05-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Análise do Consumo Médio de Combustível de Carros Modelos 1973/1974"]},{"type":"character","attributes":{},"value":["O conjunto de dados, denominado de `mtcars`, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista *Motor Trend* para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name","url"]}},"value":[{"type":"character","attributes":{},"value":["Elizabeth"]},{"type":"character","attributes":{},"value":["Mie Hashimoto"]},{"type":"character","attributes":{},"value":["https://www.linkedin.com/in/elizabeth-mie-hashimoto-a416a917/"]}]}]},{"type":"character","attributes":{},"value":["02-05-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2355,6 +2354,7 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.7/header-attrs.js"></script>
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -2415,12 +2415,32 @@ d-appendix d-footnote-list a.footnote-backlink {
 </div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#introdução">Introdução</a></li>
+<li><a href="#análise-exploratória">Análise Exploratória</a></li>
+<li><a href="#modelagem">Modelagem</a></li>
+<li><a href="#diagnóstico-do-modelo">Diagnóstico do Modelo</a>
+<ul>
+<li><a href="#dados-completo">Dados completo</a></li>
+<li><a href="#dados-reduzidos">Dados reduzidos</a></li>
+</ul></li>
+<li><a href="#conclusão-e-discussão">Conclusão e Discussão</a></li>
+<li><a href="#agradecimentos">Agradecimentos</a></li>
+<li><a href="#referências-bibliográficas">Referências bibliográficas</a></li>
+</ul>
+</nav>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggobi.github.io/ggally'>GGally</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggobi.github.io/ggally/'>GGally</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>gridExtra</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ddsjoberg/gtsummary'>gtsummary</a></span><span class='op'>)</span>
@@ -2430,7 +2450,7 @@ d-appendix d-footnote-list a.footnote-backlink {
 </details>
 </div>
 <p><a href="tcc_emh_final.pdf">VERSÃO PDF</a></p>
-<h2 id="introdução" class="unnumbered">Introdução</h2>
+<h2 class="unnumbered" id="introdução">Introdução</h2>
 <p>Na crise petrolífera de 1973, membros da Organização dos Países Árabes Exportadores de Petróleo (OPAEP) aplicaram sanções em protesto ao apoio dos Estados Unidos e outras nações à Israel durante a Guerra do Yom Kippur. O conflito resultou no aumento do preço do petróleo de três dólares por barril para cerca de 12 doláres no mundo inteiro, sendo que os preços fixados para os Estados Unidos foram ainda maiores.</p>
 <p>Como uma alternativa à alta do preço do petróleo no mercado mundial, os Estados Unidos iniciaram um programa de eficiência energética, conhecido como <em>Corporate Average Fuel Economy</em> (CAFE), com o propósito de reduzir o consumo de combustível de carros, <em>pick-ups</em>, minivans e SUVs (Almeida Filho, 2018).</p>
 <p>Acredita-se que a melhoria no consumo médio de combustível dos automóveis leva à redução das contas de importação de petróleo, ou seja, pode resultar em economias estimadas nas contas anuais de importação de petróleo no valor de 300 bilhões de dólares em 2025 e 600 bilhões em 2050 (Global fuel economy initiative, 2021). Por outro lado, a eficiência do combustível depende de muitas características do veículo, incluindo as especificações do motor, resistência aerodinâmica, peso, combustível e entre outros atributos.</p>
@@ -2438,7 +2458,6 @@ d-appendix d-footnote-list a.footnote-backlink {
 <h2 id="análise-exploratória">Análise Exploratória</h2>
 <p>O conjunto de dados, denominado de <code>mtcars</code>, foi obtido a partir das edições de março, abril, junho e julho de 1974 da revista <em>Motor Trend</em> para um estudo realizado por Hocking (1976) e posteriormente, reportado por Henderson e Velleman (1981). Os dados, em questão, são referentes ao consumo de gasolina e dez características físicas de 32 automóveis modelos 1973-1974. O mesmo está disponível na biblioteca <code>datasets</code> do <em>software</em> <code>R</code> para consulta.</p>
 <p>Dessa forma, de acordo com a hipótese formulada, as variáveis observadas no conjunto de dados são definidas como:</p>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Variável resposta</strong></p>
 <ul>
 <li><code>mpg</code>: eficiência (milhas por galão de combustível).</li>
@@ -2459,7 +2478,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>Para reduzir as informações do conjunto de dados, estatísticas descritivas de cada uma das variáveis quantitativas foram obtidas e apresentadas na Tabela 1. Os resultados mostram que não há nenhuma dado faltante e portanto, não há necessidade de imputar valores. Além disso, em média, a eficiência dos carros é de 20,09 mpg e são carros com 2 carburadores, seis cilindros e peso de 3,22 <span class="math inline">\(\times 1000\)</span> libras.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>resumo</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>am</span>,<span class='op'>-</span><span class='va'>vs</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
@@ -2783,7 +2804,9 @@ wt
 <p>Na Figura 1 é apresentada um correlograma das variáveis explicativas. Por meio do gráfico, observou-se que as variáveis explicativas apresentavam uma alta correlação, ou seja, há indicativos de problema de multicolinearidade.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>vs</span>,<span class='op'>-</span><span class='va'>am</span>, <span class='op'>-</span><span class='va'>mpg</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
@@ -2801,7 +2824,9 @@ Figure 1: Matriz de correlação das variáveis explicativas quantitativas
 <p>Na Figura 2 são apresentados os gráficos de dispersão, na qual observou-se que uma relação linear da variável resposta com as variáveis , ,  e . Nas demais variáveis, a relação tende a ser não linear.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão</span>
 
@@ -2869,7 +2894,9 @@ Figure 2: Gráfico de dispersão
 <p>Nas Figuras 3-5 são apresentados os gráficos de dispersão em função de outras covariáveis.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
 
@@ -2936,7 +2963,9 @@ Figure 3: Gráfico de dispersão com pontos estratificados pelo número de cilin
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
 
@@ -3011,7 +3040,9 @@ Figure 4: Gráfico de dispersão com pontos estratificados pelo formato do motor
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
 
@@ -3086,7 +3117,9 @@ Figure 5: Gráfico de dispersão com pontos estratificados pelo tipo de transmis
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Gráfico de dispersão com pontos estratificados</span>
 
@@ -3141,7 +3174,9 @@ Figure 5: Gráfico de dispersão com pontos estratificados pelo tipo de transmis
 <p>Na Figura 6 são apresentados os boxplots, na qual observou-se que há uma possível diferença entre o formato do motor em relação a eficiência do carro, assim como há uma diferença entre o tipo de transmissão.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Boxplot</span>
 
@@ -3187,13 +3222,14 @@ Figure 6: Boxplot
 <p><span class="math display">\[\begin{equation}\label{eq:1}\bf{Y}=\beta_0+\beta_1\bf{X}_1+\ldots+\beta_p\bf{X}_p+\mathbf{\varepsilon},\end{equation}\]</span> em que <span class="math inline">\(\bf{Y}\)</span> representa a variável resposta, <span class="math inline">\(\bf{X}_1,\ldots, \bf{X}_p\)</span> é o vetor de variáveis explicativas, <span class="math inline">\(\beta_0,\ldots, \beta_p\)</span> são os parâmetros a serem estimados e <span class="math inline">\(\bf{\varepsilon}\)</span> é o vetor de termos aleatórios do modelo.</p>
 <p>Então, dado o conjunto de dados , o modelo de regressão (1), reescrito em função do conjunto de dados  é dado por <span class="math display">\[mpg_i = \beta_0 + \beta_1cyl_i + \beta_2disp_i + \beta_3hp_i + \beta_4drat_i + \beta_5wt_i + \ldots + \beta_9gear_i + \beta_{10}carb_i + \varepsilon_i, \quad i=1,\ldots, 32,\]</span> sendo este, denominado de modelo completo. Os parâmetros <span class="math inline">\(\beta_0,\ldots, \beta_{10}\)</span> foram estimados pelo método de mínimos quadrados com auxílio computacional do <em>software</em> . Além disso, o efeito das variáveis explicativadas sobre a variável resposta {mpg} foram testadas considerando as seguintes hipóteses estatísticas <span class="math display">\[H_0: \beta_j=0 \quad vs \quad H_a: \beta_j\neq 0, j=0,1,\ldots, 10.\]</span></p>
 <p>Nessse cenário, obteve-se os seguintes resultados:</p>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo completo</strong></p>
 <p>As estimativas, bem os erros padrões e os <span class="math inline">\(p-valores\)</span> dos parâmetros do modelo completo foram obtidas pelo código</p>
 <!-- # Primeiro modelo (completo) para fazer o teste do VIF -->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_completo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_completo</span><span class='op'>)</span>
@@ -3205,7 +3241,9 @@ Figure 6: Boxplot
 <p>Por outro lado, na análise exploratório foi identificado o problema de multicolinearidade. Dessa forma, o fator de inflação da variância (VIF) foi calculo pelo seguinte código</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>mod_completo</span><span class='op'>)</span>
 </code></pre>
@@ -3215,7 +3253,9 @@ Figure 6: Boxplot
 <p>e os valores apresentados na Tabela 3. Segundo James et al. (2013), variáveis explicativas cujo VIF for maior do que cinco podem ser removidas do modelo como uma das soluções para o problema. Nessa situação, de acordo com a Tabela 3, as variáveis explicativas , ,  e  foram mantidas no modelo. Justifica-se a permanência da variável  em função do comportamento linear quando comparado com as demains variáveis quantativas contínuas (Figura 2).</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>mod_completo</span> <span class='op'>%&gt;%</span> 
@@ -3443,7 +3483,9 @@ carb
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>out_vif1</span> <span class='op'>&lt;-</span> <span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>mod_completo</span><span class='op'>)</span> 
 
@@ -3549,7 +3591,6 @@ carb
 </tbody>
 </table>
 </div>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido</strong></p>
 <ul>
 <li><code>mod_red0</code>: modelo reduzido 1</li>
@@ -3559,7 +3600,9 @@ carb
 <!-- Modelo reduzido com as variáveis com VIF <5 -->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_red1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>drat</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>am</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red1</span><span class='op'>)</span>
@@ -3570,7 +3613,9 @@ carb
 <p>e os resultados apresentados na Tabela 4. Como a hipótese nula não foi rejeitada para os coeficientes associados as variáveis  (<span class="math inline">\(p\)</span>-valor = 0,000) e  (<span class="math inline">\(p\)</span>-valor = 0,016), ou seja, o peso e o formato do motor tem um possível efeito sobre a eficiência do carro. Entretanto, especialistas em mecânica acreditam o tipo de transmissão tem alguma influência sobre o consumo médio de um automável. Por essa razão, a variável  ainda foi mantida no modelo. Além disso, na Figura 5 foi observado uma possível interação entre o tipo de transmissão e o peso do carro.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>mod_red1</span> <span class='op'>%&gt;%</span> 
@@ -3694,7 +3739,6 @@ am
 </tbody>
 </table>
 </div>
-
 <ul>
 <li><code>mod_red2</code>: modelo reduzido 2</li>
 </ul>
@@ -3703,7 +3747,9 @@ am
 <!-- Modelo reduzido 2 -->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_red2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>wt</span><span class='op'>*</span><span class='va'>am</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red2</span><span class='op'>)</span>
@@ -3714,7 +3760,9 @@ am
 <p>e os resultados apresentados na Tabela 5. De acordo com essa tabela, a hipótese nula foi rejeitada em todos os casos, pois o <span class="math inline">\(p\)</span>-valor foi menor do que o nível de significância. Dessa forma, o formato do motor e assim como a interação entre peso e tipo de transmissão tem algum efeito sobre a eficiência do carro.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>mod_red2</span> <span class='op'>%&gt;%</span> 
@@ -3838,7 +3886,6 @@ wt:am
 </tbody>
 </table>
 </div>
-
 <ul>
 <li><code>mod_red3</code>: modelo reduzido 3</li>
 </ul>
@@ -3848,7 +3895,9 @@ wt:am
 <!-- Modelo reduzido 3 dedução gráfica -->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mod_red3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, data<span class='op'>=</span><span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_red3</span><span class='op'>)</span>
@@ -3860,7 +3909,9 @@ wt:am
 <div style="page-break-after: always;"></div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>mod_red3</span> <span class='op'>%&gt;%</span> 
@@ -4004,7 +4055,9 @@ wt:factor(cyl)8
 <p>Na Tabela 7 são apresentados os valores de R2 e R2 ajustado para os três modelos reduzidos estimados. Os valores obtidos indicam que o modelo <code>mod_red2</code> é mais adequado entre os três modelos estimados, seguido do modelo <code>mod_red3</code> e <code>mod_red1</code>. Entretanto, os valores de R2 ajustados não são suficientes para determinar a adequação do modelo. À vistsa disso, uma análise de resíduo foi realizada.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>modelo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'mod_red1'</span>,<span class='st'>'mod_red2'</span>,<span class='st'>'mod_red3'</span><span class='op'>)</span>
 <span class='va'>r2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.809</span>,<span class='fl'>0.868</span>,<span class='fl'>0.862</span><span class='op'>)</span>
@@ -4073,7 +4126,6 @@ mod_red3
 <h1 id="diagnóstico-do-modelo">Diagnóstico do Modelo</h1>
 <h2 id="dados-completo">Dados completo</h2>
 <p>Para cada modelo reduzido estimado foi realizado uma análise de resíduo e os resultados são apresentados nas Figuras 7, 8 e 9, respectivamente.</p>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 1</strong></p>
 <p>De acordo com a Figura 7:</p>
 <ul>
@@ -4082,7 +4134,6 @@ mod_red3
 <li><p><strong>Scale-Location</strong>: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.</p></li>
 <li><p><strong>Residuals vs Leverage</strong>: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.</p></li>
 </ul>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 2</strong></p>
 <p>De acordo com a Figura 8:</p>
 <ul>
@@ -4091,7 +4142,6 @@ mod_red3
 <li><p><strong>Scale-Location</strong>: aparentemente os resíduos aparecem espalhados aleatoriamente, o que indica que a suposição de homocedasticidade é satisfeita, ou seja, a variância é constante.</p></li>
 <li><p><strong>Residuals vs Leverage</strong>: como todos os pontos são menores do que a distância de Cook, temos evidências de que não há pontos de alavanca.</p></li>
 </ul>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 3</strong></p>
 <p>De acordo com a Figura 9:</p>
 <ul>
@@ -4102,7 +4152,9 @@ mod_red3
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red1</span><span class='op'>)</span>
@@ -4119,7 +4171,9 @@ Figure 7: Gráfico de resíduos do modelo reduzido 1
 <!-- Outliers: Imperial, Corolla e Fiag 128-->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red2</span><span class='op'>)</span>
@@ -4136,7 +4190,9 @@ Figure 8: Gráfico de resíduos do modelo reduzido 2
 <!-- Outliers: Merc240D, Corolla e Fiag 128-->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red3</span><span class='op'>)</span>
@@ -4154,13 +4210,14 @@ Figure 9: Gráfico de resíduos do modelo reduzido 3
 <h2 id="dados-reduzidos">Dados reduzidos</h2>
 <p>O modelo <code>mod_red1</code> apresentou o menor valor de R2 ajustado e na análise de resíduo apontou a possível falta de um termo quadrático no modelo. Por essas razões, o modelo foi descartado para nova avaliação.</p>
 <p>Em relação aos modelos <code>mod_red2</code> e <code>mod_red3</code> foi realizado uma nova análise removendo os carros identificados como possíveis <em>outliers</em>.</p>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 2</strong></p>
 <p>Os resultados são apresentados na Tabela 8 e na Figura 10 indicam que o formato do motor e o efeito da interação permanecem sendo significativos para explicar a variabilidade presente na eficiência do carro. Além disso, os pontos estãos mais próximos da linha tracejada no gráfico <strong>Normal Q-Q</strong>. Entretanto, pelo gráfico <strong>Scale-Location</strong>, há evidências de heterogeneidade de variâncias e outros carros foram identificados como possíveis <em>outliers</em>.</p>
 <!-- Modelo reduzido 2 sem outliers -->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mtcars_red</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>slice</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>8L</span>, <span class='op'>-</span><span class='fl'>20L</span>, <span class='op'>-</span><span class='fl'>18L</span><span class='op'>)</span>
@@ -4172,7 +4229,9 @@ Figure 9: Gráfico de resíduos do modelo reduzido 3
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>mod_red21</span> <span class='op'>%&gt;%</span> 
@@ -4298,7 +4357,9 @@ wt:am
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red21</span><span class='op'>)</span>
@@ -4312,13 +4373,14 @@ Figure 10: Gráfico de resíduos do modelo reduzido 2 sem outliers
 </p>
 </div>
 </div>
-
 <p><span class="math inline">\(\checkmark\)</span> <strong>Modelo reduzido 3</strong></p>
 <p>Os resultados são apresentados na Tabela 9 e na Figura 11 indicam que não houve grandes mudanças nos gráficos de resíduos. Porém, houve uma mudança na significância da interação entre  e  e também, novos foram identificados como possíveis <em>outliers</em>.</p>
 <!-- Modelo reduzido 3 sem outliers -->
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mtcars_red1</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>slice</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>18L</span>, <span class='op'>-</span><span class='fl'>20L</span>, <span class='op'>-</span><span class='fl'>21L</span><span class='op'>)</span>
@@ -4330,7 +4392,9 @@ Figure 10: Gráfico de resíduos do modelo reduzido 2 sem outliers
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen<span class='op'>=</span><span class='fl'>1</span>, digits<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>mod_red31</span> <span class='op'>%&gt;%</span> 
@@ -4473,7 +4537,9 @@ wt:factor(cyl)8
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod_red31</span><span class='op'>)</span>
@@ -4502,9 +4568,9 @@ Figure 11: Gráfico de resíduos do modelo reduzido 3 sem outliers
 </ul>
 <p>Portanto, temos efeito da interação entre peso e número de cilindro do carro. Dessa forma, a hipótese de que modificações na estrutura do automóvel aumenta o seu consumo médio foi validada. Nesse caso, as modificações no peso e no número de cilindros do carro podem explicar a variabilidade presente no consumo médio de gasolina.</p>
 <p>Por fim, informações como relação peso e torque poderiam ser utilizadas no lugar de peso e potência. Outra informações que poderia ser utilizada é o tipo de carro, uma vez que carros esportivos são bem diferentes de sedãs.</p>
-<h1 id="agradecimentos" class="unnumbered">Agradecimentos</h1>
+<h1 class="unnumbered" id="agradecimentos">Agradecimentos</h1>
 <p>Ao professor Athos Damiani pelas aulas e dedicação ao curso. Aos mecânicos Marcelo Prataviera e Taka Kurihara e, também, aos alunos do curso de Engenharia Mecânica da UTFPR/Londrina, João Pedro Alves Cordeiro dos Santos e Pedro Henrique Barion pelo auxílio na compreensão das estruturas de um carro.</p>
-<h1 id="referências-bibliográficas" class="unnumbered">Referências bibliográficas</h1>
+<h1 class="unnumbered" id="referências-bibliográficas">Referências bibliográficas</h1>
 <p>ALMEIDA FILHO, G.M. <strong>Programa INOVAR-AUTO: atendimento das metas de eficiência energética e suas externalidades</strong>. 2018. Dissertação (Mestrado em Ciências) - Universidade de São Paulo, São Paulo.</p>
 <p>CRISE petrolífera de 1973. <strong>Wikipedia</strong>. Disponível em: <a href="https://pt.wikipedia.org/wiki/Crise_petrol%C3%ADfera_de_1973" class="uri">https://pt.wikipedia.org/wiki/Crise_petrol%C3%ADfera_de_1973</a>. Acesso em: 28 de jan. de 2021. </p>
 <p>FUEL efficiency. <strong>Wikipedia</strong>. Disponível em: <a href="https://en.wikipedia.org/wiki/Fuel_efficiency" class="uri">https://en.wikipedia.org/wiki/Fuel_efficiency</a>. Acesso em: 28 de jan. de 2021.</p>

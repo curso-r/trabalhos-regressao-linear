@@ -20,19 +20,18 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -52,7 +51,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -112,7 +111,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["TCC"]},{"type":"character","attributes":{},"value":["Resolução do TCC do curso de Regressão Linear com R de janeiro de 2021."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ricardo"]},{"type":"character","attributes":{},"value":["Feliz Okamoto"]},{"type":"character","attributes":{},"value":["https://www.linkedin.com/in/ricardo-feliz-okamoto-a20344171/"]}]}]},{"type":"character","attributes":{},"value":["01-25-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["TCC"]},{"type":"character","attributes":{},"value":["Resolução do TCC do curso de Regressão Linear com R de janeiro de 2021."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["first_name","last_name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ricardo"]},{"type":"character","attributes":{},"value":["Feliz Okamoto"]},{"type":"character","attributes":{},"value":["https://www.linkedin.com/in/ricardo-feliz-okamoto-a20344171/"]}]}]},{"type":"character","attributes":{},"value":["01-25-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2355,6 +2354,7 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.7/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2413,6 +2413,28 @@ d-appendix d-footnote-list a.footnote-backlink {
 </div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#introdução">Introdução</a>
+<ul>
+<li><a href="#definição-do-problema">Definição do problema</a></li>
+<li><a href="#descrição-básica-da-origem-e-da-coleta-dos-dados">Descrição básica da origem e da coleta dos dados</a></li>
+<li><a href="#hipótese-do-estudo">Hipótese do estudo</a></li>
+<li><a href="#sumários-das-variáveis-univariadas">Sumários das variáveis (univariadas)</a></li>
+<li><a href="#gráficos-de-duas-variáveis">Gráficos de duas variáveis</a></li>
+</ul></li>
+<li><a href="#modelagem">Modelagem</a>
+<ul>
+<li><a href="#baseline-model">Baseline model</a></li>
+<li><a href="#multicolinearidade-e-interações">Multicolinearidade e Interações</a></li>
+</ul></li>
+<li><a href="#diagnóstico-do-modelo">Diagnóstico do modelo</a></li>
+<li><a href="#conclusão-e-discussão">Conclusão e discussão</a></li>
+</ul>
+</nav>
+</div>
 <h2 id="introdução">Introdução</h2>
 <p>A eficiência dos carros é uma das principais características que a indústria automobilística tenta optimizar. Melhorar a eficiência de um carro significa aumentar a quantidade de quilômetros que os carros conseguem rodar consumindo menos combustível. Não só para a indústria automobilística esse tema tem importância, como também para qualquer cidadão que esteja preocupado em gastar menos (afinal de contas, mais quilômetros rodados com menos combustível significa uma conta menor no fim do mês de gasolina), e também para qualquer pessoa com consciência ambiental, que deseja diminuir a quantidade de combustíveis fósseis que são queimados por dia.</p>
 <h3 id="definição-do-problema">Definição do problema</h3>
@@ -2440,7 +2462,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <h4 id="variável-dependente">Variável dependente</h4>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2454,7 +2478,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>A começar pela variável de interesse, <code>mpg</code>, observamos a seguinte distribuição dos modelos de carro por eficiência. A média de eficiência é de aproximadamente 20 mpg. Temos 18 modelos de carro abaixo da média e 14 modelos acima dela, sendo que o modelo com a pior eficiência roda apenas 10.40 milhas por galão, enquanto o modelo mais eficiente roda mais que o triplo disso, com 33.90 milhas por galão.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span><span class='op'>)</span>
 </code></pre>
@@ -2467,7 +2493,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>Quanto às variáveis explicativas, temos os seguintes gráficos.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> 
@@ -2479,7 +2507,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>Os cilindros são onde o combustível é queimado. Há apenas três tipos de carros e cilindros: carros com 4 cilindros, 6 cilindros ou 8 cilindros. O que vemos é que a maioria dos carros possui 8 cilindros, seguido de carros com 4 cilindros e, em terceiro lugar, carros com 6 cilindros. Essa característica se relaciona com a eficiência porque quanto mais cilindros existem, maior é a queima de combustível e, portanto, maior é a geração de poder para o carro.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>hp</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2496,7 +2526,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>Vemos que a distribuição do horsepower é assimétrica para a direita (right skewed) ao compararmos a média (azul) com a mediana (vermelho).</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>wt</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2514,7 +2546,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>O que vemos desse dado é uma grande concentração de valores que giram entorno da média de aproxidamente 3200 libras.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2527,7 +2561,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>A seguir, temos o tipo de motor. Essa variável é binária, ela assume apenas dois valores: ou o motoro é V-shaped, ou ele é straight. Na base de dados, essa característica está representada na coluna <code>vs</code>. Esperamos que o tipo de motor influencie na eficiência, porque é justamente no motor em que o consumo de combustível ocorre.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2540,7 +2576,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>Outra característica que esperamos que se relacione com a eficiência é o tipo de transmissão, se é manual (1) ou automático (0). Vemos que existem nessa base de dados mais carros automáticos do que manuais.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2553,7 +2591,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <p>Além disso, temos a quantidade de marchas que um carro possui. Existem carros apenas de 3, 4 ou 5 marchas. Pensamos que a marcha se relaciona com a eficiciência porque ela controla a quantidade de poder disponível do motor.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>carb</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_histogram</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2567,7 +2607,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 <h3 id="gráficos-de-duas-variáveis">Gráficos de duas variáveis</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p_cyl</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>cyl</span>, <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span>
@@ -2597,7 +2639,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 </details>
 <img src="tcc_files/figure-html5/unnamed-chunk-11-1.png" width="624" style="display: block; margin: auto;" />
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>g2</span> <span class='op'>&lt;-</span> <span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span>
   <span class='va'>p_vs</span>, 
@@ -2609,7 +2653,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 </details>
 <img src="tcc_files/figure-html5/unnamed-chunk-11-2.png" width="624" style="display: block; margin: auto;" />
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>g3</span> <span class='op'>&lt;-</span> <span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span>
   <span class='va'>p_gear</span>, 
@@ -2633,7 +2679,9 @@ d-appendix d-footnote-list a.footnote-backlink {
 \]</span> Esses parâmetros ficam melhor resumidos na tabela a seguir:
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>baseline</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>gear</span> <span class='op'>+</span> <span class='va'>carb</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>baseline</span><span class='op'>)</span>
@@ -2672,7 +2720,9 @@ F-statistic: 20.77 on 7 and 24 DF,  p-value: 9.689e-09</code></pre>
 <p>Para tentar desmistificar isso, precisamos avaliar as variáveis individualmente. Quando rodamos um modelo para cada variável, a história é outra. Todos os coeficientes se tornam estatisticamente significantes.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cyl_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>cyl</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>hp_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span>
@@ -2725,7 +2775,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <p>Comparando, então, esses resultados com a equação que inclui todas as variáveis, podemos levantar fortes suspeitas de que existe multicolinearidade no nosso baseline model. Para diagnosticar a multicolinearidade, podemos usar o VIF.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>baseline</span><span class='op'>)</span>
 </code></pre>
@@ -2737,7 +2789,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <p>O VIF nos dá alguns valores a que temos de nos atentar. Primeiro, observamos que o VIF do <code>cyl</code> é o maior de todos. Ele está acima de 5. Acima de 5 todos VIF é problemático. Outra variável problemática é <code>hp</code>. Além disso, há <code>gear</code>. Entretanto, como ele está apenas um pouco acima de 5, vou deixá-lo para uma análise posterior. O que eu vou testar agora é o que acontece com as demais variáveis ao retirar o <code>cyl</code> e <code>hp</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>baseline_sem_cyl_e_hp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span> <span class='op'>+</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>gear</span> <span class='op'>+</span> <span class='va'>carb</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>baseline_sem_cyl_e_hp</span><span class='op'>)</span>
@@ -2752,7 +2806,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <h4 id="análise-de-wt">Análise de <code>wt</code></h4>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>wt1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>vs</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>wt2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
@@ -2800,7 +2856,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <h4 id="análise-de-gear">Análise de <code>gear</code></h4>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>gear1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>gear</span><span class='op'>+</span><span class='va'>vs</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>gear2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>gear</span><span class='op'>+</span><span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
@@ -2845,7 +2903,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <p>Repetindo o mesmo teste, mas agora com o foco na variável <code>gear</code>, nós observamos um ponto interessante: a adição da variável <code>wt</code> faz com que <code>gear</code> perca totalmente a sua significância estatística. Lembrando da tabela anterior (sobre a mudança do coeficiente <code>wt</code> com a adição de outras variáveis), vemos que <code>gear</code> não influencia o valor de <code>wt</code>, mas que o invereso acontece. Podemos, então, avaliar se existe alguma interação entre <code>wt</code> e <code>gear</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>interacao_gear_wt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>gear</span><span class='op'>*</span><span class='va'>wt</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 
@@ -2876,7 +2936,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <h4 id="análise-de-am">Análise de <code>am</code></h4>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>am1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>am</span><span class='op'>+</span><span class='va'>vs</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>am2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>am</span><span class='op'>+</span><span class='va'>gear</span>, <span class='va'>mtcars</span><span class='op'>)</span>
@@ -2921,7 +2983,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 <p>O que observamos é que <code>am</code>, igual ao que ocorre com <code>gear</code> perde toda a sua significância estatística com a adição de <code>wt</code>. Entretanto, o inverso não é verdadeiro: <code>am</code> não retira o efeito de <code>wt</code>. Vamos então realizar a mesma análise de interação <code>am</code> com <code>wt</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p3</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>wt</span>, y <span class='op'>=</span> <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2952,7 +3016,9 @@ scaled by 1 standard deviation. *** p &lt; 0.001;<br />
 Se começarmos rodando uma regressão com as três variáveis faltantes, observamos que, combinadas com <code>wt</code>, tanto <code>carb</code> quanto <code>vs</code> perdem sua significância estatística.
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span> <span class='op'>+</span> <span class='va'>vs</span> <span class='op'>+</span> <span class='va'>carb</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
@@ -2983,7 +3049,9 @@ F-statistic: 40.83 on 3 and 28 DF,  p-value: 2.349e-10</code></pre>
 <p>Isso não indica multicolinearidade porque os VIFs das variáveis são muito baixos.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 </code></pre>
@@ -2995,7 +3063,9 @@ F-statistic: 40.83 on 3 and 28 DF,  p-value: 2.349e-10</code></pre>
 Assim, temos que fazer uma análise mais minuciosa sobre o comportamento dos coeficientes ao adicionarmos as variáveis uma a uma.
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>wt1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>vs</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>wt4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>carb</span>, <span class='va'>mtcars</span><span class='op'>)</span>
@@ -3034,7 +3104,9 @@ scaled by 1 standard deviation. </em></strong> p &lt; 0.001;<br />
 <p>Para continuar a análise, iremos observar o que acontece quando as variáveis interagem entre si.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>wt6</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>vs</span><span class='op'>+</span><span class='va'>wt</span><span class='op'>*</span><span class='va'>vs</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>wt7</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span><span class='op'>~</span><span class='va'>wt</span><span class='op'>+</span><span class='va'>carb</span><span class='op'>+</span><span class='va'>wt</span><span class='op'>*</span><span class='va'>carb</span>, <span class='va'>mtcars</span><span class='op'>)</span>
@@ -3080,7 +3152,9 @@ p &lt; 0.01; * p &lt; 0.05.</p>
 <p>Por fim, resta apenas avaliar se o modelo ficou bom ou não.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
-<summary>Show code</summary>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>adjusted</span><span class='op'>)</span>
 </code></pre>

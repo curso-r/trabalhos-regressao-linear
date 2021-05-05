@@ -1,5 +1,5 @@
 ---
-title: "TCC em Regressão Linear - curso-R"
+title: "Análise de Desempenhos na NBA com Regressão Linear"
 description: |
   TCC em Regressão Linear - curso-R.
 author: 
@@ -10,6 +10,7 @@ output:
   distill::distill_article:
     self_contained: false
     code_folding: true
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -49,8 +50,6 @@ nbadb <- openxlsx::read.xlsx("nbateams.xlsx") %>%
   tibble::as_tibble()
 ```
 
-# Análise de Desempenhos na NBA com Regressão Linear
-
 ## Introdução
 
 A NBA é uma das ligas esportivas mais competitivas do Mundo. O basquete - esporte não tão popular em outros países - faz grande sucesso na região norte das Américas. Além de todo grande investimento e estrutura, a liga também tem uma **forte influência dos números**. Isso é facilmente notado pelos fãs, pois, em todo jogo, é possível observar a divulgação dos dados históricos e da partida em si. **Para quem trabalha com dados, isso se torna ainda mais atrativo**.
@@ -61,7 +60,7 @@ Dado esse contexto, a principal motivação neste trabalho está, exatamente, em
 
 Para o trabalho, utilizarei a base de dados denominada **"nbadb"**. Esse conjunto de informações foi extraído, utilizando técnicas de WebScraping, do portal ["basketball-reference"](https://www.basketball-reference.com/), que organiza um grande acervo de dados sobre o basquete estadunidense. Trata-se de **informações das temporadas completas da NBA** - princial liga de basquete dos Estados Unidos. Ou seja, contém informações da temporada regular e de playoffs. Para este trabalho, utilizei dados das **últimas 30 temporadas** (de 1990 até 2020), desconsiderando possíveis desvios contextuais de cada competição (por exemplo, temporadas que tiveram menos jogos, menos participantes e etc.). A base conta com 903 observações e 29 variáveis. Cada linha da base representa os dados de uma equipe em determinada temporada. As variáveis representam estatísticas de jogo das equipes (arremessos, bloqueios, roubadas de bola, faltas e etc.).
 
-### As variáveis da base
+#### As variáveis da base
 
 -   **team**: equipe;
 -   **champion**: equipe foi campeã ou não;
