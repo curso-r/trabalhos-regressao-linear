@@ -1,0 +1,558 @@
+---
+title: "Análise do Consumo de Combustível"
+author: 
+  - first_name: "César"
+    last_name: "Lemos"
+    url: https://www.linkedin.com/in/cesar-lemos-4a8b124b/
+date: 04-18-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  message = FALSE, 
+  warning = FALSE,
+  fig.align = "center"
+)
+
+options(digits = 5,
+        scipen = 5)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(GGally)
+library(pastecs)
+library(knitr)
+library(kableExtra)
+library(gridExtra)
+library(broom)
+library(car)
+
+mtcars <- mtcars
+```
+
+
+# Introdução
+
+Em outubro de 1973 ocorreu uma grande crise petrolífera fruto de embargo as nações apoiadoras de Israel durante a guerra do Yom Kippur (Smith, 2006). Os responsáveis por estes embargos foram os países membros da Organização dos Países Árabes Exportadores de Petróleo (OPAEP). As nações alvos deste embargo foram o Canadá, Japão, Holanda, Reino Unido, Estados Unidos e, posteriormente, Portugal, Rodésia e África do Sul.
+
+Durante o período do embargo, que foi até março de 1974, o preço médio do barril de petróleo subiu de US\$ 3,00 para aproximandamente US\$ 12,00, o que representa um aumento de `r round(12 / 3 - 1, 2)`%. Foi neste período que a revista Motor Trend US de 1974 publicou em uma de suas edições uma tabela informativa contendo dados de consumo de combustível (necessário, visto o alto valor do combustível fóssil) jutamente com outros 10 aspectos de desempenhos para 32 veículos produzidos entre 1973 e 1974.
+
+Estes são os dados que compõe a base **mtcars**, objeto de estudo deste trabalho. O estudo consistirá em verificar se as variáveis que compõe esta base podem explicar o consumo de combustível, medido em milhas por galão, dentro de um intervalo de confiança de 90%. Para esta análise foi utilizado o software R na versão 4.0.4.
+
+# Análise exploratória dos dados
+
+Analisando a base **mtcars**, é possível observar que ela é composta por 32 observações e 11 colundas e apresenta as seguintes variáveis:
+
+```{r cars, echo=FALSE}
+glimpse(mtcars)
+```
+\
+Onde:
+
+*   **mpg:**   é o consumo medido em milhas por galões;
+*   **cyl:**   é o número de cilindos que o motor do veículo possui;
+*   **disp:**  é a cilindrada do veículo, medido em polegadas cúbicas;
+*   **hp:**    é a potência bruta, medida em cavalos (horse power);
+*   **drat:**  é a relação do eixo traseiro do veículo;
+*   **wt:**    é o peso, medido em 1 mil libras;
+*   **qsec:**  é o tempo no quarto de milha;
+*   **vs:**    indica se o motor é em V (vs = 0) ou em linha (vs = 1);
+*   **am:**    informa se a transmissão é automática (am = 0) ou manual (am = 1);
+*   **gear:**  indica o número de marchas, excluindo a ré;
+*   **carb:**  informa o número de carburadores do veículo.
+\
+As estatísticas univariadas das variáveis, que se encontram na tabela 1, mostra que não há valores nulos e por isso não há necessidade de realizar algum processo de interpolação ou exclusão de valores.
+
+```{r echo=FALSE}
+stat.desc(mtcars) %>% 
+  mutate(medida = rownames(.)) %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>%
+  pivot_longer(!medida, names_to = "Caracteristicas", values_to = "Valor") %>% 
+  pivot_wider(names_from = medida, values_from = Valor) %>% 
+  select(-nbr.val, -nbr.null, -SE.mean, -var, -sum) %>% 
+  rename(Valores_NA = nbr.na,
+         Minimo = min,
+         Maximo = max,
+         Intervalo = range,
+         Mediana = median,
+         Media = mean,
+         C.I.Media_0.95 = CI.mean.0.95,
+         Desvio_Padrao = std.dev,
+         Coef_Variacao = coef.var) %>% 
+  kable(caption = "Tabela 1: Estatística univariada das variáveis") %>% 
+  kable_paper("hover", full_width = F)
+```
+\
+Para fins de análise, as variáveis *vs*, *am*, *gear*, *carb* e *cyl* serão tratadas como dummies. Embora *gear*, *carb* e *cyl* sejam numéricas, representam uma categoria de carros. Não tem como dizer que os carros possuem 3,69 marchas, em média. Ou os carros possuem uma média de 2,8 cilindros. Neste caso, uma tabela de frequência seria o mais adequado para analisar estas variáveis.
+
+A figura 1 mostra a distribuição e correlações entre as variáveis quantitativas na base de dados. Esta figura evidencia que há um problema de multicolinearidade. Além disto, a vairável resposta aparenta não ter uma correlação linear entre algumas variáveis. 
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 1: Matriz de correlação com histograma e scatter plot das variáveis quantiativas", fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
+mtcars %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>% 
+  ggpairs()
+```
+\
+
+A figura 2 mostra uma série de gráficos de correlação entre a variável dependente e as variáveis explicativas. Em alguns casos é possível perceber que a correlação não é linear, como no caso de *mpg* e *disp*, por exemplo. Isto pode ser fruto de interação entre estas variáveis e alguma outra categórica, como *gear*. 
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 2: Correlação entre a variável dependente e demais variáveis explicativas", fig.height=6, fig.width=10, message = FALSE, warning = FALSE}
+p1 <- mtcars %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>% 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e dist") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p2 <- mtcars %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e hp") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p3 <- mtcars %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>% 
+  ggplot(aes(x = drat, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e drat") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p4 <- mtcars %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>% 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e wt") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p5 <- mtcars %>% 
+  select(-vs, -am, -cyl, -carb, -gear) %>% 
+  ggplot(aes(x = qsec, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e qsec") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+grid.arrange(p1, p2, p3, p4, p5, nrow = 2)
+```
+\
+
+#### Análise das interações
+
+Quando suspeita-se que os coeficientes de inclinação podem variar entre as categorias da variável preditora então aconselha-se testar a interação entre as duas variáveis. Graficamente é possível ver estas interações ao colorir os pontos do gráfico de dispersão de acordo com a classe desejada.
+
+Nas figuras 3 a 7, é possível ver que há interações com as variáveis dummies em muitos casos. Com as interações, é possível utilizar toda a variância do banco de dados para calcular o impacto destas variáveis categóricas nos coeficientes das retas, criando uma reta para cada situação.
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 3: Interação das variáveis com o tipo do motor", fig.height=6, fig.width=10, message = FALSE, warning = FALSE}
+p1 <- mtcars %>% 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point(aes(color = as.factor(vs))) +
+  geom_smooth(aes(color = as.factor(vs)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e dist") +
+  labs(color = "Motor Linha = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p2 <- mtcars %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point(aes(color = as.factor(vs))) +
+  geom_smooth(aes(color = as.factor(vs)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e hp") +
+  labs(color = "Motor Linha = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p3 <- mtcars %>% 
+  ggplot(aes(x = drat, y = mpg)) +
+  geom_point(aes(color = as.factor(vs))) +
+  geom_smooth(aes(color = as.factor(vs)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e drat") +
+  labs(color = "Motor Linha = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p4 <- mtcars %>% 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(color = as.factor(vs))) +
+  geom_smooth(aes(color = as.factor(vs)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e wt") +
+  labs(color = "Motor Linha = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p5 <- mtcars %>% 
+  ggplot(aes(x = qsec, y = mpg)) +
+  geom_point(aes(color = as.factor(vs))) +
+  geom_smooth(aes(color = as.factor(vs)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e qsec") +
+  labs(color = "Motor Linha = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+grid.arrange(p1, p2, p3, p4, p5, nrow = 2)
+```
+\
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 4: Interação das variáveis com a quantidade de marcha", fig.height=6, fig.width=10, message = FALSE, warning = FALSE}
+p1 <- mtcars %>% 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point(aes(color = as.factor(gear))) +
+  geom_smooth(aes(color = as.factor(gear)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e dist") +
+  labs(color = "Qtd. Marchas") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p2 <- mtcars %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point(aes(color = as.factor(gear))) +
+  geom_smooth(aes(color = as.factor(gear)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e hp") +
+  labs(color = "Qtd. Marchas") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p3 <- mtcars %>% 
+  ggplot(aes(x = drat, y = mpg)) +
+  geom_point(aes(color = as.factor(gear))) +
+  geom_smooth(aes(color = as.factor(gear)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e drat") +
+  labs(color = "Qtd. Marchas") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p4 <- mtcars %>% 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(color = as.factor(gear))) +
+  geom_smooth(aes(color = as.factor(gear)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e wt") +
+  labs(color = "Qtd. Marchas") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p5 <- mtcars %>% 
+  ggplot(aes(x = qsec, y = mpg)) +
+  geom_point(aes(color = as.factor(gear))) +
+  geom_smooth(aes(color = as.factor(gear)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e qsec") +
+  labs(color = "Qtd. Marchas") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+grid.arrange(p1, p2, p3, p4, p5, nrow = 2)
+```
+\
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 5: Interação das variáveis com a quantidade de cilindros", fig.height=6, fig.width=10, message = FALSE, warning = FALSE}
+p1 <- mtcars %>% 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point(aes(color = as.factor(cyl))) +
+  geom_smooth(aes(color = as.factor(cyl)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e dist") +
+  labs(color = "Qtd. Cilindros") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p2 <- mtcars %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point(aes(color = as.factor(cyl))) +
+  geom_smooth(aes(color = as.factor(cyl)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e hp") +
+  labs(color = "Qtd. Cilindros") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p3 <- mtcars %>% 
+  ggplot(aes(x = drat, y = mpg)) +
+  geom_point(aes(color = as.factor(cyl))) +
+  geom_smooth(aes(color = as.factor(cyl)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e drat") +
+  labs(color = "Qtd. Cilindros") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p4 <- mtcars %>% 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(color = as.factor(cyl))) +
+  geom_smooth(aes(color = as.factor(cyl)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e wt") +
+  labs(color = "Qtd. Cilindros") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p5 <- mtcars %>% 
+  ggplot(aes(x = qsec, y = mpg)) +
+  geom_point(aes(color = as.factor(cyl))) +
+  geom_smooth(aes(color = as.factor(cyl)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e qsec") +
+  labs(color = "Qtd. Cilindros") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+grid.arrange(p1, p2, p3, p4, p5, nrow = 2)
+```
+\
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 6: Interação das variáveis com a quantidade de carburador", fig.height=6, fig.width=10, message = FALSE, warning = FALSE}
+p1 <- mtcars %>% 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point(aes(color = as.factor(carb))) +
+  geom_smooth(aes(color = as.factor(carb)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e dist") +
+  labs(color = "Qtd. Carburadores") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p2 <- mtcars %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point(aes(color = as.factor(carb))) +
+  geom_smooth(aes(color = as.factor(carb)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e hp") +
+  labs(color = "Qtd. Carburadores") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p3 <- mtcars %>% 
+  ggplot(aes(x = drat, y = mpg)) +
+  geom_point(aes(color = as.factor(carb))) +
+  geom_smooth(aes(color = as.factor(carb)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e drat") +
+  labs(color = "Qtd. Carburadores") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p4 <- mtcars %>% 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(color = as.factor(carb))) +
+  geom_smooth(aes(color = as.factor(carb)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e wt") +
+  labs(color = "Qtd. Carburadores") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p5 <- mtcars %>% 
+  ggplot(aes(x = qsec, y = mpg)) +
+  geom_point(aes(color = as.factor(carb))) +
+  geom_smooth(aes(color = as.factor(carb)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e qsec") +
+  labs(color = "Qtd. Carburadores") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+grid.arrange(p1, p2, p3, p4, p5, nrow = 2)
+```
+\
+
+```{r echo=FALSE, fig.cap="\\label{fig:}Figura 7: Interação das variáveis com o tipo de transmissão", fig.height=6, fig.width=10, message = FALSE, warning = FALSE}
+p1 <- mtcars %>% 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point(aes(color = as.factor(am))) +
+  geom_smooth(aes(color = as.factor(am)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e dist") +
+  labs(color = "Transm. Manual = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p2 <- mtcars %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point(aes(color = as.factor(am))) +
+  geom_smooth(aes(color = as.factor(am)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e hp") +
+  labs(color = "Transm. Manual = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p3 <- mtcars %>% 
+  ggplot(aes(x = drat, y = mpg)) +
+  geom_point(aes(color = as.factor(am))) +
+  geom_smooth(aes(color = as.factor(am)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e drat") +
+  labs(color = "Transm. Manual = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p4 <- mtcars %>% 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(aes(color = as.factor(am))) +
+  geom_smooth(aes(color = as.factor(am)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e wt") +
+  labs(color = "Transm. Manual = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+p5 <- mtcars %>% 
+  ggplot(aes(x = qsec, y = mpg)) +
+  geom_point(aes(color = as.factor(am))) +
+  geom_smooth(aes(color = as.factor(am)), method = "lm", se = F) +
+  ggtitle("Correlação entre mpg e qsec") +
+  labs(color = "Transm. Manual = 1") +
+  theme_bw() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(panel.border = element_blank(),
+        title = element_text(size = 10))
+
+grid.arrange(p1, p2, p3, p4, p5, nrow = 2)
+```
+
+# Modelagem
+
+Conforme Moretin e Singer (2019), a reta de regrssão é dada por:
+
+$y_i = \alpha + \beta x_i + \epsilon_i , i = 1,...,n.$
+
+Onde:
+
+* $y$ é a variável resposta;
+* $x$ é o vetor de variável explicativa;
+* $\alpha$ e $\beta$ são os parâmetros estimados;
+* $\epsilon$ são os erros aleatórios do modelo.
+
+Para modelar a base **mtcars**, será feito a utilização do método de stepwise com o critério de informação de Akaike para selecionar as variáveis mais importantes, além de considerar as interações vistas anteriormente.
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+mtcars <- mtcars %>% 
+  mutate(cyl = factor(cyl),
+         vs = factor(vs),
+         am = factor(am),
+         gear = factor(gear),
+         carb = factor(carb))
+
+modelo <- lm(mpg ~ drat + carb + qsec + wt * gear * cyl * vs * am, data = mtcars) %>% 
+  step(k = qchisq(0.05, df = 1, lower.tail = F))
+```
+
+Como visto na matriz de correlação, existe autocorrelação entre algumas variáveis explicativas quantitativas. Para identificar qual remover, vamos verificar o fator de inflação da variância (VIF). Segundo James et al. (2013), valores acima de 5 podem ser removidos para solucionar este problema. Entretanto, segundo a tabela 2, três variáveis possuem valores acima do recomendado. Como a exclusão de uma variável pode impactar na variância geral, será removido o que apresenta o maior valor e depois será verificado as variáveis restantes.
+
+```{r echo=FALSE}
+vif(lm(mpg ~ hp + drat + qsec + disp + wt, data = mtcars)) %>% 
+  kable(caption = "Tabela 2: Fator de inflação das variância") %>% 
+  kable_paper("hover", full_width = T)
+```
+
+Após remover a variável *disp*, a variável *hp* ainda possui um valor elevado se aproximando muito de 5, conforme tabela 3. Logo, ela será excluida.
+
+```{r echo=FALSE}
+vif(lm(mpg ~ hp + drat + qsec + wt, data = mtcars)) %>% 
+  kable(caption = "Tabela 3: Fator de inflação das variância ajustado") %>% 
+  kable_paper("hover", full_width = T)
+```
+
+O modelo contará então com as variáveis quantitativas listadas na tabela 4.
+
+```{r echo=FALSE}
+vif(lm(mpg ~ drat + qsec + wt, data = mtcars)) %>% 
+  kable(caption = "Tabela 4: Fator de inflação das variância após segundo ajuste") %>% 
+  kable_paper("hover", full_width = T)
+```
+
+Rodando o modelo com o procedimento stepwise temos que o modelo proposto não não possui significância estatística em quase nenhuma variável. Isso pode acontecer devido a variabilidade causada pela presença de uma variável e que não identificada pelo método stepwise. Como a variável *wt* não apresenta nenhuma significância estatística, ela será removida e depois o modelo será rodado novamente.
+
+```{r echo=FALSE}
+summary(modelo)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+modelo <- lm(mpg ~ drat + carb + qsec * gear * cyl * vs * am, data = mtcars) %>% 
+  step(k = qchisq(0.05, df = 1, lower.tail = F))
+```
+
+Rodando um segundo modelo temos significância estatística em todas as variáveis quantitativas, mesmo que só nas interações. Embora alguma categoria da variável dummy não apresente significância estatística, ela não será removida. A significância estatística de alguma categoria está relacionada com qual variável está na casela de referência, além disto, a remoção de outra categoria fará com que a casela de referência contemple duas categorias, o que gera uma inconsistência no modelo. Este segundo modelo apresenta um R² de 0.959 e interações com as variáveis *gear*, *cly* e *am*.
+
+Importante ressaltar que os NA gerados na regressão informam apenas que as interações observadas não adicionam informação ao modelo.
+
+```{r echo=FALSE}
+summary(modelo)
+```
+
+Analisando os resíduos do modelo é possível verificar que os resíduos aparentam estar distribuídos de forma aleatória, estão acompanhando bem a linha de normalidade no gráfico Q-Q (embora alguns pontos estejam mais afastados) e possuem alguns veículos perto da linha de 0.5 na distância de Cook, sendo o Camaro Z28 o único a possuir este valor. Embora apresente outliers, eles não serão removidos devido a quantidade pequena da amostra.
+
+```{r echo=FALSE, fig.height=8, fig.width=8, message=FALSE, warning=FALSE}
+par(mfrow = c(2, 2))
+plot(modelo)
+```
+
+Por fim, é possível comprovar a normalidade dos resíduos utilizando o teste de Shapiro-Wilk onde um p-value > 0.05 indica que a distribuição é gaussiana.
+
+```{r echo=FALSE}
+shapiro.test(modelo$residuals)
+```
+
+# Conclusão
+
+Das variáveis explicativas, as que mais contribuem para uma redução no *mpg* são possuir uma quinta marcha ($\beta = - 2349,529$), possuir câmbio manual ($\beta = - 134,278$), motor em linha ($\beta = - 19,891$) e possuir 8 carburadores ($\beta = - 19,308$). Uma hipótese que pode explicar este fato é que carros com essas características são mais modernos e eficientes, corroborando para um menor consumo de combustível.
+
+Já as variáveis que mais contribuem para aumentar o consumo de milhas por galão são possuir 6 carburadores ($\beta = 170,136$), possuir 5 marchas e 8 cilindros ($\beta = 337,798$) ou possuir 4 marchas ($\beta = 38,950$).
