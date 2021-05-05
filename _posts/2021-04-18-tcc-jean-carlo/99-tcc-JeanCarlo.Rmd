@@ -5,6 +5,7 @@ description: |
 author: 
   - first_name: "Jean Carlo"
     last_name: "Nunes da Silva"
+    url: https://www.linkedin.com/in/jeancarlonds/
 date: 04-18-2021
 output:
   distill::distill_article:
